@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="ApplicationModule.cs~RF150f3ccc.TMP" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="6.4.0" />
+		<PackageReference Include="AutoMapper.Contrib.Autofac.DependencyInjection" Version="7.0.0" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+		<PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="9.0.0" />
+		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Telegram.Bot" Version="18.0.0" />
+		<PackageReference Include="Telegram.Bot.Extensions.Polling" Version="1.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\GRSMU.TimeTableBot.Application\GRSMU.TimeTableBot.Application.csproj" />
+	  <ProjectReference Include="..\..\Core\GRSMU.TimeTableBot.Data\GRSMU.TimeTableBot.Data.csproj" />
+	  <ProjectReference Include="..\..\Core\GRSMU.TimeTableBot.Parser\GRSMU.TimeTableBot.Core.csproj" />
+	  <ProjectReference Include="..\GRSMU.TimeTable.Common.Data\GRSMU.TimeTable.Common.Data.csproj" />
+	  <ProjectReference Include="..\GRSMU.TimeTableBot.Common\GRSMU.TimeTableBot.Common.csproj" />
+	</ItemGroup>
+</Project>

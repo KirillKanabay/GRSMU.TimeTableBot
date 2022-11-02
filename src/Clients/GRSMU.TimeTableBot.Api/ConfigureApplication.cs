@@ -43,13 +43,13 @@ namespace GRSMU.TimeTableBot.Api
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            using (var scope = _services.CreateScope())
-            {
-                var botClient = scope.ServiceProvider.GetRequiredService<ITelegramBotClient>();
+            //using (var scope = _services.CreateScope())
+            //{
+            //    var botClient = scope.ServiceProvider.GetRequiredService<ITelegramBotClient>();
 
-                _logger.LogInformation("Removing webhook");
-                await botClient.DeleteWebhookAsync(cancellationToken: cancellationToken);
-            }
+            //    _logger.LogInformation("Removing webhook");
+            //    await botClient.DeleteWebhookAsync(cancellationToken: cancellationToken);
+            //}
         }
     }
 }

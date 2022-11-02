@@ -1,4 +1,5 @@
-﻿using GRSMU.TimeTable.Common.Data.Contexts;
+﻿using System.Net.Mime;
+using GRSMU.TimeTable.Common.Data.Contexts;
 using GRSMU.TimeTable.Common.Data.Immutable;
 using GRSMU.TimeTable.Common.Data.Repositories;
 using GRSMU.TimeTableBot.Data.Documents;
@@ -28,17 +29,23 @@ public class TimeTableRepository : RepositoryBase<TimeTableDocument>, ITimeTable
 
         if (filter.Date.HasValue)
         {
-            query = query.Where(x => x.Date.Equals(filter.Date));
+            var date = filter.Date.Value.Add(DateTimeOffset.Now.Offset);
+            
+            query = query.Where(x => x.Date.Equals(date));
         }
 
         if (filter.MinDate.HasValue)
         {
-            query = query.Where(x => x.Date >= filter.MinDate);
+            var minDate = filter.MinDate.Value.Add(DateTimeOffset.Now.Offset);
+
+            query = query.Where(x => x.Date >= minDate);
         }
 
         if (filter.MaxDate.HasValue)
         {
-            query = query.Where(x => x.Date <= filter.MaxDate);
+            var maxDate = filter.MaxDate.Value.Add(DateTimeOffset.Now.Offset);
+
+            query = query.Where(x => x.Date <= maxDate);
         }
 
         if (!string.IsNullOrEmpty(filter.GroupId))
@@ -48,7 +55,9 @@ public class TimeTableRepository : RepositoryBase<TimeTableDocument>, ITimeTable
 
         if (filter.Week.HasValue)
         {
-            query = query.Where(x => x.Week.Equals(filter.Week));
+            var week = filter.Week.Value.Add(DateTimeOffset.Now.Offset);
+
+            query = query.Where(x => x.Week.Equals(week));
         }
 
         return query.ToListAsync();

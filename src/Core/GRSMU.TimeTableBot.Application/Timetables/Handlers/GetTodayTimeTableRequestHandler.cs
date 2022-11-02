@@ -66,7 +66,7 @@ public class GetTodayTimeTableRequestHandler : GetTimeTableRequestHandlerBase<Ge
             return new List<TimeTableDto>();
         }
 
-        grabbedTimeTables = grabbedTimeTables.Where(x => x.Date.Equals(filter.Date)).ToList();
+        grabbedTimeTables = grabbedTimeTables.Where(x => x.Date.Date.Equals(filter.Date.Value.Date)).ToList();
 
         var dtos = Mapper.Map<List<TimeTableDto>>(grabbedTimeTables);
 

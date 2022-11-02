@@ -1,4 +1,4 @@
-namespace GRSMU.TimeTableBot.Mvc.Models
+namespace GRSMU.TimeTableBot.Web.Core.ViewModels
 {
     public class ErrorViewModel
     {

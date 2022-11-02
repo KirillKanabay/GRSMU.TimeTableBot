@@ -21,9 +21,11 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Hangfire" Version="1.7.9" />
 		<PackageReference Include="HangFire.Mongo" Version="0.6.6" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.13" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\GRSMU.TimeTableBot.Web.Core\GRSMU.TimeTableBot.Web.Core.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.TimeTableBot.Common\GRSMU.TimeTableBot.Common.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.TimeTableBot.IoC\GRSMU.TimeTableBot.IoC.csproj" />
 	</ItemGroup>

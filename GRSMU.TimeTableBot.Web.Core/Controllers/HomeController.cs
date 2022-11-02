@@ -1,8 +1,9 @@
-﻿using GRSMU.TimeTableBot.Mvc.Models;
+﻿using System.Diagnostics;
+using GRSMU.TimeTableBot.Web.Core.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 
-namespace GRSMU.TimeTableBot.Mvc.Controllers
+namespace GRSMU.TimeTableBot.Web.Core.Controllers
 {
     public class HomeController : Controller
     {

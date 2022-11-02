@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Globalization;
+using AutoMapper;
 using GRSMU.TimeTableBot.Common.Broker.Handlers;
 using GRSMU.TimeTableBot.Common.Broker.Responses;
 using GRSMU.TimeTableBot.Common.Extensions;
@@ -88,7 +89,7 @@ namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
         {
             timeTableModels = timeTableModels.Where(x => !x.Date.Equals(DateTime.MinValue)).ToList();
 
-            var week = DateTime.Parse(query.Week);
+            var week = DateTime.Parse(query.Week, styles: DateTimeStyles.AssumeUniversal);
 
             var documents = timeTableModels.Select(x =>
             {

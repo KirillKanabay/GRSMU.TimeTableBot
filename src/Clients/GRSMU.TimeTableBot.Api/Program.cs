@@ -54,11 +54,14 @@ namespace GRSMU.TimeTableBot.Api
             builder.Services.AddHostedService<ConfigureApplication>();
 
             builder.Services.AddControllers().AddNewtonsoftJson();
+            builder.Services.AddControllersWithViews();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseStaticFiles();
 
             app.UseRouting();
             app.UseCors();
@@ -82,6 +85,9 @@ namespace GRSMU.TimeTableBot.Api
                     pattern: $"bot/{token}",
                     new { controller = "Webhook", action = "Post" }
                 );
+
+                app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+                
                 endpoints.MapControllers();
             });
 

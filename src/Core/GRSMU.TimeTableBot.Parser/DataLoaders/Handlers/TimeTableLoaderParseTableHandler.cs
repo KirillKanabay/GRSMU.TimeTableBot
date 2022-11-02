@@ -1,4 +1,5 @@
-﻿using AngleSharp.Dom;
+﻿using System.Globalization;
+using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
 using GRSMU.TimeTableBot.Common.Models;
@@ -51,7 +52,7 @@ namespace GRSMU.TimeTableBot.Core.DataLoaders.Handlers
                 var date = cellDate.Children.FirstOrDefault(x => x.ClassName?.Equals("date") ?? false)?.TextContent;
                 var day = cellDate.Children.FirstOrDefault(x => x.ClassName?.Equals("day") ?? false)?.TextContent;
 
-                finalTimeTable.Date = DateTime.Parse(date);
+                finalTimeTable.Date = DateTime.Parse(date, styles: DateTimeStyles.AssumeUniversal);
                 finalTimeTable.Day = day;
             }
 

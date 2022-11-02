@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.TimeTableBot.ConsoleA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.TimeTableBot.Common", "src\Common\GRSMU.TimeTableBot.Common\GRSMU.TimeTableBot.Common.csproj", "{41C0280D-B684-477B-A893-36F645DAAE9D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.TimeTableBot.Core", "src\Core\GRSMU.TimeTableBot.Parser\GRSMU.TimeTableBot.Core.csproj", "{C45764E2-F04A-4A33-BE9D-F9F695B18DEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.TimeTableBot.Core", "src\Core\GRSMU.TimeTableBot.Core\GRSMU.TimeTableBot.Core.csproj", "{C45764E2-F04A-4A33-BE9D-F9F695B18DEB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.TimeTableBot.Data", "src\Core\GRSMU.TimeTableBot.Data\GRSMU.TimeTableBot.Data.csproj", "{146D15FF-8E6A-49E8-AF57-1FB610AA906D}"
 EndProject
@@ -19,15 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{441C90
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{D3D17206-7573-4326-A229-122F77738ADE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.TimeTableBot.Api", "src\Clients\GRSMU.TimeTableBot.Api\GRSMU.TimeTableBot.Api.csproj", "{2B8A56EC-8800-4791-9073-2C6F7D165DB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.TimeTableBot.Web", "src\Clients\GRSMU.TimeTableBot.Web\GRSMU.TimeTableBot.Web.csproj", "{2B8A56EC-8800-4791-9073-2C6F7D165DB4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.TimeTableBot.IoC", "src\Common\GRSMU.TimeTableBot.IoC\GRSMU.TimeTableBot.IoC.csproj", "{8D32026A-B77E-43BC-AA76-81FD0B2CAEBB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.TimeTable.Common.Data", "src\Common\GRSMU.TimeTable.Common.Data\GRSMU.TimeTable.Common.Data.csproj", "{C2B5F497-3E8A-4A0B-BBD4-4F6C746FF69A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{EB285B1B-230E-49F0-9E43-4D90123D5DD2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GRSMU.TimeTableBot.Mvc", "GRSMU.TimeTableBot.Mvc\GRSMU.TimeTableBot.Mvc.csproj", "{E642A2AB-32EF-49CA-BFF2-C054A1D7906B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,10 +69,6 @@ Global
 		{C2B5F497-3E8A-4A0B-BBD4-4F6C746FF69A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2B5F497-3E8A-4A0B-BBD4-4F6C746FF69A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2B5F497-3E8A-4A0B-BBD4-4F6C746FF69A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E642A2AB-32EF-49CA-BFF2-C054A1D7906B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E642A2AB-32EF-49CA-BFF2-C054A1D7906B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E642A2AB-32EF-49CA-BFF2-C054A1D7906B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E642A2AB-32EF-49CA-BFF2-C054A1D7906B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,7 +83,6 @@ Global
 		{2B8A56EC-8800-4791-9073-2C6F7D165DB4} = {D3D17206-7573-4326-A229-122F77738ADE}
 		{8D32026A-B77E-43BC-AA76-81FD0B2CAEBB} = {441C9002-3662-48EA-963B-7DD5165E8C35}
 		{C2B5F497-3E8A-4A0B-BBD4-4F6C746FF69A} = {441C9002-3662-48EA-963B-7DD5165E8C35}
-		{E642A2AB-32EF-49CA-BFF2-C054A1D7906B} = {D3D17206-7573-4326-A229-122F77738ADE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {10530508-34ED-4342-AA81-44CEA4681F2F}

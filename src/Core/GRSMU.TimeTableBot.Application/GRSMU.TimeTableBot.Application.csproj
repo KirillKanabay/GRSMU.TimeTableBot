@@ -11,6 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\GRSMU.TimeTableBot.Core\GRSMU.TimeTableBot.Core.csproj" />
 	  <ProjectReference Include="..\GRSMU.TimeTableBot.Data\GRSMU.TimeTableBot.Data.csproj" />
 	  <ProjectReference Include="..\GRSMU.TimeTableBot.Domain\GRSMU.TimeTableBot.Domain.csproj" />
 	  <ProjectReference Include="..\GRSMU.TimeTableBot.Parser\GRSMU.TimeTableBot.Core.csproj" />

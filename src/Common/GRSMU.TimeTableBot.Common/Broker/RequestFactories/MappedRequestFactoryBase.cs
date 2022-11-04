@@ -10,18 +10,18 @@ namespace GRSMU.TimeTableBot.Common.Broker.RequestFactories
     public abstract class MappedRequestFactoryBase : IRequestFactory
     {
         private readonly IRequestCache _requestCache;
-        private readonly Dictionary<string, Func<Update, bool, Task<RequestMessageBase>>> _requestMap;
+        private readonly Dictionary<string, Func<Update, bool, Task<TelegramRequestMessageBase>>> _requestMap;
 
         protected readonly IUserService UserService;
 
         protected MappedRequestFactoryBase(IRequestCache requestCache, IUserService userService)
         {
             _requestCache = requestCache ?? throw new ArgumentNullException(nameof(requestCache));
-            _requestMap = new Dictionary<string, Func<Update, bool, Task<RequestMessageBase>>>();
+            _requestMap = new Dictionary<string, Func<Update, bool, Task<TelegramRequestMessageBase>>>();
             UserService = userService;
         }
         
-        public async Task<RequestMessageBase> CreateRequestMessage(Update update)
+        public async Task<TelegramRequestMessageBase> CreateRequestMessage(Update update)
         {
             var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
             
@@ -46,7 +46,7 @@ namespace GRSMU.TimeTableBot.Common.Broker.RequestFactories
 #pragma warning restore CS8603
         }
 
-        public MappedRequestFactoryBase AddRequest(string command, Func<Update, bool, Task<RequestMessageBase>> requestFactory)
+        public MappedRequestFactoryBase AddRequest(string command, Func<Update, bool, Task<TelegramRequestMessageBase>> requestFactory)
         {
             if (_requestMap.ContainsKey(command))
             {
@@ -59,7 +59,7 @@ namespace GRSMU.TimeTableBot.Common.Broker.RequestFactories
         }
 
         public MappedRequestFactoryBase AddRequest<TRequest>(string command)
-            where TRequest : RequestMessageBase
+            where TRequest : TelegramRequestMessageBase
         {
             if (_requestMap.ContainsKey(command))
             {
@@ -71,8 +71,8 @@ namespace GRSMU.TimeTableBot.Common.Broker.RequestFactories
             return this;
         }
 
-        protected async Task<RequestMessageBase> CreateCommandRequestMessage<TRequest>(Update update, bool isCached)
-            where TRequest : RequestMessageBase
+        protected async Task<TelegramRequestMessageBase> CreateCommandRequestMessage<TRequest>(Update update, bool isCached)
+            where TRequest : TelegramRequestMessageBase
         {
             var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
             var requestMessage = Activator.CreateInstance(typeof(TRequest), userContext);

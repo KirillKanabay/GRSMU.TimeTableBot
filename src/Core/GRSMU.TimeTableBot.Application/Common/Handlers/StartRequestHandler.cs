@@ -1,13 +1,10 @@
 ﻿using GRSMU.TimeTableBot.Common.Broker.Handlers;
 using GRSMU.TimeTableBot.Common.Broker.RequestBroker;
-using GRSMU.TimeTableBot.Common.Broker.Responses;
-using GRSMU.TimeTableBot.Common.Contexts;
 using GRSMU.TimeTableBot.Common.Responses;
 using GRSMU.TimeTableBot.Domain.RequestMessages.Common;
 using Telegram.Bot;
 using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Core.Immutable;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Users;
 using GRSMU.TimeTableBot.Domain.RequestMessages.Users.Settings;
 
 namespace GRSMU.TimeTableBot.Application.Common.Handlers

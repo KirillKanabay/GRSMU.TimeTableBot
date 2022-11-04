@@ -1,4 +1,4 @@
-﻿namespace GRSMU.TimeTableBot.Domain.Dtos;
+﻿namespace GRSMU.TimeTableBot.Domain.Dtos.TimeTable;
 
 public class TimeTableLineDto
 {

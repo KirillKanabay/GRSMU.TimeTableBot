@@ -49,7 +49,7 @@ public class RequestFactory : MappedRequestFactoryBase
     
     #region Registrators
 
-    private async Task<RequestMessageBase> CreateSettingsCommand<TRequest>(Update update, bool isCached)
+    private async Task<TelegramRequestMessageBase> CreateSettingsCommand<TRequest>(Update update, bool isCached)
         where TRequest : SettingsRequestMessageBase
     {
         var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
@@ -66,7 +66,7 @@ public class RequestFactory : MappedRequestFactoryBase
 
     #endregion
 
-    private async Task<RequestMessageBase> CreateReportCommand(Update update, bool isCached)
+    private async Task<TelegramRequestMessageBase> CreateReportCommand(Update update, bool isCached)
     {
         var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
         var requestMessage = new ReportRequestMessage(userContext);

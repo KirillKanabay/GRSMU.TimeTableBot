@@ -1,4 +1,4 @@
-﻿namespace GRSMU.TimeTableBot.Common.Broker.Responses;
+﻿namespace GRSMU.TimeTableBot.Common.Responses;
 
 public enum ResponseStatus
 {

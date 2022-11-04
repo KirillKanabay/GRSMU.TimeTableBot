@@ -6,8 +6,8 @@ using Telegram.Bot;
 namespace GRSMU.TimeTableBot.Common.Broker.Handlers
 {
     public abstract class TelegramRequestHandlerBase<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
-        where TRequest : RequestMessageBase<TResponse>
-        where TResponse : ResponseBase
+        where TRequest : TelegramRequestMessageBase<TResponse>
+        where TResponse : TelegramResponseBase
     {
         protected ITelegramBotClient Client { get; }
         protected TelegramRequestHandlerBase(ITelegramBotClient client)
@@ -40,7 +40,7 @@ namespace GRSMU.TimeTableBot.Common.Broker.Handlers
     }
 
     public abstract class TelegramRequestHandlerBase<TRequest> : TelegramRequestHandlerBase<TRequest, EmptyResponse>
-        where TRequest : RequestMessageBase
+        where TRequest : TelegramRequestMessageBase
     {
         protected TelegramRequestHandlerBase(ITelegramBotClient client) : base(client)
         {

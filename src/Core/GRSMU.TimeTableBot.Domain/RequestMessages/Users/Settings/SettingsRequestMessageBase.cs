@@ -3,7 +3,7 @@ using GRSMU.TimeTableBot.Common.RequestMessages;
 
 namespace GRSMU.TimeTableBot.Domain.RequestMessages.Users.Settings;
 
-public class SettingsRequestMessageBase : RequestMessageBase
+public class SettingsRequestMessageBase : TelegramRequestMessageBase
 {
     public SettingsRequestMessageBase(UserContext userContext) : base(userContext)
     {

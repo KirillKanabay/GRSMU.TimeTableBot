@@ -1,8 +1,7 @@
-﻿using GRSMU.TimeTableBot.Common.Broker.Responses;
-using GRSMU.TimeTableBot.Common.Responses;
+﻿using GRSMU.TimeTableBot.Common.Responses;
 using MediatR;
 
-namespace GRSMU.TimeTableBot.Common.Messages
+namespace GRSMU.TimeTableBot.Common.RequestMessages
 {
     public interface IRequestMessage<out TResponse> : IRequest<TResponse> where TResponse : ResponseBase
     {

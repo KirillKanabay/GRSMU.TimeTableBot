@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using GRSMU.TimeTableBot.Common.Broker.Handlers;
 using GRSMU.TimeTableBot.Common.Broker.RequestBroker;
-using GRSMU.TimeTableBot.Common.Broker.Responses;
 using GRSMU.TimeTableBot.Common.Common.Handlers.Data;
 using GRSMU.TimeTableBot.Common.Contexts;
 using GRSMU.TimeTableBot.Common.Extensions;

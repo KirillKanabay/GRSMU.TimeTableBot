@@ -1,5 +1,5 @@
 ﻿using GRSMU.TimeTableBot.Core.Immutable;
-using GRSMU.TimeTableBot.Domain.Dtos;
+using GRSMU.TimeTableBot.Domain.Dtos.TimeTable;
 using System.Text;
 
 namespace GRSMU.TimeTableBot.Core.Presenters

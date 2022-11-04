@@ -1,4 +1,4 @@
-﻿namespace GRSMU.TimeTableBot.Domain.Dtos
+﻿namespace GRSMU.TimeTableBot.Domain.Dtos.TimeTable
 {
     public class TimeTableDto
     {
@@ -9,7 +9,7 @@
         public DateTime Date { get; set; }
 
         public DateTime Week { get; set; }
-        
+
         public List<TimeTableLineDto> Lines { get; set; }
     }
 }

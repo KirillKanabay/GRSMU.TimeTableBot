@@ -1,9 +1,8 @@
-﻿using GRSMU.TimeTableBot.Common.Broker.Responses;
-using GRSMU.TimeTableBot.Common.Contexts;
+﻿using GRSMU.TimeTableBot.Common.Contexts;
 
 namespace GRSMU.TimeTableBot.Common.Responses;
 
-public sealed class EmptyResponse : ResponseBase
+public sealed class EmptyResponse : TelegramResponseBase
 {
     public EmptyResponse(IUserContext userContext) : this(userContext, ResponseStatus.Finished)
     {

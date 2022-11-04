@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Telegram.Bot.Types;
 
-namespace GRSMU.TimeTableBot.Api.Controllers;
+namespace GRSMU.TimeTableBot.Web.Core.Controllers;
 
 public class WebhookController : ControllerBase
 {

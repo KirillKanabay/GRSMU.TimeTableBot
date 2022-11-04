@@ -5,6 +5,7 @@ using GRSMU.TimeTableBot.Api.RecurringJobs;
 using GRSMU.TimeTableBot.Api.RecurringJobs.Jobs;
 using GRSMU.TimeTableBot.Common.Models.Options;
 using GRSMU.TimeTableBot.IoC;
+using GRSMU.TimeTableBot.Web.Core.Controllers;
 using Hangfire;
 using Hangfire.Mongo;
 using NLog;
@@ -54,11 +55,16 @@ namespace GRSMU.TimeTableBot.Api
             builder.Services.AddHostedService<ConfigureApplication>();
 
             builder.Services.AddControllers().AddNewtonsoftJson();
+            builder.Services.AddControllersWithViews()
+                .AddApplicationPart(typeof(HomeController).Assembly)
+                .AddRazorRuntimeCompilation();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseStaticFiles();
 
             app.UseRouting();
             app.UseCors();
@@ -82,6 +88,9 @@ namespace GRSMU.TimeTableBot.Api
                     pattern: $"bot/{token}",
                     new { controller = "Webhook", action = "Post" }
                 );
+
+                app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+                
                 endpoints.MapControllers();
             });
 

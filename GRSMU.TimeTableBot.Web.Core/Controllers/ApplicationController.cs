@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace GRSMU.TimeTableBot.Api.Controllers;
+namespace GRSMU.TimeTableBot.Web.Core.Controllers;
 
 [ApiController]
 public class ApplicationController : ControllerBase

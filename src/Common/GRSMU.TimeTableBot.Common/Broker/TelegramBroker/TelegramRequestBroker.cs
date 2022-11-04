@@ -2,7 +2,7 @@
 using GRSMU.TimeTableBot.Common.Broker.RequestBroker;
 using GRSMU.TimeTableBot.Common.Broker.RequestCache;
 using GRSMU.TimeTableBot.Common.Extensions;
-using GRSMU.TimeTableBot.Common.Responses;
+using GRSMU.TimeTableBot.Common.Models.Responses;
 using GRSMU.TimeTableBot.Common.Services;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot;

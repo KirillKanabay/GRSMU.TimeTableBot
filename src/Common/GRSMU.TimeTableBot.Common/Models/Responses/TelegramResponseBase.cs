@@ -1,6 +1,6 @@
 ﻿using GRSMU.TimeTableBot.Common.Contexts;
 
-namespace GRSMU.TimeTableBot.Common.Responses;
+namespace GRSMU.TimeTableBot.Common.Models.Responses;
 
 public abstract class TelegramResponseBase : ResponseBase
 {

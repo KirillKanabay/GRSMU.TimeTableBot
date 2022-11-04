@@ -3,7 +3,7 @@ using AutoMapper;
 using GRSMU.TimeTableBot.Common.Broker.Handlers;
 using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.Models;
-using GRSMU.TimeTableBot.Common.Responses;
+using GRSMU.TimeTableBot.Common.Models.Responses;
 using GRSMU.TimeTableBot.Core.DataLoaders;
 using GRSMU.TimeTableBot.Data.Documents;
 using GRSMU.TimeTableBot.Data.Repositories.TimeTables;

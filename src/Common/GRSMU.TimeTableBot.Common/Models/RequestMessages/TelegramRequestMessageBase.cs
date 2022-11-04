@@ -1,5 +1,6 @@
 ﻿using GRSMU.TimeTableBot.Common.Contexts;
-using GRSMU.TimeTableBot.Common.Responses;
+using GRSMU.TimeTableBot.Common.Models.RequestMessages;
+using GRSMU.TimeTableBot.Common.Models.Responses;
 
 namespace GRSMU.TimeTableBot.Common.RequestMessages;
 

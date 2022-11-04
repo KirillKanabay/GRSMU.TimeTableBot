@@ -1,5 +1,5 @@
-﻿using GRSMU.TimeTableBot.Common.RequestMessages;
-using GRSMU.TimeTableBot.Common.Responses;
+﻿using GRSMU.TimeTableBot.Common.Models.Responses;
+using GRSMU.TimeTableBot.Common.RequestMessages;
 using MediatR;
 using Telegram.Bot;
 

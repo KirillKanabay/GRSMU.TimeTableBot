@@ -4,7 +4,7 @@ using GRSMU.TimeTableBot.Common.Broker.RequestBroker;
 using GRSMU.TimeTableBot.Common.Common.Handlers.Data;
 using GRSMU.TimeTableBot.Common.Contexts;
 using GRSMU.TimeTableBot.Common.Extensions;
-using GRSMU.TimeTableBot.Common.Responses;
+using GRSMU.TimeTableBot.Common.Models.Responses;
 using GRSMU.TimeTableBot.Common.Services;
 using GRSMU.TimeTableBot.Core.DataLoaders;
 using GRSMU.TimeTableBot.Core.Immutable;

@@ -10,7 +10,7 @@ using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Application.Users.Handlers;
 
-public class CancelReportRequestHandler : RequestHandlerBase<CancelReportRequestMessage>
+public class CancelReportRequestHandler : TelegramRequestHandlerBase<CancelReportRequestMessage>
 {
     private readonly IUserService _userService;
     private readonly IRequestCacheRepository _requestCacheRepository;

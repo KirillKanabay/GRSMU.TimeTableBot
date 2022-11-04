@@ -17,7 +17,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 
 namespace GRSMU.TimeTableBot.Application.Users.Handlers.Settings
 {
-    public abstract class SettingsRequestHandlerBase<TRequest> : RequestHandlerBase<TRequest>
+    public abstract class SettingsRequestHandlerBase<TRequest> : TelegramRequestHandlerBase<TRequest>
         where TRequest : SettingsRequestMessageBase
     {
         protected abstract string SettingsTitle { get; }

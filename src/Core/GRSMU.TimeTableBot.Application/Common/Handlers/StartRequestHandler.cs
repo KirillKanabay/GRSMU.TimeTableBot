@@ -12,7 +12,7 @@ using GRSMU.TimeTableBot.Domain.RequestMessages.Users.Settings;
 
 namespace GRSMU.TimeTableBot.Application.Common.Handlers
 {
-    public class StartRequestHandler : RequestHandlerBase<StartRequestMessage>
+    public class StartRequestHandler : TelegramRequestHandlerBase<StartRequestMessage>
     {
         private readonly IRequestBroker _requestBroker;
 

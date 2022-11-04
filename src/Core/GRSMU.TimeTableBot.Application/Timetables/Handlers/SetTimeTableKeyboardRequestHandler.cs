@@ -8,7 +8,7 @@ using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Application.Timetables.Handlers;
 
-public class SetTimeTableKeyboardRequestHandler : RequestHandlerBase<SetTimeTableKeyboardRequestMessage>
+public class SetTimeTableKeyboardRequestHandler : TelegramRequestHandlerBase<SetTimeTableKeyboardRequestMessage>
 {
     public SetTimeTableKeyboardRequestHandler(ITelegramBotClient client) : base(client)
     {

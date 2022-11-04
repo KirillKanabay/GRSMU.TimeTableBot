@@ -8,7 +8,7 @@ using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Application.Users.Handlers
 {
-    public class RunSettingsRequestHandler : RequestHandlerBase<RunSettingsRequestMessage>
+    public class RunSettingsRequestHandler : TelegramRequestHandlerBase<RunSettingsRequestMessage>
     {
         private readonly IRequestBroker _requestBroker;
 

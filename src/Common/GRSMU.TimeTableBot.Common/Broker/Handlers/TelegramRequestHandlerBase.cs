@@ -1,17 +1,16 @@
-﻿using GRSMU.TimeTableBot.Common.Broker.Responses;
-using GRSMU.TimeTableBot.Common.RequestMessages;
+﻿using GRSMU.TimeTableBot.Common.RequestMessages;
 using GRSMU.TimeTableBot.Common.Responses;
 using MediatR;
 using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Common.Broker.Handlers
 {
-    public abstract class RequestHandlerBase<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+    public abstract class TelegramRequestHandlerBase<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
         where TRequest : RequestMessageBase<TResponse>
         where TResponse : ResponseBase
     {
         protected ITelegramBotClient Client { get; }
-        protected RequestHandlerBase(ITelegramBotClient client)
+        protected TelegramRequestHandlerBase(ITelegramBotClient client)
         {
             Client = client ?? throw new ArgumentNullException(nameof(client));
         }
@@ -40,10 +39,10 @@ namespace GRSMU.TimeTableBot.Common.Broker.Handlers
         }
     }
 
-    public abstract class RequestHandlerBase<TRequest> : RequestHandlerBase<TRequest, EmptyResponse>
+    public abstract class TelegramRequestHandlerBase<TRequest> : TelegramRequestHandlerBase<TRequest, EmptyResponse>
         where TRequest : RequestMessageBase
     {
-        protected RequestHandlerBase(ITelegramBotClient client) : base(client)
+        protected TelegramRequestHandlerBase(ITelegramBotClient client) : base(client)
         {
         }
     }

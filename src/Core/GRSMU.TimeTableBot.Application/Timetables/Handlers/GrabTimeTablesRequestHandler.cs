@@ -14,7 +14,7 @@ using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
 {
-    public class GrabTimeTablesRequestHandler : RequestHandlerBase<GrabTimeTablesRequestMessage>
+    public class GrabTimeTablesRequestHandler : TelegramRequestHandlerBase<GrabTimeTablesRequestMessage>
     {
         private readonly ITimeTableLoader _timeTableLoader;
         private readonly FormDataLoader _formDataLoader;

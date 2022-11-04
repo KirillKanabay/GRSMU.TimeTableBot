@@ -8,7 +8,7 @@ using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Application.Common.Handlers;
 
-public class SetDefaultMenuRequestHandler : RequestHandlerBase<SetDefaultMenuRequestMessage>
+public class SetDefaultMenuRequestHandler : TelegramRequestHandlerBase<SetDefaultMenuRequestMessage>
 {
     public SetDefaultMenuRequestHandler(ITelegramBotClient client) : base(client)
     {

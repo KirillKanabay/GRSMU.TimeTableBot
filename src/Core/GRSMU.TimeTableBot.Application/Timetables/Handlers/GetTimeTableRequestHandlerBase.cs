@@ -15,7 +15,7 @@ using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Application.Timetables.Handlers;
 
-public abstract class GetTimeTableRequestHandlerBase<TRequest> : RequestHandlerBase<TRequest>
+public abstract class GetTimeTableRequestHandlerBase<TRequest> : TelegramRequestHandlerBase<TRequest>
     where TRequest : GetTimeTableRequestMessageBase
 {
     private readonly ITimeTableRepository _timeTableRepository;

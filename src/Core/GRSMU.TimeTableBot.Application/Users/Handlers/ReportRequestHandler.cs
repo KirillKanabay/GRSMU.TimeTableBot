@@ -14,7 +14,7 @@ using static System.String;
 
 namespace GRSMU.TimeTableBot.Application.Users.Handlers;
 
-public class ReportRequestHandler : RequestHandlerBase<ReportRequestMessage>
+public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMessage>
 {
     private readonly IUserService _userService;
     private readonly IReportRepository _reportRepository;

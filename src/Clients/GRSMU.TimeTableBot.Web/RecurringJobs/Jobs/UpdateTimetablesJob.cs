@@ -1,8 +1,9 @@
-﻿using GRSMU.TimeTableBot.Common.Broker.RequestBroker;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Timetables;
+﻿using GRSMU.TimeTableBot.Api.RecurringJobs.Jobs;
+using GRSMU.TimeTableBot.Common.Broker.RequestBroker;
+using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Hangfire;
 
-namespace GRSMU.TimeTableBot.Api.RecurringJobs.Jobs
+namespace GRSMU.TimeTableBot.Web.RecurringJobs.Jobs
 {
     public class UpdateTimetablesJob : RecurringJobBase
     {

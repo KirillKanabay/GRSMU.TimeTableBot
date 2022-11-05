@@ -1,6 +1,7 @@
-﻿using GRSMU.TimeTableBot.Common.Broker.Handlers;
-using GRSMU.TimeTableBot.Common.Extensions;
+﻿using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.Models.Responses;
+using GRSMU.TimeTableBot.Common.Telegram.Extensions;
+using GRSMU.TimeTableBot.Common.Telegram.Handlers;
 using GRSMU.TimeTableBot.Core.Immutable;
 using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Telegram.Bot;

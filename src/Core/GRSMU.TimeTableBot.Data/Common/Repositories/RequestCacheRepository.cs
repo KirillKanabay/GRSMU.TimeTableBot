@@ -1,6 +1,6 @@
 ﻿using GRSMU.TimeTable.Common.Data.Contexts;
 using GRSMU.TimeTable.Common.Data.Immutable;
-using GRSMU.TimeTable.Common.Data.Repositories;
+using GRSMU.TimeTableBot.Common.Data.Repositories;
 using GRSMU.TimeTableBot.Data.Common.Contracts;
 using GRSMU.TimeTableBot.Data.Common.Documents;
 using MongoDB.Driver;

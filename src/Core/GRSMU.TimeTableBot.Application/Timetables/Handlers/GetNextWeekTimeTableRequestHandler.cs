@@ -39,7 +39,7 @@ public class GetNextWeekTimeTableRequestHandler : GetTimeTableRequestHandlerBase
 
         return filter;
     }
-
+    
     protected override async Task<List<TimeTableDto>> GetFromLoader(UserContext user, TimeTableFilter filter)
     {
         var startOfWeek = filter.Week ?? DateTime.Today.StartOfWeek().AddDays(7);

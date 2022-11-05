@@ -1,5 +1,5 @@
 ﻿using GRSMU.TimeTableBot.Common.Models;
-using GRSMU.TimeTableBot.Common.Options;
+using GRSMU.TimeTableBot.Common.Models.Options;
 using GRSMU.TimeTableBot.Core.DataLoaders.Common;
 using GRSMU.TimeTableBot.Core.DataLoaders.Handlers;
 

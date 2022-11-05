@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
-using GRSMU.TimeTableBot.Common.Broker.Handlers;
 using GRSMU.TimeTableBot.Common.Contexts;
-using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.Models.Responses;
+using GRSMU.TimeTableBot.Common.Telegram.Extensions;
+using GRSMU.TimeTableBot.Common.Telegram.Handlers;
 using GRSMU.TimeTableBot.Core.DataLoaders;
 using GRSMU.TimeTableBot.Core.Immutable;
 using GRSMU.TimeTableBot.Core.Presenters;
-using GRSMU.TimeTableBot.Data.Repositories.TimeTables.Filters;
-using GRSMU.TimeTableBot.Data.TimeTable.Contracts;
 using GRSMU.TimeTableBot.Data.TimeTables.Contracts;
+using GRSMU.TimeTableBot.Data.TimeTables.Contracts.Filters;
 using GRSMU.TimeTableBot.Domain.Timetables.Dtos;
 using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Telegram.Bot;

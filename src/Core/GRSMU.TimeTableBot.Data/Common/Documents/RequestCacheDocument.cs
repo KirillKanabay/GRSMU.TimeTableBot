@@ -1,4 +1,5 @@
 ﻿using GRSMU.TimeTable.Common.Data.Documents;
+using GRSMU.TimeTableBot.Common.Data.Documents;
 
 namespace GRSMU.TimeTableBot.Data.Common.Documents;
 

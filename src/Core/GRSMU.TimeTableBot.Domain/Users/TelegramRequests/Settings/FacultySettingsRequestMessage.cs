@@ -1,7 +1,6 @@
 ﻿using GRSMU.TimeTableBot.Common.Contexts;
-using GRSMU.TimeTableBot.Domain.Users.TelegramRequests.Settings;
 
-namespace GRSMU.TimeTableBot.Domain.Users.Requests.Settings;
+namespace GRSMU.TimeTableBot.Domain.Users.TelegramRequests.Settings;
 
 public class FacultySettingsRequestMessage : SettingsRequestMessageBase
 {

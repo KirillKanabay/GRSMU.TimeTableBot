@@ -1,15 +1,14 @@
 ﻿using GRSMU.TimeTableBot.Common.Broker.RequestCache;
-using GRSMU.TimeTableBot.Common.Broker.RequestFactories;
-using GRSMU.TimeTableBot.Common.Common.Handlers.Data;
-using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.RequestMessages;
 using GRSMU.TimeTableBot.Common.Services;
+using GRSMU.TimeTableBot.Common.Telegram.Data;
+using GRSMU.TimeTableBot.Common.Telegram.Extensions;
+using GRSMU.TimeTableBot.Common.Telegram.RequestFactories;
 using GRSMU.TimeTableBot.Core.Immutable;
 using GRSMU.TimeTableBot.Domain.Common.Requests;
 using GRSMU.TimeTableBot.Domain.Reports.Requests;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Users;
 using GRSMU.TimeTableBot.Domain.Timetables.Requests;
-using GRSMU.TimeTableBot.Domain.Users.Requests.Settings;
+using GRSMU.TimeTableBot.Domain.Users.TelegramRequests;
 using GRSMU.TimeTableBot.Domain.Users.TelegramRequests.Settings;
 using Telegram.Bot.Types;
 

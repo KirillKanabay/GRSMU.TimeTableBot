@@ -2,6 +2,7 @@
 using GRSMU.TimeTableBot.Common.Contexts;
 using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.Services;
+using GRSMU.TimeTableBot.Common.Telegram.Extensions;
 using GRSMU.TimeTableBot.Data.Users.Contracts;
 using GRSMU.TimeTableBot.Data.Users.Documents;
 using Telegram.Bot.Types;

@@ -1,4 +1,4 @@
-﻿using GRSMU.TimeTableBot.Common.TelegramClient;
+﻿using GRSMU.TimeTableBot.Common.Telegram;
 
 namespace GRSMU.TimeTableBot.ConsoleApp
 {

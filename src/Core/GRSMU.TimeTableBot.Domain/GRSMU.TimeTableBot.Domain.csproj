@@ -10,8 +10,4 @@
 	  <ProjectReference Include="..\..\Common\GRSMU.TimeTableBot.Common\GRSMU.TimeTableBot.Common.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Users\Responses\" />
-	</ItemGroup>
-
 </Project>

@@ -10,11 +10,11 @@ using GRSMU.TimeTableBot.Core.DataLoaders;
 using GRSMU.TimeTableBot.Core.Immutable;
 using GRSMU.TimeTableBot.Data.Users.Contracts;
 using GRSMU.TimeTableBot.Data.Users.Documents;
-using GRSMU.TimeTableBot.Domain.Users.Requests.Settings;
+using GRSMU.TimeTableBot.Domain.Users.TelegramRequests.Settings;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 
-namespace GRSMU.TimeTableBot.Application.Users.Handlers.Settings
+namespace GRSMU.TimeTableBot.Application.Users.TelegramHandlers.Settings
 {
     public abstract class SettingsRequestHandlerBase<TRequest> : TelegramRequestHandlerBase<TRequest>
         where TRequest : SettingsRequestMessageBase

@@ -1,6 +1,6 @@
-﻿namespace GRSMU.TimeTableBot.Domain.Users.Dtos.Filters
+﻿namespace GRSMU.TimeTableBot.Data.Users.Contracts.Filters
 {
-    public class UserFilterDto
+    public class UserFilter
     {
         public string Username { get; set; }
 

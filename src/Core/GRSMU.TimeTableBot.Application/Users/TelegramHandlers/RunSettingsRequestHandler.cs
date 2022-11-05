@@ -5,7 +5,7 @@ using GRSMU.TimeTableBot.Common.Models.Responses;
 using GRSMU.TimeTableBot.Domain.Users.Requests.Settings;
 using Telegram.Bot;
 
-namespace GRSMU.TimeTableBot.Application.Users.Handlers
+namespace GRSMU.TimeTableBot.Application.Users.TelegramHandlers
 {
     public class RunSettingsRequestHandler : TelegramRequestHandlerBase<RunSettingsRequestMessage>
     {

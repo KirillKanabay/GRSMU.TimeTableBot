@@ -9,7 +9,7 @@ namespace GRSMU.TimeTable.Common.Data.Extensions
         private const int DefaultPageSize = 10;
         private const int DefaultPage = 1;
 
-        public static async Task<List<TDocument>> ToPagedList<TDocument>(this IMongoQueryable<TDocument> query, PagingModel paging, Dictionary<string, Func<object>> sortingFields = null)
+        public static async Task<List<TDocument>> ToPagedListAsync<TDocument>(this IMongoQueryable<TDocument> query, PagingModel paging, Dictionary<string, Func<object>> sortingFields = null)
         {
             paging.TotalCount = await query.CountAsync();
 

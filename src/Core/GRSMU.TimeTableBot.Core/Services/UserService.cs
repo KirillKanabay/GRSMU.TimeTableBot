@@ -25,7 +25,7 @@ namespace GRSMU.TimeTableBot.Core.Services
 
             var telegramId = user.Id.ToString();
 
-            var userDocument = await _userRepository.GetByTelegramId(telegramId);
+            var userDocument = await _userRepository.GetByTelegramIdAsync(telegramId);
 
             if (userDocument == null)
             {

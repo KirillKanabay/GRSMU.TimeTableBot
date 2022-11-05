@@ -8,10 +8,8 @@ using GRSMU.TimeTableBot.Core.Immutable;
 using GRSMU.TimeTableBot.Data.Users.Contracts;
 using GRSMU.TimeTableBot.Domain.Users.Requests.Settings;
 using Telegram.Bot;
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.ReplyMarkups;
 
-namespace GRSMU.TimeTableBot.Application.Users.Handlers.Settings;
+namespace GRSMU.TimeTableBot.Application.Users.TelegramHandlers.Settings;
 
 public class GroupSettingsRequestHandler : SettingsRequestHandlerBase<GroupSettingsRequestMessage>
 {

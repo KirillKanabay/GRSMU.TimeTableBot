@@ -4,14 +4,14 @@ using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.Models.Responses;
 using GRSMU.TimeTableBot.Common.Services;
 using GRSMU.TimeTableBot.Core.Immutable;
-using GRSMU.TimeTableBot.Data.Documents;
 using GRSMU.TimeTableBot.Data.Reports.Contracts;
+using GRSMU.TimeTableBot.Data.Reports.Documents;
 using GRSMU.TimeTableBot.Domain.Reports.Requests;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 using static System.String;
 
-namespace GRSMU.TimeTableBot.Application.Users.Handlers;
+namespace GRSMU.TimeTableBot.Application.Users.TelegramHandlers;
 
 public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMessage>
 {

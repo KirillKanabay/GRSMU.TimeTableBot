@@ -7,7 +7,7 @@ using GRSMU.TimeTableBot.Data.Common.Contracts;
 using GRSMU.TimeTableBot.Domain.Reports.Requests;
 using Telegram.Bot;
 
-namespace GRSMU.TimeTableBot.Application.Users.Handlers;
+namespace GRSMU.TimeTableBot.Application.Users.TelegramHandlers;
 
 public class CancelReportRequestHandler : TelegramRequestHandlerBase<CancelReportRequestMessage>
 {

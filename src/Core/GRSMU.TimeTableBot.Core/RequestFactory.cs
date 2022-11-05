@@ -10,6 +10,7 @@ using GRSMU.TimeTableBot.Domain.Reports.Requests;
 using GRSMU.TimeTableBot.Domain.RequestMessages.Users;
 using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using GRSMU.TimeTableBot.Domain.Users.Requests.Settings;
+using GRSMU.TimeTableBot.Domain.Users.TelegramRequests.Settings;
 using Telegram.Bot.Types;
 
 namespace GRSMU.TimeTableBot.Core;

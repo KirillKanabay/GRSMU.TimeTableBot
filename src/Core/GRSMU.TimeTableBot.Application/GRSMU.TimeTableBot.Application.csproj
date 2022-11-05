@@ -17,4 +17,8 @@
 	  <ProjectReference Include="..\GRSMU.TimeTableBot.Parser\GRSMU.TimeTableBot.Core.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Users\Handlers\" />
+	</ItemGroup>
+
 </Project>

@@ -21,5 +21,11 @@
         public string CourseId { get; set; }
 
         public string FacultyId { get; set; }
+
+        public string GroupName { get; set; }
+
+        public string FacultyName { get; set; }
+
+        public string CourseName { get; set; }
     }
 }

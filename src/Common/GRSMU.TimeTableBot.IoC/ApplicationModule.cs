@@ -28,6 +28,7 @@ using GRSMU.TimeTableBot.Data.TimeTables.Repositories;
 using GRSMU.TimeTableBot.Data.Users.Contracts;
 using GRSMU.TimeTableBot.Data.Users.Repositories;
 using GRSMU.TimeTableBot.IoC.Extensions;
+using GRSMU.TimeTableBot.Web.Core.Controllers;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using Microsoft.Extensions.Configuration;
@@ -59,6 +60,7 @@ namespace GRSMU.TimeTableBot.IoC
 
             builder.RegisterAutoMapper(typeof(UserMappings).Assembly);
             builder.RegisterAutoMapper(typeof(TimeTableProfile).Assembly);
+            builder.RegisterAutoMapper(typeof(UserController).Assembly);
             
             RegisterServices(builder);
             RegisterRequestBroker(builder);

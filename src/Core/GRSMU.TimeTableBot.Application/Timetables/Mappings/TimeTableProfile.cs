@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GRSMU.TimeTableBot.Common.Models;
 using GRSMU.TimeTableBot.Data.TimeTables.Documents;
-using GRSMU.TimeTableBot.Domain.Dtos.TimeTable;
+using GRSMU.TimeTableBot.Domain.Timetables.Dtos;
 
 namespace GRSMU.TimeTableBot.Application.Timetables.Mappings
 {

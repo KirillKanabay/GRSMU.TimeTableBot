@@ -1,7 +1,7 @@
 ﻿using GRSMU.TimeTableBot.Common.Contexts;
 using GRSMU.TimeTableBot.Common.RequestMessages;
 
-namespace GRSMU.TimeTableBot.Domain.RequestMessages.Timetables;
+namespace GRSMU.TimeTableBot.Domain.Timetables.Requests;
 
 public abstract class GetTimeTableRequestMessageBase : TelegramRequestMessageBase
 {

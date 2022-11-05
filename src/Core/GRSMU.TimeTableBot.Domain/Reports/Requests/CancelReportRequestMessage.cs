@@ -1,7 +1,7 @@
 ﻿using GRSMU.TimeTableBot.Common.Contexts;
 using GRSMU.TimeTableBot.Common.RequestMessages;
 
-namespace GRSMU.TimeTableBot.Domain.RequestMessages.Users;
+namespace GRSMU.TimeTableBot.Domain.Reports.Requests;
 
 public class CancelReportRequestMessage : TelegramRequestMessageBase
 {

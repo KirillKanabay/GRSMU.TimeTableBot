@@ -5,10 +5,11 @@ using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.RequestMessages;
 using GRSMU.TimeTableBot.Common.Services;
 using GRSMU.TimeTableBot.Core.Immutable;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Common;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Timetables;
+using GRSMU.TimeTableBot.Domain.Common.Requests;
+using GRSMU.TimeTableBot.Domain.Reports.Requests;
 using GRSMU.TimeTableBot.Domain.RequestMessages.Users;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Users.Settings;
+using GRSMU.TimeTableBot.Domain.Timetables.Requests;
+using GRSMU.TimeTableBot.Domain.Users.Requests.Settings;
 using Telegram.Bot.Types;
 
 namespace GRSMU.TimeTableBot.Core;

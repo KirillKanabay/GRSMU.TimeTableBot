@@ -6,8 +6,8 @@ using GRSMU.TimeTableBot.Core.DataLoaders;
 using GRSMU.TimeTableBot.Core.Presenters;
 using GRSMU.TimeTableBot.Data.TimeTables.Contracts;
 using GRSMU.TimeTableBot.Data.TimeTables.Contracts.Filters;
-using GRSMU.TimeTableBot.Domain.Dtos.TimeTable;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Timetables;
+using GRSMU.TimeTableBot.Domain.Timetables.Dtos;
+using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Application.Timetables.Handlers;

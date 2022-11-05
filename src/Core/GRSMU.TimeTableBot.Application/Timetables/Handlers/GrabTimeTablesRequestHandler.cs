@@ -7,7 +7,7 @@ using GRSMU.TimeTableBot.Common.Models.Responses;
 using GRSMU.TimeTableBot.Core.DataLoaders;
 using GRSMU.TimeTableBot.Data.TimeTable.Contracts;
 using GRSMU.TimeTableBot.Data.TimeTable.Documents;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Timetables;
+using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 

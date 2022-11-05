@@ -1,11 +1,11 @@
 ﻿using GRSMU.TimeTableBot.Common.Models.RequestMessages;
 using GRSMU.TimeTableBot.Common.Models.Responses;
-using GRSMU.TimeTableBot.Domain.Dtos.Users;
-using GRSMU.TimeTableBot.Domain.Dtos.Users.Filters;
+using GRSMU.TimeTableBot.Domain.Users.Dtos;
+using GRSMU.TimeTableBot.Domain.Users.Dtos.Filters;
 
-namespace GRSMU.TimeTableBot.Domain.RequestMessages.Users;
+namespace GRSMU.TimeTableBot.Domain.Users.Requests;
 
 public class GetUsersRequestMessage : FilterPagedRequestMessage<UserFilterDto, ItemPagedResponse<UserDto>>
 {
-    
+
 }

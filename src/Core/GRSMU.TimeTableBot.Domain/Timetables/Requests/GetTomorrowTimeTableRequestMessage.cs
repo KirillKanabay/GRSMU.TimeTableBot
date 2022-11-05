@@ -1,6 +1,6 @@
 ﻿using GRSMU.TimeTableBot.Common.Contexts;
 
-namespace GRSMU.TimeTableBot.Domain.RequestMessages.Timetables;
+namespace GRSMU.TimeTableBot.Domain.Timetables.Requests;
 
 public class GetTomorrowTimeTableRequestMessage : GetTimeTableRequestMessageBase
 {

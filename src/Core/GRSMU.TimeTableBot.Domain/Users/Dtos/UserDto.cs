@@ -1,4 +1,4 @@
-﻿namespace GRSMU.TimeTableBot.Domain.Dtos.Users
+﻿namespace GRSMU.TimeTableBot.Domain.Users.Dtos
 {
     public class UserDto
     {

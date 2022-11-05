@@ -1,4 +1,4 @@
-﻿namespace GRSMU.TimeTableBot.Domain.Dtos.Users.Filters
+﻿namespace GRSMU.TimeTableBot.Domain.Users.Dtos.Filters
 {
     public class UserFilterDto
     {

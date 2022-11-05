@@ -1,6 +1,6 @@
 ﻿using GRSMU.TimeTableBot.Common.Contexts;
 
-namespace GRSMU.TimeTableBot.Domain.RequestMessages.Users.Settings;
+namespace GRSMU.TimeTableBot.Domain.Users.Requests.Settings;
 
 public class GroupSettingsRequestMessage : SettingsRequestMessageBase
 {

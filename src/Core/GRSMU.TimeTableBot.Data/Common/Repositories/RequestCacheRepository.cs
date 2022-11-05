@@ -1,10 +1,11 @@
 ﻿using GRSMU.TimeTable.Common.Data.Contexts;
 using GRSMU.TimeTable.Common.Data.Immutable;
 using GRSMU.TimeTable.Common.Data.Repositories;
-using GRSMU.TimeTableBot.Data.Documents;
+using GRSMU.TimeTableBot.Data.Common.Contracts;
+using GRSMU.TimeTableBot.Data.Common.Documents;
 using MongoDB.Driver;
 
-namespace GRSMU.TimeTableBot.Data.Repositories;
+namespace GRSMU.TimeTableBot.Data.Common.Repositories;
 
 public class RequestCacheRepository : RepositoryBase<RequestCacheDocument>, IRequestCacheRepository
 {

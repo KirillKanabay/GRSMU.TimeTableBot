@@ -1,6 +1,6 @@
 ﻿using GRSMU.TimeTableBot.Common.Broker.RequestCache;
 using GRSMU.TimeTableBot.Core.Immutable;
-using GRSMU.TimeTableBot.Data.Repositories;
+using GRSMU.TimeTableBot.Data.Common.Contracts;
 
 namespace GRSMU.TimeTableBot.Core
 {

@@ -1,11 +1,11 @@
 ﻿using GRSMU.TimeTable.Common.Data.Documents;
 
-namespace GRSMU.TimeTableBot.Data.Documents
+namespace GRSMU.TimeTableBot.Data.Users.Documents
 {
     public class UserDocument : DocumentBase
     {
         public string TelegramId { get; set; }
-        
+
         public int? LastBotMessageId { get; set; }
 
         public long ChatId { get; set; }
@@ -21,7 +21,7 @@ namespace GRSMU.TimeTableBot.Data.Documents
         public string GroupId { get; set; }
 
         public string CourseId { get; set; }
-        
+
         public string FacultyId { get; set; }
     }
 }

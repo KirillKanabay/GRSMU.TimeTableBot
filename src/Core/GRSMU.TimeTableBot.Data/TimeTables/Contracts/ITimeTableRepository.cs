@@ -1,7 +1,7 @@
-﻿using GRSMU.TimeTableBot.Data.Documents;
-using GRSMU.TimeTableBot.Data.Repositories.TimeTables.Filters;
+﻿using GRSMU.TimeTableBot.Data.TimeTables.Contracts.Filters;
+using GRSMU.TimeTableBot.Data.TimeTables.Documents;
 
-namespace GRSMU.TimeTableBot.Data.Repositories.TimeTables
+namespace GRSMU.TimeTableBot.Data.TimeTables.Contracts
 {
     public interface ITimeTableRepository
     {

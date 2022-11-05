@@ -1,4 +1,4 @@
-﻿namespace GRSMU.TimeTableBot.Data.Repositories
+﻿namespace GRSMU.TimeTableBot.Data.Common.Contracts
 {
     public interface IRequestCacheRepository
     {

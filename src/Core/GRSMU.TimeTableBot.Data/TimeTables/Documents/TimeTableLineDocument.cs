@@ -1,4 +1,4 @@
-﻿namespace GRSMU.TimeTableBot.Data.Documents
+﻿namespace GRSMU.TimeTableBot.Data.TimeTables.Documents
 {
     public class TimeTableLineDocument
     {

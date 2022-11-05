@@ -1,7 +1,7 @@
 ﻿using GRSMU.TimeTable.Common.Data.Documents;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace GRSMU.TimeTableBot.Data.Documents
+namespace GRSMU.TimeTableBot.Data.TimeTables.Documents
 {
     public class TimeTableDocument : DocumentBase
     {

@@ -1,6 +1,6 @@
-﻿using GRSMU.TimeTableBot.Data.Documents;
+﻿using GRSMU.TimeTableBot.Data.Users.Documents;
 
-namespace GRSMU.TimeTableBot.Data.Repositories.Users;
+namespace GRSMU.TimeTableBot.Data.Users.Contracts;
 
 public interface IUserRepository
 {

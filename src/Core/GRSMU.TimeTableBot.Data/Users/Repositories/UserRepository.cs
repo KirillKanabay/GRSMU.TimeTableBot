@@ -1,10 +1,11 @@
 ﻿using GRSMU.TimeTable.Common.Data.Contexts;
 using GRSMU.TimeTable.Common.Data.Immutable;
 using GRSMU.TimeTable.Common.Data.Repositories;
-using GRSMU.TimeTableBot.Data.Documents;
+using GRSMU.TimeTableBot.Data.Users.Contracts;
+using GRSMU.TimeTableBot.Data.Users.Documents;
 using MongoDB.Driver.Linq;
 
-namespace GRSMU.TimeTableBot.Data.Repositories.Users
+namespace GRSMU.TimeTableBot.Data.Users.Repositories
 {
     public class UserRepository : RepositoryBase<UserDocument>, IUserRepository
     {

@@ -5,7 +5,7 @@ using GRSMU.TimeTableBot.Common.Models.Responses;
 using GRSMU.TimeTableBot.Common.Services;
 using GRSMU.TimeTableBot.Core.Immutable;
 using GRSMU.TimeTableBot.Data.Documents;
-using GRSMU.TimeTableBot.Data.Repositories.Users;
+using GRSMU.TimeTableBot.Data.Reports.Contracts;
 using GRSMU.TimeTableBot.Domain.RequestMessages.Users;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;

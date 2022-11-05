@@ -1,13 +1,13 @@
-﻿using System.Net.Mime;
-using GRSMU.TimeTable.Common.Data.Contexts;
+﻿using GRSMU.TimeTable.Common.Data.Contexts;
 using GRSMU.TimeTable.Common.Data.Immutable;
 using GRSMU.TimeTable.Common.Data.Repositories;
-using GRSMU.TimeTableBot.Data.Documents;
-using GRSMU.TimeTableBot.Data.Repositories.TimeTables.Filters;
+using GRSMU.TimeTableBot.Data.TimeTables.Contracts;
+using GRSMU.TimeTableBot.Data.TimeTables.Contracts.Filters;
+using GRSMU.TimeTableBot.Data.TimeTables.Documents;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
-namespace GRSMU.TimeTableBot.Data.Repositories.TimeTables;
+namespace GRSMU.TimeTableBot.Data.TimeTables.Repositories;
 
 public class TimeTableRepository : RepositoryBase<TimeTableDocument>, ITimeTableRepository
 {
@@ -30,7 +30,7 @@ public class TimeTableRepository : RepositoryBase<TimeTableDocument>, ITimeTable
         if (filter.Date.HasValue)
         {
             var date = filter.Date.Value.Add(DateTimeOffset.Now.Offset);
-            
+
             query = query.Where(x => x.Date.Equals(date));
         }
 

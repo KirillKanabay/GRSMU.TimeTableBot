@@ -1,6 +1,6 @@
 ﻿using GRSMU.TimeTable.Common.Data.Documents;
 
-namespace GRSMU.TimeTableBot.Data.Documents;
+namespace GRSMU.TimeTableBot.Data.Reports.Documents;
 
 public class ReportDocument : DocumentBase
 {

@@ -1,4 +1,4 @@
-﻿namespace GRSMU.TimeTableBot.Data.Repositories.TimeTables.Filters
+﻿namespace GRSMU.TimeTableBot.Data.TimeTables.Contracts.Filters
 {
     public class TimeTableFilter
     {

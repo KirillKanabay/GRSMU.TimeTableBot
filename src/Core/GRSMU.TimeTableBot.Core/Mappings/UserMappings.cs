@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GRSMU.TimeTableBot.Common.Contexts;
-using GRSMU.TimeTableBot.Data.Documents;
+using GRSMU.TimeTableBot.Data.Users.Documents;
 using MongoDB.Bson;
 using Telegram.Bot.Types;
 

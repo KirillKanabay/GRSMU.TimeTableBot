@@ -1,6 +1,6 @@
 ﻿using GRSMU.TimeTable.Common.Data.Documents;
 
-namespace GRSMU.TimeTableBot.Data.Documents;
+namespace GRSMU.TimeTableBot.Data.Common.Documents;
 
 public class RequestCacheDocument : DocumentBase
 {

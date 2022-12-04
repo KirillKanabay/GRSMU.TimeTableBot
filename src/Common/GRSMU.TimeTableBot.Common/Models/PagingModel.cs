@@ -9,4 +9,6 @@ public class PagingModel
     public string SortBy { get; set; }
 
     public int TotalCount { get; set; }
+
+    public int PagesCount { get; set; }
 }

@@ -28,6 +28,8 @@ namespace GRSMU.TimeTable.Common.Data.Extensions
                 paging.PageSize = DefaultPageSize;
             }
 
+            paging.PagesCount = (int)Math.Ceiling((decimal)paging.TotalCount / paging.PageSize);
+
             query = query.Skip((paging.Page - 1) * paging.PageSize).Take(paging.PageSize);
 
             return await query.ToListAsync();

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GRSMU.Bot.Common.Web.ViewModels;
 using GRSMU.TimeTableBot.Common.Broker.RequestBroker;
 using GRSMU.TimeTableBot.Common.Models;
 using GRSMU.TimeTableBot.Domain.Users.Dtos.Filters;
@@ -19,14 +20,14 @@ public class UserController : Controller
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index([FromQuery] int? page)
     {
         var response = await _requestBroker.Publish(new GetUsersRequestMessage
         {
             Filter = new UserFilterDto(),
             Paging = new PagingModel
             {
-                Page = 1,
+                Page = page ?? 1,
                 PageSize = 15
             }
         });
@@ -34,7 +35,7 @@ public class UserController : Controller
         var viewModel = new UserListViewModel
         {
             Users = response.Items.Select(_mapper.Map<UserViewModel>).ToList(),
-            Paging = response.PagingModel
+            Paging = _mapper.Map<PagingViewModel>(response.PagingModel)
         };
 
         return View(viewModel);

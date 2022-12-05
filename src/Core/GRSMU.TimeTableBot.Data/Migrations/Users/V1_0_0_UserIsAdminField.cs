@@ -1,7 +1,7 @@
 ﻿using GRSMU.TimeTable.Common.Data.Contexts;
 using GRSMU.TimeTable.Common.Data.Immutable;
 using GRSMU.TimeTable.Common.Data.Migrator;
-using GRSMU.TimeTableBot.Data.Documents;
+using GRSMU.TimeTableBot.Data.Users.Documents;
 using MongoDB.Driver;
 
 namespace GRSMU.TimeTableBot.Data.Migrations.Users

@@ -1,14 +1,15 @@
 ﻿using GRSMU.TimeTableBot.Common.Broker.RequestCache;
-using GRSMU.TimeTableBot.Common.Broker.RequestFactories;
-using GRSMU.TimeTableBot.Common.Common.Handlers.Data;
-using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.RequestMessages;
 using GRSMU.TimeTableBot.Common.Services;
+using GRSMU.TimeTableBot.Common.Telegram.Data;
+using GRSMU.TimeTableBot.Common.Telegram.Extensions;
+using GRSMU.TimeTableBot.Common.Telegram.RequestFactories;
 using GRSMU.TimeTableBot.Core.Immutable;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Common;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Timetables;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Users;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Users.Settings;
+using GRSMU.TimeTableBot.Domain.Common.Requests;
+using GRSMU.TimeTableBot.Domain.Reports.Requests;
+using GRSMU.TimeTableBot.Domain.Timetables.Requests;
+using GRSMU.TimeTableBot.Domain.Users.TelegramRequests;
+using GRSMU.TimeTableBot.Domain.Users.TelegramRequests.Settings;
 using Telegram.Bot.Types;
 
 namespace GRSMU.TimeTableBot.Core;
@@ -49,7 +50,7 @@ public class RequestFactory : MappedRequestFactoryBase
     
     #region Registrators
 
-    private async Task<RequestMessageBase> CreateSettingsCommand<TRequest>(Update update, bool isCached)
+    private async Task<TelegramRequestMessageBase> CreateSettingsCommand<TRequest>(Update update, bool isCached)
         where TRequest : SettingsRequestMessageBase
     {
         var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
@@ -66,7 +67,7 @@ public class RequestFactory : MappedRequestFactoryBase
 
     #endregion
 
-    private async Task<RequestMessageBase> CreateReportCommand(Update update, bool isCached)
+    private async Task<TelegramRequestMessageBase> CreateReportCommand(Update update, bool isCached)
     {
         var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
         var requestMessage = new ReportRequestMessage(userContext);

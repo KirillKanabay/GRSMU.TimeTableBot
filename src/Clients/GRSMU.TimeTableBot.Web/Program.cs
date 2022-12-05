@@ -1,17 +1,19 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using GRSMU.TimeTableBot.Api;
 using GRSMU.TimeTableBot.Api.Filters;
 using GRSMU.TimeTableBot.Api.RecurringJobs;
 using GRSMU.TimeTableBot.Api.RecurringJobs.Jobs;
 using GRSMU.TimeTableBot.Common.Models.Options;
 using GRSMU.TimeTableBot.IoC;
 using GRSMU.TimeTableBot.Web.Core.Controllers;
+using GRSMU.TimeTableBot.Web.RecurringJobs.Jobs;
 using Hangfire;
 using Hangfire.Mongo;
 using NLog;
 using NLog.Web;
 
-namespace GRSMU.TimeTableBot.Api
+namespace GRSMU.TimeTableBot.Web
 {
     public class Program
     {

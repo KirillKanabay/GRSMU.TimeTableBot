@@ -1,20 +1,19 @@
 ﻿using System.Globalization;
 using AutoMapper;
-using GRSMU.TimeTableBot.Common.Broker.Handlers;
-using GRSMU.TimeTableBot.Common.Broker.Responses;
 using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.Models;
-using GRSMU.TimeTableBot.Common.Responses;
+using GRSMU.TimeTableBot.Common.Models.Responses;
+using GRSMU.TimeTableBot.Common.Telegram.Handlers;
 using GRSMU.TimeTableBot.Core.DataLoaders;
-using GRSMU.TimeTableBot.Data.Documents;
-using GRSMU.TimeTableBot.Data.Repositories.TimeTables;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Timetables;
+using GRSMU.TimeTableBot.Data.TimeTables.Contracts;
+using GRSMU.TimeTableBot.Data.TimeTables.Documents;
+using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
 {
-    public class GrabTimeTablesRequestHandler : RequestHandlerBase<GrabTimeTablesRequestMessage>
+    public class GrabTimeTablesRequestHandler : TelegramRequestHandlerBase<GrabTimeTablesRequestMessage>
     {
         private readonly ITimeTableLoader _timeTableLoader;
         private readonly FormDataLoader _formDataLoader;

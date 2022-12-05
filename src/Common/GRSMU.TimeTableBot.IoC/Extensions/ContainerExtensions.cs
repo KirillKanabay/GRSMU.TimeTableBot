@@ -2,7 +2,6 @@
 using Autofac;
 using GRSMU.TimeTable.Common.Data.Migrator;
 using GRSMU.TimeTableBot.Common.Models.Options;
-using GRSMU.TimeTableBot.Common.Options;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Telegram.Bot;

@@ -1,0 +1,20 @@
+﻿@model PagingViewModel
+
+@{
+    var pagesCount = Model.PagesCount;
+    var page = Model.Page;
+}
+
+<nav>
+    <ul class="pagination justify-content-center">
+        @for (int pageIdx = 1; pageIdx < pagesCount; pageIdx++)
+        {
+            var url = $"?page={pageIdx}";
+            var activeClass = pageIdx.Equals(page) ? "active" : "";
+
+            <li class="page-item @(activeClass)">
+                <a class="page-link" href="@url">@pageIdx</a>
+            </li>
+        }
+    </ul>
+</nav>

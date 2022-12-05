@@ -26,10 +26,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Clients\GRSMU.TimeTableBot.Web.Core\GRSMU.TimeTableBot.Web.Core.csproj" />
 	  <ProjectReference Include="..\..\Core\GRSMU.TimeTableBot.Application\GRSMU.TimeTableBot.Application.csproj" />
-	  <ProjectReference Include="..\..\Core\GRSMU.TimeTableBot.Data\GRSMU.TimeTableBot.Data.csproj" />
-	  <ProjectReference Include="..\..\Core\GRSMU.TimeTableBot.Parser\GRSMU.TimeTableBot.Core.csproj" />
-	  <ProjectReference Include="..\GRSMU.TimeTable.Common.Data\GRSMU.TimeTable.Common.Data.csproj" />
-	  <ProjectReference Include="..\GRSMU.TimeTableBot.Common\GRSMU.TimeTableBot.Common.csproj" />
+	  <ProjectReference Include="..\..\Core\GRSMU.TimeTableBot.Core\GRSMU.TimeTableBot.Core.csproj" />
+	  <ProjectReference Include="..\GRSMU.TimeTableBot.Common.Telegram\GRSMU.TimeTableBot.Common.Telegram.csproj" />
 	</ItemGroup>
 </Project>

@@ -1,18 +1,15 @@
-﻿using GRSMU.TimeTableBot.Common.Broker.Handlers;
-using GRSMU.TimeTableBot.Common.Broker.RequestBroker;
-using GRSMU.TimeTableBot.Common.Broker.Responses;
-using GRSMU.TimeTableBot.Common.Contexts;
-using GRSMU.TimeTableBot.Common.Responses;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Common;
+﻿using GRSMU.TimeTableBot.Common.Broker.RequestBroker;
 using Telegram.Bot;
-using GRSMU.TimeTableBot.Common.Extensions;
+using GRSMU.TimeTableBot.Common.Models.Responses;
+using GRSMU.TimeTableBot.Common.Telegram.Extensions;
 using GRSMU.TimeTableBot.Core.Immutable;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Users;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Users.Settings;
+using GRSMU.TimeTableBot.Domain.Common.Requests;
+using GRSMU.TimeTableBot.Common.Telegram.Handlers;
+using GRSMU.TimeTableBot.Domain.Users.TelegramRequests.Settings;
 
 namespace GRSMU.TimeTableBot.Application.Common.Handlers
 {
-    public class StartRequestHandler : RequestHandlerBase<StartRequestMessage>
+    public class StartRequestHandler : TelegramRequestHandlerBase<StartRequestMessage>
     {
         private readonly IRequestBroker _requestBroker;
 

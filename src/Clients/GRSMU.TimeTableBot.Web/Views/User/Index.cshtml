@@ -1,7 +1,51 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model GRSMU.TimeTableBot.Web.Core.ViewModels.Users.UserListViewModel;
+
 @{
+    var userList = Model.Users;
+    var paging = Model.Paging;
 }
 
-<h1>User's</h1>
+<h1>Пользователи (@paging.TotalCount)</h1>
+
+<table class="table table-striped">
+    <thead>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Логин</th>
+        <th scope="col">Факультет</th>
+        <th scope="col">Курс</th>
+        <th scope="col">Группа</th>
+    </thead>
+    <tbody>
+    @foreach (var user in userList)
+    {
+        var firstName = user.FirstName;
+        var lastName = user.LastName;
+        var username = user.Username;
+        var faculty = user.FacultyName;
+        var course = user.CourseName;
+        var group = user.GroupName;
+        
+        <tr>
+            <td>@firstName</td>
+            <td>@lastName</td>
+            @if(string.IsNullOrWhiteSpace(username))
+            {
+                <td>-</td>    
+            }
+            else
+            {
+                var link = $"https://t.me/{username}";
+                <td>
+                    <a class="link-info" href="@link">@@@username</a>
+                </td>
+            }
+            <td>@faculty</td>
+            <td>@course</td>
+            <td>@group</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<partial name="Partials/_Paging" model="paging"/>

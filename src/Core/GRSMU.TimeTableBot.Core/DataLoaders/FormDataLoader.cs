@@ -2,7 +2,7 @@
 using AngleSharp.Html.Dom;
 using AngleSharp;
 using GRSMU.TimeTableBot.Common.Extensions;
-using GRSMU.TimeTableBot.Common.Options;
+using GRSMU.TimeTableBot.Common.Models.Options;
 using GRSMU.TimeTableBot.Core.Immutable;
 
 namespace GRSMU.TimeTableBot.Core.DataLoaders

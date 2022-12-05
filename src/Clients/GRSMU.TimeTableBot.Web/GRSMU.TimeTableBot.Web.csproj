@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -25,9 +25,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\GRSMU.TimeTableBot.Web.Core\GRSMU.TimeTableBot.Web.Core.csproj" />
-	  <ProjectReference Include="..\..\Common\GRSMU.TimeTableBot.Common\GRSMU.TimeTableBot.Common.csproj" />
+	  <ProjectReference Include="..\..\Common\GRSMU.TimeTableBot.Common.Data\GRSMU.TimeTableBot.Common.Data.csproj" />
+	  <ProjectReference Include="..\..\Common\GRSMU.TimeTableBot.Common.Telegram\GRSMU.TimeTableBot.Common.Telegram.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.TimeTableBot.IoC\GRSMU.TimeTableBot.IoC.csproj" />
+	  <ProjectReference Include="..\GRSMU.TimeTableBot.Web.Core\GRSMU.TimeTableBot.Web.Core.csproj" />
 	</ItemGroup>
 	
 	<ItemGroup>

@@ -2,8 +2,9 @@
 using GRSMU.TimeTableBot.Common.Contexts;
 using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.Services;
-using GRSMU.TimeTableBot.Data.Documents;
-using GRSMU.TimeTableBot.Data.Repositories.Users;
+using GRSMU.TimeTableBot.Common.Telegram.Extensions;
+using GRSMU.TimeTableBot.Data.Users.Contracts;
+using GRSMU.TimeTableBot.Data.Users.Documents;
 using Telegram.Bot.Types;
 
 namespace GRSMU.TimeTableBot.Core.Services
@@ -25,7 +26,7 @@ namespace GRSMU.TimeTableBot.Core.Services
 
             var telegramId = user.Id.ToString();
 
-            var userDocument = await _userRepository.GetByTelegramId(telegramId);
+            var userDocument = await _userRepository.GetByTelegramIdAsync(telegramId);
 
             if (userDocument == null)
             {

@@ -1,10 +1,9 @@
 ﻿using GRSMU.TimeTable.Common.Data.Migrator;
 using GRSMU.TimeTableBot.Common.Models.Options;
-using GRSMU.TimeTableBot.Common.Options;
 using Telegram.Bot;
-using Telegram.Bot.Types.Enums;
+using UpdateType = Telegram.Bot.Types.Enums.UpdateType;
 
-namespace GRSMU.TimeTableBot.Api
+namespace GRSMU.TimeTableBot.Web
 {
     public class ConfigureApplication : IHostedService
     {
@@ -41,15 +40,9 @@ namespace GRSMU.TimeTableBot.Api
             }
         }
 
-        public async Task StopAsync(CancellationToken cancellationToken)
+        public Task StopAsync(CancellationToken cancellationToken)
         {
-            //using (var scope = _services.CreateScope())
-            //{
-            //    var botClient = scope.ServiceProvider.GetRequiredService<ITelegramBotClient>();
-
-            //    _logger.LogInformation("Removing webhook");
-            //    await botClient.DeleteWebhookAsync(cancellationToken: cancellationToken);
-            //}
+            return Task.CompletedTask;
         }
     }
 }

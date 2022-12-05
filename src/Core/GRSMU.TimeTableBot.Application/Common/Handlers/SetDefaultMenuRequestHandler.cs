@@ -1,14 +1,14 @@
-﻿using GRSMU.TimeTableBot.Common.Broker.Handlers;
-using GRSMU.TimeTableBot.Common.Broker.Responses;
-using GRSMU.TimeTableBot.Common.Extensions;
-using GRSMU.TimeTableBot.Common.Responses;
+﻿using GRSMU.TimeTableBot.Common.Extensions;
+using GRSMU.TimeTableBot.Common.Models.Responses;
+using GRSMU.TimeTableBot.Common.Telegram.Extensions;
+using GRSMU.TimeTableBot.Common.Telegram.Handlers;
 using GRSMU.TimeTableBot.Core.Immutable;
-using GRSMU.TimeTableBot.Domain.RequestMessages.Common;
+using GRSMU.TimeTableBot.Domain.Common.Requests;
 using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Application.Common.Handlers;
 
-public class SetDefaultMenuRequestHandler : RequestHandlerBase<SetDefaultMenuRequestMessage>
+public class SetDefaultMenuRequestHandler : TelegramRequestHandlerBase<SetDefaultMenuRequestMessage>
 {
     public SetDefaultMenuRequestHandler(ITelegramBotClient client) : base(client)
     {

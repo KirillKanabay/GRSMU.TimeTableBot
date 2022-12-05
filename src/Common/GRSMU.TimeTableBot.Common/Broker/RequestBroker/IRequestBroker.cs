@@ -1,7 +1,5 @@
-﻿using GRSMU.TimeTableBot.Common.Broker.Messages;
-using GRSMU.TimeTableBot.Common.Broker.Responses;
-using GRSMU.TimeTableBot.Common.Messages;
-using GRSMU.TimeTableBot.Common.Responses;
+﻿using GRSMU.TimeTableBot.Common.Models.RequestMessages;
+using GRSMU.TimeTableBot.Common.Models.Responses;
 
 namespace GRSMU.TimeTableBot.Common.Broker.RequestBroker
 {

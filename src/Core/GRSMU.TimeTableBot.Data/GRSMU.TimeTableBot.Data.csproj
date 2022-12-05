@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\GRSMU.TimeTable.Common.Data\GRSMU.TimeTable.Common.Data.csproj" />
+    <ProjectReference Include="..\..\Common\GRSMU.TimeTableBot.Common.Data\GRSMU.TimeTableBot.Common.Data.csproj" />
   </ItemGroup>
 
 </Project>

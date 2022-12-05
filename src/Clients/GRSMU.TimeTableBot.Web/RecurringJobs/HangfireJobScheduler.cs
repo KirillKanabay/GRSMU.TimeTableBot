@@ -1,4 +1,5 @@
 ﻿using GRSMU.TimeTableBot.Api.RecurringJobs.Jobs;
+using GRSMU.TimeTableBot.Web.RecurringJobs.Jobs;
 using Hangfire;
 
 namespace GRSMU.TimeTableBot.Api.RecurringJobs

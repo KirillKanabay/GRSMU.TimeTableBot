@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\GRSMU.TimeTableBot.Common.Telegram\GRSMU.TimeTableBot.Common.Telegram.csproj" />
     <ProjectReference Include="..\..\Common\GRSMU.TimeTableBot.Common\GRSMU.TimeTableBot.Common.csproj" />
     <ProjectReference Include="..\GRSMU.TimeTableBot.Data\GRSMU.TimeTableBot.Data.csproj" />
     <ProjectReference Include="..\GRSMU.TimeTableBot.Domain\GRSMU.TimeTableBot.Domain.csproj" />

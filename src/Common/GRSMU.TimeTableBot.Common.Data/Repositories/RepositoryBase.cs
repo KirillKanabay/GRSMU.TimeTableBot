@@ -32,14 +32,31 @@ namespace GRSMU.TimeTableBot.Common.Data.Repositories
             return query.FirstOrDefaultAsync(document => document.Id.Equals(id));
         }
 
-        public virtual Task InsertAsync(TDocument document)
+        public virtual async Task InsertAsync(TDocument document)
         {
-            return Collection.InsertOneAsync(document);
+            if (document == null)
+            {
+                throw new ArgumentNullException(nameof(document));
+            }
+
+            await OnBeforeInsert(document);
+
+            await Collection.InsertOneAsync(document);
         }
 
-        public virtual Task InsertManyAsync(List<TDocument> documents)
+        public virtual async Task InsertManyAsync(List<TDocument> documents)
         {
-            return Collection.InsertManyAsync(documents);
+            if (documents == null)
+            {
+                throw new ArgumentNullException(nameof(documents));
+            }
+
+            foreach (var document in documents)
+            {
+                await OnBeforeInsert(document);
+            }
+
+            await Collection.InsertManyAsync(documents);
         }
 
         public virtual Task<List<TDocument>> ListAllAsync()
@@ -81,6 +98,20 @@ namespace GRSMU.TimeTableBot.Common.Data.Repositories
             var query = Collection.AsQueryable(new AggregateOptions { AllowDiskUse = true });
 
             return query;
+        }
+
+        protected virtual FilterDefinition<TDocument> GetFilter()
+        {
+            return Builders<TDocument>.Filter.Empty;
+        }
+
+        protected virtual Task OnBeforeInsert(TDocument document)
+        {
+            var timestamp = DateTime.UtcNow;
+
+            document.CreatedDate = timestamp;
+
+            return Task.CompletedTask;
         }
     }
 }

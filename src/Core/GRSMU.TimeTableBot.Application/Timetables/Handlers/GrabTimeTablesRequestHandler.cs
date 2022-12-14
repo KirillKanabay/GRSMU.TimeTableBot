@@ -6,13 +6,16 @@ using GRSMU.TimeTableBot.Common.Models.Responses;
 using GRSMU.TimeTableBot.Common.Telegram.Handlers;
 using GRSMU.TimeTableBot.Core.DataLoaders;
 using GRSMU.TimeTableBot.Data.TimeTables.Contracts;
+using GRSMU.TimeTableBot.Data.TimeTables.Contracts.Filters;
 using GRSMU.TimeTableBot.Data.TimeTables.Documents;
+using GRSMU.TimeTableBot.Domain.Timetables.Enums;
 using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
 {
+    //TODO: Change type of handler
     public class GrabTimeTablesRequestHandler : TelegramRequestHandlerBase<GrabTimeTablesRequestMessage>
     {
         private readonly ITimeTableLoader _timeTableLoader;
@@ -39,13 +42,7 @@ namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
             var weeksForGrab = GetWeeksForGrab(weeks);
             var coursesForGrab = await _formDataLoader.GetCoursesAsync();
             var facultiesForGrab = await _formDataLoader.GetFacultiesAsync();
-
-            _logger.LogInformation("Starting clear TimeTable collection");
             
-            await _timeTableRepository.ClearCollection();
-            
-            _logger.LogInformation("TimeTable collection cleared successfully");
-
             foreach (var (_, courseId) in coursesForGrab)
             {
                 foreach (var (_, facultyId) in facultiesForGrab)
@@ -54,6 +51,14 @@ namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
 
                     foreach (var (_, groupId) in groupsForGrab)
                     {
+                        await _timeTableRepository.DeleteManyAsync(new TimeTableFilter
+                        {
+                            GroupId = groupId,
+                            Type = TimeTableType.Lecture
+                        });
+
+                        _logger.LogInformation($"Successfully removed timetable for GroupId: {groupId}, FacultyId: {facultyId}, CourseId: {courseId}");
+
                         foreach (var week in weeksForGrab)
                         {
                             var query = new TimetableQuery
@@ -79,7 +84,7 @@ namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
                 }
             }
 
-            _logger.LogInformation("Successfully grabbed!!!");
+            _logger.LogInformation($"Timetable successfully grabbed! Timestamp:{DateTime.Now}");
 
             return response;
         }
@@ -105,7 +110,7 @@ namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
 
                 return;
             }
-
+            
             await _timeTableRepository.InsertManyAsync(documents);
 
             _logger.LogInformation($"Successfully grabbed GroupId: {query.GroupId}, FacultyId: {query.FacultyId}, CourseId: {query.CourseId}, Week: {query.Week}");

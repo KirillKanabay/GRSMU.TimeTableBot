@@ -1,8 +1,8 @@
-﻿using GRSMU.TimeTableBot.Common.RequestMessages;
+﻿using GRSMU.TimeTableBot.Common.Models.RequestMessages;
 
 namespace GRSMU.TimeTableBot.Domain.Timetables.Requests
 {
-    public class GrabTimeTablesRequestMessage : InternalRequestMessageBase
+    public class GrabTimeTablesRequestMessage : RequestMessageBase
     {
     }
 }

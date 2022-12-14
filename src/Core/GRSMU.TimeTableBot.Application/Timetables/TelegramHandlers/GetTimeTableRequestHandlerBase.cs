@@ -12,7 +12,7 @@ using GRSMU.TimeTableBot.Domain.Timetables.Dtos;
 using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Telegram.Bot;
 
-namespace GRSMU.TimeTableBot.Application.Timetables.Handlers;
+namespace GRSMU.TimeTableBot.Application.Timetables.TelegramHandlers;
 
 public abstract class GetTimeTableRequestHandlerBase<TRequest> : TelegramRequestHandlerBase<TRequest>
     where TRequest : GetTimeTableRequestMessageBase
@@ -30,9 +30,9 @@ public abstract class GetTimeTableRequestHandlerBase<TRequest> : TelegramRequest
         TimeTableLoader = timeTableLoader ?? throw new ArgumentNullException(nameof(timeTableLoader));
     }
 
-    protected override async Task<EmptyResponse> ExecuteAsync(TRequest request, CancellationToken cancellationToken)
+    protected override async Task<TelegramResponse> ExecuteAsync(TRequest request, CancellationToken cancellationToken)
     {
-        var response = new EmptyResponse(request.UserContext, ResponseStatus.Finished);
+        var response = new TelegramResponse(request.UserContext, ResponseStatus.Finished);
         
         var user = request.UserContext;
 

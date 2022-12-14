@@ -10,11 +10,11 @@ using GRSMU.TimeTableBot.Domain.Timetables.Dtos;
 using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Telegram.Bot;
 
-namespace GRSMU.TimeTableBot.Application.Timetables.Handlers;
+namespace GRSMU.TimeTableBot.Application.Timetables.TelegramHandlers;
 
-public class GetNextWeekTimeTableRequestHandler : GetTimeTableRequestHandlerBase<GetNextWeekTimeTableRequestMessage>
+public class GetWeekTimeTableRequestHandler : GetTimeTableRequestHandlerBase<GetWeekTimeTableRequestMessage>
 {
-    public GetNextWeekTimeTableRequestHandler(ITelegramBotClient client, ITimeTableRepository timeTableRepository, TimeTablePresenter timeTablePresenter, IMapper mapper, ITimeTableLoader timeTableLoader) : base(client, timeTableRepository, timeTablePresenter, mapper, timeTableLoader)
+    public GetWeekTimeTableRequestHandler(ITelegramBotClient client, ITimeTableRepository timeTableRepository, TimeTablePresenter timeTablePresenter, IMapper mapper, ITimeTableLoader timeTableLoader) : base(client, timeTableRepository, timeTablePresenter, mapper, timeTableLoader)
     {
     }
 
@@ -34,17 +34,17 @@ public class GetNextWeekTimeTableRequestHandler : GetTimeTableRequestHandlerBase
         var filter = new TimeTableFilter
         {
             GroupId = context.GroupId,
-            Week = today.StartOfWeek().AddDays(7)
+            Week = today.StartOfWeek()
         };
 
         return filter;
     }
-    
+
     protected override async Task<List<TimeTableDto>> GetFromLoader(UserContext user, TimeTableFilter filter)
     {
-        var startOfWeek = filter.Week ?? DateTime.Today.StartOfWeek().AddDays(7);
+        var startOfWeek = filter.Week ?? DateTime.Today.StartOfWeek();
         var endOfWeek = startOfWeek.EndOfWeek();
-
+        
         var grabbedTimeTables = await TimeTableLoader.GrabTimeTableModels(new TimetableQuery
         {
             CourseId = user.CourseId,
@@ -57,7 +57,7 @@ public class GetNextWeekTimeTableRequestHandler : GetTimeTableRequestHandlerBase
         {
             return new List<TimeTableDto>();
         }
-
+        
         grabbedTimeTables = grabbedTimeTables.Where(x => x.Date >= startOfWeek && x.Date <= endOfWeek).ToList();
 
         var dtos = Mapper.Map<List<TimeTableDto>>(grabbedTimeTables);

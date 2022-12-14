@@ -43,9 +43,9 @@ namespace GRSMU.TimeTableBot.Application.Users.TelegramHandlers.Settings
             FormDataLoader = formDataLoader ?? throw new ArgumentNullException(nameof(formDataLoader));
         }
 
-        protected override async Task<EmptyResponse> ExecuteAsync(TRequest request, CancellationToken cancellationToken)
+        protected override async Task<TelegramResponse> ExecuteAsync(TRequest request, CancellationToken cancellationToken)
         {
-            var response = new EmptyResponse(request.UserContext);
+            var response = new TelegramResponse(request.UserContext);
 
             var user = request.UserContext;
 

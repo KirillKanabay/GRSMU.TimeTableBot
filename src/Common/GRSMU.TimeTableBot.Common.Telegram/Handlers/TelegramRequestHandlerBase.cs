@@ -39,7 +39,7 @@ namespace GRSMU.TimeTableBot.Common.Telegram.Handlers
         }
     }
 
-    public abstract class TelegramRequestHandlerBase<TRequest> : TelegramRequestHandlerBase<TRequest, EmptyResponse>
+    public abstract class TelegramRequestHandlerBase<TRequest> : TelegramRequestHandlerBase<TRequest, TelegramResponse>
         where TRequest : TelegramRequestMessageBase
     {
         protected TelegramRequestHandlerBase(ITelegramBotClient client) : base(client)

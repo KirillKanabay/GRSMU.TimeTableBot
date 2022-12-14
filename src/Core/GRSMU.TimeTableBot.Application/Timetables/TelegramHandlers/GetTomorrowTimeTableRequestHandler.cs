@@ -10,7 +10,7 @@ using GRSMU.TimeTableBot.Domain.Timetables.Dtos;
 using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Telegram.Bot;
 
-namespace GRSMU.TimeTableBot.Application.Timetables.Handlers;
+namespace GRSMU.TimeTableBot.Application.Timetables.TelegramHandlers;
 
 public class GetTomorrowTimeTableRequestHandler : GetTimeTableRequestHandlerBase<GetTomorrowTimeTableRequestMessage>
 {

@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="RequestHandlers\**" />
+    <EmbeddedResource Remove="RequestHandlers\**" />
+    <None Remove="RequestHandlers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="0.17.1" />
+    <PackageReference Include="Autofac" Version="6.4.0" />
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
+    <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
+    <ProjectReference Include="..\..\Common\GRSMU.Bot.Common\GRSMU.Bot.Common.csproj" />
+    <ProjectReference Include="..\GRSMU.Bot.Data\GRSMU.Bot.Data.csproj" />
+    <ProjectReference Include="..\GRSMU.Bot.Data\GRSMU.Bot.Data.csproj" />
+    <ProjectReference Include="..\GRSMU.Bot.Domain\GRSMU.Bot.Domain.csproj" />
+    <ProjectReference Include="..\GRSMU.Bot.Domain\GRSMU.Bot.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

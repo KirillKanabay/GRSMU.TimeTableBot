@@ -4,6 +4,7 @@ using GRSMU.TimeTable.Common.Data.Contexts;
 using GRSMU.TimeTable.Common.Data.Migrator;
 using GRSMU.TimeTableBot.Application.Timetables.Handlers;
 using GRSMU.TimeTableBot.Application.Timetables.Mappings;
+using GRSMU.TimeTableBot.Application.Timetables.TelegramHandlers;
 using GRSMU.TimeTableBot.Common.Broker.RequestBroker;
 using GRSMU.TimeTableBot.Common.Broker.RequestCache;
 using GRSMU.TimeTableBot.Common.Data.Contexts;

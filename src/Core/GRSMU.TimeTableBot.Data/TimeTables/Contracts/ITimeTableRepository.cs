@@ -7,6 +7,8 @@ namespace GRSMU.TimeTableBot.Data.TimeTables.Contracts
     {
         Task ClearCollection();
 
+        Task DeleteManyAsync(TimeTableFilter filter);
+
         Task<List<TimeTableDocument>> GetDocuments(TimeTableFilter filter);
 
         Task InsertManyAsync(List<TimeTableDocument> documents);

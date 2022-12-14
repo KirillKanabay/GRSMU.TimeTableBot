@@ -14,9 +14,9 @@ public class SetDefaultMenuRequestHandler : TelegramRequestHandlerBase<SetDefaul
     {
     }
 
-    protected override async Task<EmptyResponse> ExecuteAsync(SetDefaultMenuRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<TelegramResponse> ExecuteAsync(SetDefaultMenuRequestMessage request, CancellationToken cancellationToken)
     {
-        var response = new EmptyResponse(request.UserContext, ResponseStatus.Finished);
+        var response = new TelegramResponse(request.UserContext, ResponseStatus.Finished);
 
         await Client.SendTextMessageWithMarkup(request.UserContext, "Главное меню", Markups.DefaultMarkup);
 

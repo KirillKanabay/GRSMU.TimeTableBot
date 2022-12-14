@@ -15,7 +15,7 @@ public abstract class TelegramRequestMessageBase<TResponse> : IRequestMessage<TR
     }
 }
 
-public abstract class TelegramRequestMessageBase : TelegramRequestMessageBase<EmptyResponse>
+public abstract class TelegramRequestMessageBase : TelegramRequestMessageBase<TelegramResponse>
 {
     protected TelegramRequestMessageBase(UserContext userContext) : base(userContext)
     {

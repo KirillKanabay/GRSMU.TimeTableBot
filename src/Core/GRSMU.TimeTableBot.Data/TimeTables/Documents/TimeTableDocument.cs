@@ -1,5 +1,5 @@
-﻿using GRSMU.TimeTable.Common.Data.Documents;
-using GRSMU.TimeTableBot.Common.Data.Documents;
+﻿using GRSMU.TimeTableBot.Common.Data.Documents;
+using GRSMU.TimeTableBot.Domain.Timetables.Enums;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace GRSMU.TimeTableBot.Data.TimeTables.Documents
@@ -15,6 +15,8 @@ namespace GRSMU.TimeTableBot.Data.TimeTables.Documents
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime Week { get; set; }
+        
+        public TimeTableType Type { get; set; }
 
         public List<TimeTableLineDocument> Lines { get; set; }
     }

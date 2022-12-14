@@ -25,7 +25,7 @@ public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMess
         _reportRepository = reportRepository ?? throw new ArgumentNullException(nameof(reportRepository));
     }
 
-    protected override async Task<EmptyResponse> ExecuteAsync(ReportRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<TelegramResponse> ExecuteAsync(ReportRequestMessage request, CancellationToken cancellationToken)
     {
         var user = request.UserContext;
 
@@ -52,7 +52,7 @@ public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMess
 
             await _userService.UpdateContext(user);
 
-            return new EmptyResponse(user, ResponseStatus.WaitingNextResponse);
+            return new TelegramResponse(user, ResponseStatus.WaitingNextResponse);
         }
 
         await Client.EditMessageReplyMarkupAsync
@@ -80,6 +80,6 @@ public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMess
             Markups.DefaultMarkup
         );
 
-        return new EmptyResponse(user, ResponseStatus.Finished);
+        return new TelegramResponse(user, ResponseStatus.Finished);
     }
 }

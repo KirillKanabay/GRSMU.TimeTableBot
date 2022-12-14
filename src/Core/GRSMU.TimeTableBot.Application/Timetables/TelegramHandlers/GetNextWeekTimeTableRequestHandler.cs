@@ -1,32 +1,24 @@
-﻿using AngleSharp.Io;
-using AutoMapper;
-using GRSMU.TimeTableBot.Common.Broker.Handlers;
+﻿using AutoMapper;
+using GRSMU.TimeTableBot.Application.Timetables.Handlers;
 using GRSMU.TimeTableBot.Common.Contexts;
 using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.Models;
 using GRSMU.TimeTableBot.Core.DataLoaders;
-using GRSMU.TimeTableBot.Core.Immutable;
 using GRSMU.TimeTableBot.Core.Presenters;
 using GRSMU.TimeTableBot.Data.TimeTables.Contracts;
 using GRSMU.TimeTableBot.Data.TimeTables.Contracts.Filters;
 using GRSMU.TimeTableBot.Domain.Timetables.Dtos;
 using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Telegram.Bot;
-using Telegram.Bot.Types;
 
-namespace GRSMU.TimeTableBot.Application.Timetables.Handlers;
+namespace GRSMU.TimeTableBot.Application.Timetables.TelegramHandlers;
 
-public class GetTodayTimeTableRequestHandler : GetTimeTableRequestHandlerBase<GetTodayTimeTableRequestMessage>
+public class GetNextWeekTimeTableRequestHandler : GetTimeTableRequestHandlerBase<GetNextWeekTimeTableRequestMessage>
 {
-    public GetTodayTimeTableRequestHandler(
-        ITelegramBotClient client, 
-        ITimeTableRepository timeTableRepository, 
-        TimeTablePresenter timeTablePresenter, 
-        IMapper mapper, 
-        ITimeTableLoader timeTableLoader) : base(client, timeTableRepository, timeTablePresenter, mapper, timeTableLoader)
+    public GetNextWeekTimeTableRequestHandler(ITelegramBotClient client, ITimeTableRepository timeTableRepository, TimeTablePresenter timeTablePresenter, IMapper mapper, ITimeTableLoader timeTableLoader) : base(client, timeTableRepository, timeTablePresenter, mapper, timeTableLoader)
     {
     }
-    
+
     protected override TimeTableFilter CreateFilter(UserContext context)
     {
         var today = DateTime.Today;
@@ -43,21 +35,23 @@ public class GetTodayTimeTableRequestHandler : GetTimeTableRequestHandlerBase<Ge
         var filter = new TimeTableFilter
         {
             GroupId = context.GroupId,
-            Date = today
+            Week = today.StartOfWeek().AddDays(7)
         };
 
         return filter;
     }
-
+    
     protected override async Task<List<TimeTableDto>> GetFromLoader(UserContext user, TimeTableFilter filter)
     {
+        var startOfWeek = filter.Week ?? DateTime.Today.StartOfWeek().AddDays(7);
+        var endOfWeek = startOfWeek.EndOfWeek();
+
         var grabbedTimeTables = await TimeTableLoader.GrabTimeTableModels(new TimetableQuery
         {
             CourseId = user.CourseId,
             FacultyId = user.FacultyId,
             GroupId = user.GroupId,
-            Week = filter.Date?.StartOfWeek().ToString("dd.MM.yyyy 0:00:00") 
-                   ?? DateTime.Today.StartOfWeek().ToString("dd.MM.yyyy 0:00:00")
+            Week = startOfWeek.ToString("dd.MM.yyyy 0:00:00")
         });
 
         if (!grabbedTimeTables.Any())
@@ -65,7 +59,7 @@ public class GetTodayTimeTableRequestHandler : GetTimeTableRequestHandlerBase<Ge
             return new List<TimeTableDto>();
         }
 
-        grabbedTimeTables = grabbedTimeTables.Where(x => x.Date.Date.Equals(filter.Date.Value.Date)).ToList();
+        grabbedTimeTables = grabbedTimeTables.Where(x => x.Date >= startOfWeek && x.Date <= endOfWeek).ToList();
 
         var dtos = Mapper.Map<List<TimeTableDto>>(grabbedTimeTables);
 

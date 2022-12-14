@@ -12,6 +12,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\GRSMU.TimeTableBot.Common.Data\GRSMU.TimeTableBot.Common.Data.csproj" />
+    <ProjectReference Include="..\GRSMU.TimeTableBot.Domain\GRSMU.TimeTableBot.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\TimeTables\" />
   </ItemGroup>
 
 </Project>

@@ -18,9 +18,9 @@ namespace GRSMU.TimeTableBot.Application.Common.Handlers
             _requestBroker = requestBroker ?? throw new ArgumentNullException(nameof(requestBroker));
         }
 
-        protected override async Task<EmptyResponse> ExecuteAsync(StartRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<TelegramResponse> ExecuteAsync(StartRequestMessage request, CancellationToken cancellationToken)
         {
-            var response = new EmptyResponse(request.UserContext, ResponseStatus.Finished);
+            var response = new TelegramResponse(request.UserContext, ResponseStatus.Finished);
 
             var user = request.UserContext;
 

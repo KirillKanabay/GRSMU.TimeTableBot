@@ -1,4 +1,5 @@
-﻿using GRSMU.TimeTableBot.Common.Models.Responses;
+﻿using GRSMU.TimeTableBot.Common.Models.RequestMessages;
+using GRSMU.TimeTableBot.Common.Models.Responses;
 using GRSMU.TimeTableBot.Common.RequestMessages;
 using MediatR;
 

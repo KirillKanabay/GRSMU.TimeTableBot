@@ -1,9 +1,12 @@
-﻿using GRSMU.TimeTableBot.Common.Models.RequestMessages;
-using GRSMU.TimeTableBot.Common.Models.Responses;
+﻿using GRSMU.TimeTableBot.Common.Models.Responses;
 
-namespace GRSMU.TimeTableBot.Common.RequestMessages;
+namespace GRSMU.TimeTableBot.Common.Models.RequestMessages;
 
-public class RequestMessageBase<TResponse> : IRequestMessage<TResponse>
+public abstract class RequestMessageBase<TResponse> : IRequestMessage<TResponse>
     where TResponse : ResponseBase
+{
+}
+
+public abstract class RequestMessageBase : RequestMessageBase<EmptyResponse>
 {
 }

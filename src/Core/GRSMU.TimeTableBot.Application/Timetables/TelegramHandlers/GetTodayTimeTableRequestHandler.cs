@@ -10,14 +10,19 @@ using GRSMU.TimeTableBot.Domain.Timetables.Dtos;
 using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Telegram.Bot;
 
-namespace GRSMU.TimeTableBot.Application.Timetables.Handlers;
+namespace GRSMU.TimeTableBot.Application.Timetables.TelegramHandlers;
 
-public class GetWeekTimeTableRequestHandler : GetTimeTableRequestHandlerBase<GetWeekTimeTableRequestMessage>
+public class GetTodayTimeTableRequestHandler : GetTimeTableRequestHandlerBase<GetTodayTimeTableRequestMessage>
 {
-    public GetWeekTimeTableRequestHandler(ITelegramBotClient client, ITimeTableRepository timeTableRepository, TimeTablePresenter timeTablePresenter, IMapper mapper, ITimeTableLoader timeTableLoader) : base(client, timeTableRepository, timeTablePresenter, mapper, timeTableLoader)
+    public GetTodayTimeTableRequestHandler(
+        ITelegramBotClient client, 
+        ITimeTableRepository timeTableRepository, 
+        TimeTablePresenter timeTablePresenter, 
+        IMapper mapper, 
+        ITimeTableLoader timeTableLoader) : base(client, timeTableRepository, timeTablePresenter, mapper, timeTableLoader)
     {
     }
-
+    
     protected override TimeTableFilter CreateFilter(UserContext context)
     {
         var today = DateTime.Today;
@@ -34,7 +39,7 @@ public class GetWeekTimeTableRequestHandler : GetTimeTableRequestHandlerBase<Get
         var filter = new TimeTableFilter
         {
             GroupId = context.GroupId,
-            Week = today.StartOfWeek()
+            Date = today
         };
 
         return filter;
@@ -42,23 +47,21 @@ public class GetWeekTimeTableRequestHandler : GetTimeTableRequestHandlerBase<Get
 
     protected override async Task<List<TimeTableDto>> GetFromLoader(UserContext user, TimeTableFilter filter)
     {
-        var startOfWeek = filter.Week ?? DateTime.Today.StartOfWeek();
-        var endOfWeek = startOfWeek.EndOfWeek();
-        
         var grabbedTimeTables = await TimeTableLoader.GrabTimeTableModels(new TimetableQuery
         {
             CourseId = user.CourseId,
             FacultyId = user.FacultyId,
             GroupId = user.GroupId,
-            Week = startOfWeek.ToString("dd.MM.yyyy 0:00:00")
+            Week = filter.Date?.StartOfWeek().ToString("dd.MM.yyyy 0:00:00") 
+                   ?? DateTime.Today.StartOfWeek().ToString("dd.MM.yyyy 0:00:00")
         });
 
         if (!grabbedTimeTables.Any())
         {
             return new List<TimeTableDto>();
         }
-        
-        grabbedTimeTables = grabbedTimeTables.Where(x => x.Date >= startOfWeek && x.Date <= endOfWeek).ToList();
+
+        grabbedTimeTables = grabbedTimeTables.Where(x => x.Date.Date.Equals(filter.Date.Value.Date)).ToList();
 
         var dtos = Mapper.Map<List<TimeTableDto>>(grabbedTimeTables);
 

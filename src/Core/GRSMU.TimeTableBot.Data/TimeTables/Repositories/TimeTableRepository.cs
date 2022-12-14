@@ -23,46 +23,16 @@ public class TimeTableRepository : RepositoryBase<TimeTableDocument>, ITimeTable
         return Collection.DeleteManyAsync(_ => true);
     }
 
-    public Task<List<TimeTableDocument>> GetDocuments(TimeTableFilter filter)
+    public Task DeleteManyAsync(TimeTableFilter filter)
     {
-        var query = GetQuery();
-
-        if (filter.Date.HasValue)
-        {
-            var date = filter.Date.Value.Add(DateTimeOffset.Now.Offset);
-
-            query = query.Where(x => x.Date.Equals(date));
-        }
-
-        if (filter.MinDate.HasValue)
-        {
-            var minDate = filter.MinDate.Value.Add(DateTimeOffset.Now.Offset);
-
-            query = query.Where(x => x.Date >= minDate);
-        }
-
-        if (filter.MaxDate.HasValue)
-        {
-            var maxDate = filter.MaxDate.Value.Add(DateTimeOffset.Now.Offset);
-
-            query = query.Where(x => x.Date <= maxDate);
-        }
-
-        if (!string.IsNullOrEmpty(filter.GroupId))
-        {
-            query = query.Where(x => x.GroupId == filter.GroupId);
-        }
-
-        if (filter.Week.HasValue)
-        {
-            var week = filter.Week.Value.Add(DateTimeOffset.Now.Offset);
-
-            query = query.Where(x => x.Week.Equals(week));
-        }
-
-        return query.ToListAsync();
+        return Collection.DeleteManyAsync(GetFilter(filter));
     }
 
+    public Task<List<TimeTableDocument>> GetDocuments(TimeTableFilter filter)
+    {
+        return GetQuery().Where(x => GetFilter(filter).Inject()).ToListAsync();
+    }
+    
     public async Task UpsertManyAsync(List<TimeTableDocument> documents, string groupId, DateTime week)
     {
         var query = GetQuery();
@@ -88,5 +58,51 @@ public class TimeTableRepository : RepositoryBase<TimeTableDocument>, ITimeTable
         var filter = Builders<TimeTableDocument>.Filter.Eq(x => x.GroupId, document.GroupId);
 
         return Collection.ReplaceOneAsync(filter, document);
+    }
+    
+    private FilterDefinition<TimeTableDocument> GetFilter(TimeTableFilter filter)
+    {
+        var query = GetFilter();
+
+        if (filter.Date.HasValue)
+        {
+            //TODO: Move to extension
+            var date = filter.Date.Value.Add(DateTimeOffset.Now.Offset);
+
+            query &= Builders<TimeTableDocument>.Filter.Where(x => x.Date.Equals(date));
+        }
+
+        if (filter.MinDate.HasValue)
+        {
+            var minDate = filter.MinDate.Value.Add(DateTimeOffset.Now.Offset);
+
+            query &= Builders<TimeTableDocument>.Filter.Where(x => x.Date >= minDate);
+        }
+
+        if (filter.MaxDate.HasValue)
+        {
+            var maxDate = filter.MaxDate.Value.Add(DateTimeOffset.Now.Offset);
+
+            query &= Builders<TimeTableDocument>.Filter.Where(x => x.Date <= maxDate);
+        }
+
+        if (!string.IsNullOrEmpty(filter.GroupId))
+        {
+            query &= Builders<TimeTableDocument>.Filter.Where(x => x.GroupId == filter.GroupId);
+        }
+
+        if (filter.Week.HasValue)
+        {
+            var week = filter.Week.Value.Add(DateTimeOffset.Now.Offset);
+
+            query &= Builders<TimeTableDocument>.Filter.Where(x => x.Week.Equals(week));
+        }
+
+        if (filter.Type.HasValue)
+        {
+            query &= Builders<TimeTableDocument>.Filter.Where(x => x.Type.Equals(filter.Type));
+        }
+
+        return query;
     }
 }

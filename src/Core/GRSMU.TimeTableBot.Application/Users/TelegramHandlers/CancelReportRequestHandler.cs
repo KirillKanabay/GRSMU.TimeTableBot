@@ -21,9 +21,9 @@ public class CancelReportRequestHandler : TelegramRequestHandlerBase<CancelRepor
         _requestCacheRepository = requestCacheRepository ?? throw new ArgumentNullException(nameof(requestCacheRepository));
     }
 
-    protected override async Task<EmptyResponse> ExecuteAsync(CancelReportRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<TelegramResponse> ExecuteAsync(CancelReportRequestMessage request, CancellationToken cancellationToken)
     {
-        var response = new EmptyResponse(request.UserContext, ResponseStatus.Finished);
+        var response = new TelegramResponse(request.UserContext, ResponseStatus.Finished);
 
         var user = request.UserContext;
 

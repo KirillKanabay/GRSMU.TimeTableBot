@@ -9,5 +9,7 @@ namespace GRSMU.TimeTableBot.Common.Data.Documents
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+
+        public DateTime? CreatedDate { get; set; }
     }
 }

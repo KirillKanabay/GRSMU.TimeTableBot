@@ -1,19 +1,21 @@
 ﻿using System.Globalization;
 using AutoMapper;
+using GRSMU.TimeTableBot.Common.Broker.Handlers;
 using GRSMU.TimeTableBot.Common.Extensions;
 using GRSMU.TimeTableBot.Common.Models;
 using GRSMU.TimeTableBot.Common.Models.Responses;
-using GRSMU.TimeTableBot.Common.Telegram.Handlers;
 using GRSMU.TimeTableBot.Core.DataLoaders;
 using GRSMU.TimeTableBot.Data.TimeTables.Contracts;
+using GRSMU.TimeTableBot.Data.TimeTables.Contracts.Filters;
 using GRSMU.TimeTableBot.Data.TimeTables.Documents;
+using GRSMU.TimeTableBot.Domain.Timetables.Enums;
 using GRSMU.TimeTableBot.Domain.Timetables.Requests;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 
 namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
 {
-    public class GrabTimeTablesRequestHandler : TelegramRequestHandlerBase<GrabTimeTablesRequestMessage>
+    public class GrabTimeTablesRequestHandler : RequestHandlerBase<GrabTimeTablesRequestMessage, EmptyResponse>
     {
         private readonly ITimeTableLoader _timeTableLoader;
         private readonly FormDataLoader _formDataLoader;
@@ -21,7 +23,12 @@ namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
         private readonly ITimeTableRepository _timeTableRepository;
         private readonly ILogger<GrabTimeTablesRequestHandler> _logger;
 
-        public GrabTimeTablesRequestHandler(ITelegramBotClient client, ITimeTableLoader timeTableLoader, FormDataLoader formDataLoader, IMapper mapper, ITimeTableRepository timeTableRepository, ILogger<GrabTimeTablesRequestHandler> logger) : base(client)
+        public GrabTimeTablesRequestHandler(
+            ITimeTableLoader timeTableLoader, 
+            FormDataLoader formDataLoader, 
+            IMapper mapper, 
+            ITimeTableRepository timeTableRepository, 
+            ILogger<GrabTimeTablesRequestHandler> logger)
         {
             _timeTableLoader = timeTableLoader ?? throw new ArgumentNullException(nameof(timeTableLoader));
             _formDataLoader = formDataLoader ?? throw new ArgumentNullException(nameof(formDataLoader));
@@ -32,20 +39,12 @@ namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
 
         protected override async Task<EmptyResponse> ExecuteAsync(GrabTimeTablesRequestMessage request, CancellationToken cancellationToken)
         {
-            var response = new EmptyResponse(request.UserContext, ResponseStatus.Finished);
-
             var weeks = await _formDataLoader.GetWeeksAsync();
 
             var weeksForGrab = GetWeeksForGrab(weeks);
             var coursesForGrab = await _formDataLoader.GetCoursesAsync();
             var facultiesForGrab = await _formDataLoader.GetFacultiesAsync();
-
-            _logger.LogInformation("Starting clear TimeTable collection");
             
-            await _timeTableRepository.ClearCollection();
-            
-            _logger.LogInformation("TimeTable collection cleared successfully");
-
             foreach (var (_, courseId) in coursesForGrab)
             {
                 foreach (var (_, facultyId) in facultiesForGrab)
@@ -54,6 +53,14 @@ namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
 
                     foreach (var (_, groupId) in groupsForGrab)
                     {
+                        await _timeTableRepository.DeleteManyAsync(new TimeTableFilter
+                        {
+                            GroupId = groupId,
+                            Type = TimeTableType.Lecture
+                        });
+
+                        _logger.LogInformation($"Successfully removed timetable for GroupId: {groupId}, FacultyId: {facultyId}, CourseId: {courseId}");
+
                         foreach (var week in weeksForGrab)
                         {
                             var query = new TimetableQuery
@@ -72,16 +79,16 @@ namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
                             catch (Exception e)
                             {
                                 _logger.LogError($"Error while grabbing timetable for GroupId: {query.GroupId}, FacultyId: {query.FacultyId}, CourseId: {query.CourseId}, Week: {query.Week}", e);
-                                return response;
+                                return new EmptyResponse();
                             }
                         }
                     }
                 }
             }
 
-            _logger.LogInformation("Successfully grabbed!!!");
+            _logger.LogInformation($"Timetable successfully grabbed! Timestamp:{DateTime.Now}");
 
-            return response;
+            return new EmptyResponse();
         }
 
         private async Task ProcessTimeTables(List<TimeTableParsedModel> timeTableModels, TimetableQuery query)
@@ -105,7 +112,7 @@ namespace GRSMU.TimeTableBot.Application.Timetables.Handlers
 
                 return;
             }
-
+            
             await _timeTableRepository.InsertManyAsync(documents);
 
             _logger.LogInformation($"Successfully grabbed GroupId: {query.GroupId}, FacultyId: {query.FacultyId}, CourseId: {query.CourseId}, Week: {query.Week}");

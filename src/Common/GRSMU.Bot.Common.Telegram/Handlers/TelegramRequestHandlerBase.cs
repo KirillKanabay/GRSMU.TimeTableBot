@@ -1,12 +1,14 @@
-﻿using GRSMU.Bot.Common.Models.RequestMessages;
-using GRSMU.Bot.Common.Models.Responses;
+﻿using GRSMU.Bot.Common.Models.Responses;
+using GRSMU.Bot.Common.Telegram.Models.Messages;
 using MediatR;
 using Telegram.Bot;
+using TelegramRequestMessageBase = GRSMU.Bot.Common.Telegram.Models.Messages.TelegramRequestMessageBase;
+using TelegramResponse = GRSMU.Bot.Common.Telegram.Models.Responses.TelegramResponse;
 
 namespace GRSMU.Bot.Common.Telegram.Handlers
 {
     public abstract class TelegramRequestHandlerBase<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
-        where TRequest : TelegramRequestMessageBase<TResponse>
+        where TRequest : TelegramCommandMessageBase<TResponse>
         where TResponse : TelegramResponseBase
     {
         protected ITelegramBotClient Client { get; }

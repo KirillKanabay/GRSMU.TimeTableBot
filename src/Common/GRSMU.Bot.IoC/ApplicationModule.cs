@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using AutoMapper.Contrib.Autofac.DependencyInjection;
-using GRSMU.Bot.Common.Broker.RequestBroker;
 using GRSMU.Bot.Common.Broker.RequestCache;
 using GRSMU.Bot.Common.Data.Contexts;
 using GRSMU.Bot.Common.Data.Migrator;
@@ -33,6 +32,8 @@ using GRSMU.Bot.Web.Core.Controllers;
 using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using GRSMU.Bot.Common.Broker.Contracts;
+using GRSMU.Bot.Common.Broker;
 
 namespace GRSMU.Bot.IoC
 {

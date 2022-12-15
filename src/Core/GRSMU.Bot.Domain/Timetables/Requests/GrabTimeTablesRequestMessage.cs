@@ -1,4 +1,4 @@
-﻿using GRSMU.Bot.Common.Models.RequestMessages;
+﻿using GRSMU.Bot.Common.Models.Messages;
 
 namespace GRSMU.Bot.Domain.Timetables.Requests
 {

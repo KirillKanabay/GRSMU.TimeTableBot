@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using GRSMU.Bot.Common.Broker.RequestBroker;
 using GRSMU.Bot.Common.Web.ViewModels;
 using GRSMU.Bot.Common.Models;
 using GRSMU.Bot.Domain.Users.Dtos.Filters;
 using GRSMU.Bot.Domain.Users.Requests;
 using GRSMU.Bot.Web.Core.ViewModels.Users;
 using Microsoft.AspNetCore.Mvc;
+using GRSMU.Bot.Common.Broker.Contracts;
 
 namespace GRSMU.Bot.Web.Core.Controllers;
 

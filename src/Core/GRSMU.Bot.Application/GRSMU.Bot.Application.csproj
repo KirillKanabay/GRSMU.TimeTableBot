@@ -13,7 +13,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common\GRSMU.Bot.Common.csproj" />
-	  <ProjectReference Include="..\GRSMU.Bot.Core\GRSMU.Bot.Core.csproj" />
 	  <ProjectReference Include="..\GRSMU.Bot.Domain\GRSMU.Bot.Domain.csproj" />
 	</ItemGroup>
 

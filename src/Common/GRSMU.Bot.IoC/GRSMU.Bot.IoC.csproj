@@ -28,7 +28,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Clients\GRSMU.Bot.Web.Core\GRSMU.Bot.Web.Core.csproj" />
 	  <ProjectReference Include="..\..\Core\GRSMU.Bot.Application\GRSMU.Bot.Application.csproj" />
-	  <ProjectReference Include="..\..\Core\GRSMU.Bot.Core\GRSMU.Bot.Core.csproj" />
 	  <ProjectReference Include="..\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
 	  <ProjectReference Include="..\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
 	</ItemGroup>

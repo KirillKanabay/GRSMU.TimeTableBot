@@ -1,4 +1,4 @@
-﻿using GRSMU.Bot.Common.Models.RequestMessages;
+﻿using GRSMU.Bot.Common.Models.Messages;
 using GRSMU.Bot.Common.Models.Responses;
 using GRSMU.Bot.Domain.Users.Dtos;
 using GRSMU.Bot.Domain.Users.Dtos.Filters;

@@ -1,8 +1,8 @@
 ﻿using GRSMU.Bot.Common.Broker.RequestCache;
-using GRSMU.Bot.Common.Models.RequestMessages;
 using GRSMU.Bot.Common.Services;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using Telegram.Bot.Types;
+using TelegramRequestMessageBase = GRSMU.Bot.Common.Telegram.Models.Messages.TelegramRequestMessageBase;
 
 namespace GRSMU.Bot.Common.Telegram.RequestFactories
 {

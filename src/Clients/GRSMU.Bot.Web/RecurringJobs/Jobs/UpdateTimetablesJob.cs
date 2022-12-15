@@ -1,4 +1,4 @@
-﻿using GRSMU.Bot.Common.Broker.RequestBroker;
+﻿using GRSMU.Bot.Common.Broker.Contracts;
 using GRSMU.Bot.Domain.Timetables.Requests;
 using Hangfire;
 

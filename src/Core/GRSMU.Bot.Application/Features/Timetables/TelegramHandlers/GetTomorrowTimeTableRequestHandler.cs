@@ -1,0 +1,66 @@
+﻿using AutoMapper;
+using GRSMU.Bot.Application.Features.Timetables.DataLoaders;
+using GRSMU.Bot.Common.Contexts;
+using GRSMU.Bot.Common.Extensions;
+using GRSMU.Bot.Common.Models;
+using GRSMU.Bot.Core.DataLoaders;
+using GRSMU.Bot.Core.Presenters;
+using GRSMU.Bot.Data.TimeTables.Contracts;
+using GRSMU.Bot.Data.TimeTables.Contracts.Filters;
+using GRSMU.Bot.Domain.Timetables.Dtos;
+using GRSMU.Bot.Domain.Timetables.Requests;
+using Telegram.Bot;
+
+namespace GRSMU.Bot.Application.Features.Timetables.TelegramHandlers;
+
+public class GetTomorrowTimeTableRequestHandler : GetTimeTableRequestHandlerBase<GetTomorrowTimeTableRequestMessage>
+{
+    public GetTomorrowTimeTableRequestHandler(ITelegramBotClient client, ITimeTableRepository timeTableRepository, TimeTablePresenter timeTablePresenter, IMapper mapper, ITimeTableLoader timeTableLoader) : base(client, timeTableRepository, timeTablePresenter, mapper, timeTableLoader)
+    {
+    }
+
+    protected override TimeTableFilter CreateFilter(UserContext context)
+    {
+        var day = DateTime.Today.AddDays(1);
+
+        if (day.DayOfWeek is DayOfWeek.Saturday)
+        {
+            day = day.AddDays(2);
+        }
+        else if (day.DayOfWeek is DayOfWeek.Sunday)
+        {
+            day = day.AddDays(1);
+        }
+
+        var filter = new TimeTableFilter
+        {
+            GroupId = context.GroupId,
+            Date = day
+        };
+
+        return filter;
+    }
+
+    protected override async Task<List<TimeTableDto>> GetFromLoader(UserContext user, TimeTableFilter filter)
+    {
+        var grabbedTimeTables = await TimeTableLoader.GrabTimeTableModels(new TimetableQuery
+        {
+            CourseId = user.CourseId,
+            FacultyId = user.FacultyId,
+            GroupId = user.GroupId,
+            Week = filter.Date?.StartOfWeek().ToString("dd.MM.yyyy 0:00:00")
+                   ?? DateTime.Today.StartOfWeek().ToString("dd.MM.yyyy 0:00:00")
+        });
+
+        if (!grabbedTimeTables.Any())
+        {
+            return new List<TimeTableDto>();
+        }
+
+        grabbedTimeTables = grabbedTimeTables.Where(x => x.Date.Date.Equals(filter.Date.Value.Date)).ToList();
+
+        var dtos = Mapper.Map<List<TimeTableDto>>(grabbedTimeTables);
+
+        return dtos;
+    }
+}

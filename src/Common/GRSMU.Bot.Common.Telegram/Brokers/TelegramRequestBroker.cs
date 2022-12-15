@@ -1,4 +1,4 @@
-﻿using GRSMU.Bot.Common.Broker.RequestBroker;
+﻿using GRSMU.Bot.Common.Broker.Contracts;
 using GRSMU.Bot.Common.Broker.RequestCache;
 using GRSMU.Bot.Common.Models.Responses;
 using GRSMU.Bot.Common.Services;
@@ -48,7 +48,7 @@ public class TelegramRequestBroker : ITelegramRequestBroker
         {
             var response = await _requestBroker.Publish(request);
 
-            if (response.Status is ResponseStatus.WaitingNextResponse)
+            if (response.Status is TelegramResponseStatus.WaitingNextResponse)
             {
                 await _requestCache.Push(request.UserContext.TelegramId, update.ExtractCommand());
             }

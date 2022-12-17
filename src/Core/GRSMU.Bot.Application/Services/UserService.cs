@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using GRSMU.Bot.Common.Contexts;
-using GRSMU.Bot.Common.Services;
 using GRSMU.Bot.Common.Telegram.Extensions;
+using GRSMU.Bot.Common.Telegram.Services;
 using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Data.Users.Documents;
 using Telegram.Bot.Types;
 
 namespace GRSMU.Bot.Core.Services
 {
-    public class UserService : IUserService
+    public class UserService : ITelegramUserService
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;

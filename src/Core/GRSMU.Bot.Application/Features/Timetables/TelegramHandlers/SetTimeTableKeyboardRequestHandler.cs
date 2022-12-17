@@ -6,6 +6,7 @@ using GRSMU.Bot.Domain.Timetables.Requests;
 using Telegram.Bot;
 using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
 using GRSMU.Bot.Common.Telegram.Enums;
+using GRSMU.Bot.Domain.Timetables.TelegramRequests;
 
 namespace GRSMU.Bot.Application.Timetables.TelegramHandlers;
 

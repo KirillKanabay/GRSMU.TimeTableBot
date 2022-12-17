@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GRSMU.Bot.Common.Broker.Contracts;
 using GRSMU.Bot.Common.Contexts;
-using GRSMU.Bot.Common.Services;
+using GRSMU.Bot.Common.Telegram.Services;
 using GRSMU.Bot.Core.DataLoaders;
 using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Data.Users.Contracts;
@@ -12,7 +12,7 @@ namespace GRSMU.Bot.Application.Users.TelegramHandlers.Settings;
 
 public class FacultySettingsRequestHandler : SettingsRequestHandlerBase<FacultySettingsRequestMessage>
 {
-    public FacultySettingsRequestHandler(ITelegramBotClient client, IRequestBroker requestBroker, IUserService userService, IMapper mapper, IUserRepository userRepository, FormDataLoader formDataLoader) : base(client, requestBroker, userService, mapper, userRepository, formDataLoader)
+    public FacultySettingsRequestHandler(ITelegramBotClient client, IRequestBroker requestBroker, ITelegramUserService userService, IMapper mapper, IUserRepository userRepository, FormDataLoader formDataLoader) : base(client, requestBroker, userService, mapper, userRepository, formDataLoader)
     {
     }
 

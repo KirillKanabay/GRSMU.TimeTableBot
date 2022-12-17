@@ -1,5 +1,5 @@
-﻿using GRSMU.Bot.Common.Contexts;
-using GRSMU.Bot.Common.Telegram.Data;
+﻿using GRSMU.Bot.Common.Telegram.Data;
+using GRSMU.Bot.Common.Telegram.Models;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -44,29 +44,29 @@ public static class TelegramExtensions
         _ => throw new NotSupportedException()
     };
 
-    public static Task<Message> SendTextMessage(this ITelegramBotClient client, UserContext userContext, string message)
+    public static Task<Message> SendTextMessage(this ITelegramBotClient client, TelegramUser user, string message)
     {
-        return client.SendTextMessageAsync(userContext.ChatId, message);
+        return client.SendTextMessageAsync(user.ChatId, message);
     }
 
-    public static Task<Message> SendTextMessageWithMarkup(this ITelegramBotClient client, UserContext userContext,
+    public static Task<Message> SendTextMessageWithMarkup(this ITelegramBotClient client, TelegramUser user,
         string message, IReplyMarkup markup)
     {
-        return client.SendTextMessageAsync(userContext.ChatId, replyMarkup: markup, text: message);
+        return client.SendTextMessageAsync(user.ChatId, replyMarkup: markup, text: message);
     }
 
-    public static async Task RemoveReplyKeyboard(this ITelegramBotClient client, UserContext userContext)
+    public static async Task RemoveReplyKeyboard(this ITelegramBotClient client, TelegramUser user)
     {
         var serviceMessage = await client.SendTextMessageWithMarkup
         (
-            userContext,
+            user,
             $"Service message: {Guid.NewGuid()}",
             new ReplyKeyboardRemove()
         );
 
         await client.DeleteMessageAsync
         (
-            userContext.ChatId,
+            user.ChatId,
             serviceMessage.MessageId
         );
     }
@@ -76,18 +76,18 @@ public static class TelegramExtensions
         return !string.IsNullOrWhiteSpace(GetMessageText(update));
     }
 
-    public static async Task SetReplyKeyboard(this ITelegramBotClient client, UserContext userContext, ReplyKeyboardMarkup replyMarkup)
+    public static async Task SetReplyKeyboard(this ITelegramBotClient client, TelegramUser user, ReplyKeyboardMarkup replyMarkup)
     {
         var serviceMessage = await client.SendTextMessageWithMarkup
         (
-            userContext,
+            user,
             $"Service message: {Guid.NewGuid()}",
             replyMarkup
         );
 
         await client.DeleteMessageAsync
         (
-            userContext.ChatId,
+            user.ChatId,
             serviceMessage.MessageId
         );
     }

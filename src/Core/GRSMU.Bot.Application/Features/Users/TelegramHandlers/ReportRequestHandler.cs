@@ -1,7 +1,6 @@
 ﻿using GRSMU.Bot.Common.Models.Responses;
 using GRSMU.Bot.Common.Extensions;
 using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Services;
 using GRSMU.Bot.Common.Telegram.Data;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Core.Immutable;
@@ -13,15 +12,16 @@ using Telegram.Bot.Types.ReplyMarkups;
 using static System.String;
 using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
 using GRSMU.Bot.Common.Telegram.Enums;
+using GRSMU.Bot.Common.Telegram.Services;
 
 namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers;
 
 public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMessage>
 {
-    private readonly IUserService _userService;
+    private readonly ITelegramUserService _userService;
     private readonly IReportRepository _reportRepository;
 
-    public ReportRequestHandler(ITelegramBotClient client, IUserService userService, IReportRepository reportRepository) : base(client)
+    public ReportRequestHandler(ITelegramBotClient client, ITelegramUserService userService, IReportRepository reportRepository) : base(client)
     {
         _userService = userService ?? throw new ArgumentNullException(nameof(userService));
         _reportRepository = reportRepository ?? throw new ArgumentNullException(nameof(reportRepository));
@@ -52,7 +52,7 @@ public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMess
 
             user.LastBotMessageId = message.MessageId;
 
-            await _userService.UpdateContext(user);
+            await _userService.UpdateUserAsync(user);
 
             return new TelegramResponse(user, TelegramResponseStatus.WaitingNextResponse);
         }
@@ -67,7 +67,7 @@ public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMess
 
         user.LastBotMessageId = null;
 
-        await _userService.UpdateContext(user);
+        await _userService.UpdateUserAsync(user);
 
         await _reportRepository.InsertAsync(new ReportDocument
         {

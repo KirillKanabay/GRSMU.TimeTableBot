@@ -4,10 +4,10 @@ using GRSMU.Bot.Common.Models.Responses;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Common.Telegram.Models.Responses;
 using GRSMU.Bot.Core.Immutable;
-using GRSMU.Bot.Domain.Common.Requests;
 using Telegram.Bot;
 using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
 using GRSMU.Bot.Common.Telegram.Enums;
+using GRSMU.Bot.Domain.Common.TelegramRequests;
 
 namespace GRSMU.Bot.Application.Features.Common.Handlers;
 

@@ -1,4 +1,5 @@
-﻿using GRSMU.Bot.Common.Telegram.Enums;
+﻿using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
+using GRSMU.Bot.Common.Telegram.Enums;
 using GRSMU.Bot.Common.Telegram.Models.Messages;
 using GRSMU.Bot.Common.Telegram.Models.Responses;
 using MediatR;
@@ -10,9 +11,12 @@ public abstract class SimpleTelegramRequestHandlerBase<TRequest> : IRequestHandl
     where TRequest : TelegramCommandMessageBase
 {
     protected ITelegramBotClient Client { get; }
-    protected SimpleTelegramRequestHandlerBase(ITelegramBotClient client)
+    protected ITelegramRequestContext Context { get; }
+    
+    protected SimpleTelegramRequestHandlerBase(ITelegramBotClient client, ITelegramRequestContext context)
     {
         Client = client ?? throw new ArgumentNullException(nameof(client));
+        Context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
     public async Task<TelegramResponse> Handle(TRequest request, CancellationToken cancellationToken)

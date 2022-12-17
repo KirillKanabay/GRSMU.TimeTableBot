@@ -1,7 +1,7 @@
-﻿using GRSMU.Bot.Common.Services;
-using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
+﻿using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Common.Telegram.Models.Messages;
+using GRSMU.Bot.Common.Telegram.Services;
 using Telegram.Bot.Types;
 
 namespace GRSMU.Bot.Common.Telegram.RequestFactories
@@ -11,9 +11,9 @@ namespace GRSMU.Bot.Common.Telegram.RequestFactories
         private readonly IRequestCache _requestCache;
         private readonly Dictionary<string, Func<Update, bool, Task<TelegramCommandMessageBase>>> _requestMap;
 
-        protected readonly IUserService UserService;
+        protected readonly ITelegramUserService UserService;
 
-        protected MappedRequestFactoryBase(IRequestCache requestCache, IUserService userService)
+        protected MappedRequestFactoryBase(IRequestCache requestCache, ITelegramUserService userService)
         {
             _requestCache = requestCache ?? throw new ArgumentNullException(nameof(requestCache));
             _requestMap = new Dictionary<string, Func<Update, bool, Task<TelegramCommandMessageBase>>>();
@@ -22,7 +22,7 @@ namespace GRSMU.Bot.Common.Telegram.RequestFactories
         
         public async Task<TelegramCommandMessageBase> CreateRequestMessage(Update update)
         {
-            var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
+            var userContext = await UserService.CreateUserFromTelegramUpdateAsync(update);
             
             var cachedCommand = await _requestCache.Pop(userContext.TelegramId);
 
@@ -73,7 +73,7 @@ namespace GRSMU.Bot.Common.Telegram.RequestFactories
         protected async Task<TelegramCommandMessageBase> CreateCommandRequestMessage<TRequest>(Update update, bool isCached)
             where TRequest : TelegramCommandMessageBase
         {
-            var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
+            var userContext = await UserService.CreateUserFromTelegramUpdateAsync(update);
             var requestMessage = Activator.CreateInstance(typeof(TRequest));
 
             return (requestMessage as TRequest)!;

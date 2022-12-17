@@ -2,7 +2,7 @@
 
 namespace GRSMU.Bot.Domain.Timetables.Requests
 {
-    public class GrabTimeTablesRequestMessage : RequestMessageBase
+    public class GrabTimeTablesRequestMessage : CommandMessageBase
     {
     }
 }

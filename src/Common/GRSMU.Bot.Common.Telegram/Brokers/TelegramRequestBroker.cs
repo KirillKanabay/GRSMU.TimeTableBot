@@ -1,10 +1,10 @@
 ﻿using GRSMU.Bot.Common.Broker.Contracts;
 using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Services;
 using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Enums;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Common.Telegram.RequestFactories;
+using GRSMU.Bot.Common.Telegram.Services;
 using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -17,10 +17,10 @@ public class TelegramRequestBroker : ITelegramRequestBroker
     private readonly IRequestCache _requestCache;
     private readonly IRequestFactory _requestFactory;
     private readonly ITelegramBotClient _botClient;
-    private readonly IUserService _userService;
+    private readonly ITelegramUserService _userService;
     private readonly ILogger<TelegramRequestBroker> _logger;
 
-    public TelegramRequestBroker(IRequestBroker requestBroker, IRequestCache requestCache, IRequestFactory requestFactory, ITelegramBotClient botClient, IUserService userService, ILogger<TelegramRequestBroker> logger)
+    public TelegramRequestBroker(IRequestBroker requestBroker, IRequestCache requestCache, IRequestFactory requestFactory, ITelegramBotClient botClient, ITelegramUserService userService, ILogger<TelegramRequestBroker> logger)
     {
         _requestBroker = requestBroker ?? throw new ArgumentNullException(nameof(requestBroker));
         _requestCache = requestCache ?? throw new ArgumentNullException(nameof(requestCache));
@@ -36,7 +36,7 @@ public class TelegramRequestBroker : ITelegramRequestBroker
     {
         var request = await _requestFactory.CreateRequestMessage(update);
 
-        var userContext = await _userService.CreateContextFromTelegramUpdateAsync(update);
+        var userContext = await _userService.CreateUserFromTelegramUpdateAsync(update);
 
         if (request == null)
         {

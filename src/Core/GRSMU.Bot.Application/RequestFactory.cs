@@ -1,8 +1,8 @@
-﻿using GRSMU.Bot.Common.Services;
-using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
+﻿using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Data;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Common.Telegram.RequestFactories;
+using GRSMU.Bot.Common.Telegram.Services;
 using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Domain.Common.Requests;
 using GRSMU.Bot.Domain.Reports.Requests;
@@ -14,7 +14,7 @@ namespace GRSMU.Bot.Core;
 
 public class RequestFactory : MappedRequestFactoryBase
 {
-    public RequestFactory(IRequestCache requestCache, IUserService userService) : base(requestCache, userService)
+    public RequestFactory(IRequestCache requestCache, ITelegramUserService userService) : base(requestCache, userService)
     {
         AddRequest<StartRequestMessage>(CommandKeys.Start);
         AddRequest<SetDefaultMenuRequestMessage>(CommandKeys.SetDefaultMenu);
@@ -51,7 +51,7 @@ public class RequestFactory : MappedRequestFactoryBase
     private async Task<TelegramRequestMessageBase> CreateSettingsCommand<TRequest>(Update update, bool isCached)
         where TRequest : SettingsRequestMessageBase
     {
-        var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
+        var userContext = await UserService.CreateUserFromTelegramUpdateAsync(update);
 
         var value = CallbackDataProcessor.ReadCallbackData(update?.CallbackQuery?.Data).Data;
 
@@ -67,7 +67,7 @@ public class RequestFactory : MappedRequestFactoryBase
 
     private async Task<TelegramRequestMessageBase> CreateReportCommand(Update update, bool isCached)
     {
-        var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
+        var userContext = await UserService.CreateUserFromTelegramUpdateAsync(update);
         var requestMessage = new ReportRequestMessage(userContext);
 
         if (isCached)

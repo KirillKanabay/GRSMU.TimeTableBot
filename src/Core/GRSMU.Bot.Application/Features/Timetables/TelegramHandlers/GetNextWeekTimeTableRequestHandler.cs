@@ -9,6 +9,7 @@ using GRSMU.Bot.Data.TimeTables.Contracts;
 using GRSMU.Bot.Data.TimeTables.Contracts.Filters;
 using GRSMU.Bot.Domain.Timetables.Dtos;
 using GRSMU.Bot.Domain.Timetables.Requests;
+using GRSMU.Bot.Domain.Timetables.TelegramRequests;
 using Telegram.Bot;
 
 namespace GRSMU.Bot.Application.Timetables.TelegramHandlers;

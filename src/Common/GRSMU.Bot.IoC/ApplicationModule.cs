@@ -7,15 +7,12 @@ using GRSMU.Bot.Common.Data.Models.Options;
 using GRSMU.Bot.Common.Telegram.Brokers;
 using GRSMU.Bot.Common.Telegram.Models.Options;
 using GRSMU.Bot.Common.Telegram.RequestFactories;
-using GRSMU.Bot.Application.Timetables.Handlers;
 using GRSMU.Bot.Application.Timetables.Mappings;
 using GRSMU.Bot.Application.Timetables.TelegramHandlers;
 using GRSMU.Bot.Common.Models.Options;
-using GRSMU.Bot.Common.Services;
 using GRSMU.Bot.Common.Telegram;
 using GRSMU.Bot.Core;
 using GRSMU.Bot.Core.DataLoaders;
-using GRSMU.Bot.Core.Mappings;
 using GRSMU.Bot.Core.Presenters;
 using GRSMU.Bot.Core.Services;
 using GRSMU.Bot.Data.Common.Contracts;
@@ -34,7 +31,9 @@ using MediatR.Extensions.Autofac.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using GRSMU.Bot.Common.Broker.Contracts;
 using GRSMU.Bot.Common.Broker;
+using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
+using GRSMU.Bot.Common.Telegram.Services;
 
 namespace GRSMU.Bot.IoC
 {
@@ -61,7 +60,6 @@ namespace GRSMU.Bot.IoC
 
             builder.RegisterTelegramClient(_configuration);
 
-            builder.RegisterAutoMapper(typeof(UserMappings).Assembly);
             builder.RegisterAutoMapper(typeof(TimeTableProfile).Assembly);
             builder.RegisterAutoMapper(typeof(UserController).Assembly);
             
@@ -85,7 +83,7 @@ namespace GRSMU.Bot.IoC
 
         private void RegisterServices(ContainerBuilder builder)
         {
-            builder.RegisterType<UserService>().As<IUserService>().SingleInstance();
+            builder.RegisterType<UserService>().As<ITelegramUserService>().SingleInstance();
         }
 
         private void RegisterRequestBroker(ContainerBuilder builder)
@@ -106,7 +104,11 @@ namespace GRSMU.Bot.IoC
 
             builder.RegisterType<TelegramRequestBroker>()
                 .As<ITelegramRequestBroker>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<TelegramRequestContext>()
+                .As<ITelegramRequestContext>()
+                .InstancePerLifetimeScope();
         }
     }
 }

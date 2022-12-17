@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using GRSMU.Bot.Common.Broker.Contracts;
 using GRSMU.Bot.Common.Contexts;
-using GRSMU.Bot.Common.Services;
 using GRSMU.Bot.Common.Telegram.Extensions;
+using GRSMU.Bot.Common.Telegram.Services;
 using GRSMU.Bot.Core.DataLoaders;
 using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Data.Users.Contracts;
@@ -13,7 +13,7 @@ namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers.Settings;
 
 public class GroupSettingsRequestHandler : SettingsRequestHandlerBase<GroupSettingsRequestMessage>
 {
-    public GroupSettingsRequestHandler(ITelegramBotClient client, IRequestBroker requestBroker, IUserService userService, IMapper mapper, IUserRepository userRepository, FormDataLoader formDataLoader) : base(client, requestBroker, userService, mapper, userRepository, formDataLoader)
+    public GroupSettingsRequestHandler(ITelegramBotClient client, IRequestBroker requestBroker, ITelegramUserService userService, IMapper mapper, IUserRepository userRepository, FormDataLoader formDataLoader) : base(client, requestBroker, userService, mapper, userRepository, formDataLoader)
     {
     }
 
@@ -40,7 +40,7 @@ public class GroupSettingsRequestHandler : SettingsRequestHandlerBase<GroupSetti
             {
                 await Client.DeleteMessageAsync(user.ChatId, user.LastBotMessageId.Value, cancellationToken);
                 await Client.SendTextMessageWithMarkup(user, "Настройка профиля завершена", Markups.DefaultMarkup);
-                await UserService.DeleteLastMessageBotId(request.UserContext);
+                await UserService.DeleteLastMessageBotIdAsync(request.UserContext);
             }
         }
     }

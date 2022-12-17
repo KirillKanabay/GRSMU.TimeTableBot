@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Contexts;
-using GRSMU.Bot.Common.Extensions;
-using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Services;
 using GRSMU.Bot.Common.Telegram.Data;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Core.DataLoaders;
@@ -15,6 +10,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 using GRSMU.Bot.Common.Broker.Contracts;
 using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
+using GRSMU.Bot.Common.Telegram.Services;
 
 namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers.Settings
 {
@@ -30,12 +26,12 @@ namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers.Settings
 
         protected readonly IRequestBroker RequestBroker;
         protected readonly FormDataLoader FormDataLoader;
-        protected readonly IUserService UserService;
+        protected readonly ITelegramUserService UserService;
 
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        protected SettingsRequestHandlerBase(ITelegramBotClient client, IRequestBroker requestBroker, IUserService userService, IMapper mapper, IUserRepository userRepository, FormDataLoader formDataLoader) : base(client)
+        protected SettingsRequestHandlerBase(ITelegramBotClient client, IRequestBroker requestBroker, ITelegramUserService userService, IMapper mapper, IUserRepository userRepository, FormDataLoader formDataLoader) : base(client)
         {
             RequestBroker = requestBroker ?? throw new ArgumentNullException(nameof(requestBroker));
             UserService = userService ?? throw new ArgumentNullException(nameof(userService));
@@ -77,7 +73,7 @@ namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers.Settings
                 {
                     var message = await Client.SendTextMessageWithMarkup(user, SettingsTitle, buttons);
 
-                    await UserService.UpdateLastMessageBotId(user, message.MessageId);
+                    await UserService.UpdateLastMessageBotIdAsync(user, message.MessageId);
                 }
 
                 return response;

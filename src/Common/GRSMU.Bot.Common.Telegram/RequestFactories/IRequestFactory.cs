@@ -1,10 +1,10 @@
-﻿using Telegram.Bot.Types;
-using TelegramRequestMessageBase = GRSMU.Bot.Common.Telegram.Models.Messages.TelegramRequestMessageBase;
+﻿using GRSMU.Bot.Common.Telegram.Models.Messages;
+using Telegram.Bot.Types;
 
 namespace GRSMU.Bot.Common.Telegram.RequestFactories
 {
     public interface IRequestFactory
     {
-        Task<TelegramRequestMessageBase> CreateRequestMessage(Update update);
+        Task<TelegramCommandMessageBase> CreateRequestMessage(Update update);
     }
 }

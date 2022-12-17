@@ -1,5 +1,4 @@
 ﻿using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Telegram.Handlers;
 using GRSMU.Bot.Common.Extensions;
 using GRSMU.Bot.Common.Models.Responses;
 using GRSMU.Bot.Common.Services;
@@ -12,6 +11,8 @@ using GRSMU.Bot.Domain.Reports.Requests;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 using static System.String;
+using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
+using GRSMU.Bot.Common.Telegram.Enums;
 
 namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers;
 

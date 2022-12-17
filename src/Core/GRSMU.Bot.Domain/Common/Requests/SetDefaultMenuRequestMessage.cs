@@ -1,10 +1,7 @@
-﻿using GRSMU.Bot.Common.Contexts;
+﻿using GRSMU.Bot.Common.Telegram.Models.Messages;
 
 namespace GRSMU.Bot.Domain.Common.Requests;
 
-public class SetDefaultMenuRequestMessage : TelegramRequestMessageBase
+public class SetDefaultMenuRequestMessage : TelegramCommandMessageBase
 {
-    public SetDefaultMenuRequestMessage(UserContext userContext) : base(userContext)
-    {
-    }
 }

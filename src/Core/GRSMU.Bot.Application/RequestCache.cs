@@ -1,8 +1,8 @@
-﻿using GRSMU.Bot.Common.Broker.RequestCache;
+﻿using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Data.Common.Contracts;
 
-namespace GRSMU.Bot.Core
+namespace GRSMU.Bot.Application
 {
     public class RequestCache : IRequestCache
     {

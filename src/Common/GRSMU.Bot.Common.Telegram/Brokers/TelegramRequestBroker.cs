@@ -1,7 +1,8 @@
 ﻿using GRSMU.Bot.Common.Broker.Contracts;
-using GRSMU.Bot.Common.Broker.RequestCache;
 using GRSMU.Bot.Common.Models.Responses;
 using GRSMU.Bot.Common.Services;
+using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
+using GRSMU.Bot.Common.Telegram.Enums;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Common.Telegram.RequestFactories;
 using Microsoft.Extensions.Logging;

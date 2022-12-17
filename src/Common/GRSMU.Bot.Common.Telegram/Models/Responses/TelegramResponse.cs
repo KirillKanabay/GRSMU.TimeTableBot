@@ -1,4 +1,5 @@
 ﻿using GRSMU.Bot.Common.Models.Responses;
+using GRSMU.Bot.Common.Telegram.Enums;
 
 namespace GRSMU.Bot.Common.Telegram.Models.Responses;
 

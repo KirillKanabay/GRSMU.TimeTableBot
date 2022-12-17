@@ -1,10 +1,11 @@
 ﻿using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Telegram.Handlers;
 using GRSMU.Bot.Common.Models.Responses;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Domain.Timetables.Requests;
 using Telegram.Bot;
+using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
+using GRSMU.Bot.Common.Telegram.Enums;
 
 namespace GRSMU.Bot.Application.Timetables.TelegramHandlers;
 

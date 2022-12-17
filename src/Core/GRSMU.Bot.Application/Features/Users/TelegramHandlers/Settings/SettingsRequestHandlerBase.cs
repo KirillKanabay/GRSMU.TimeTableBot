@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Telegram.Handlers;
 using GRSMU.Bot.Common.Contexts;
 using GRSMU.Bot.Common.Extensions;
 using GRSMU.Bot.Common.Models.Responses;
@@ -15,6 +14,7 @@ using GRSMU.Bot.Domain.Users.TelegramRequests.Settings;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 using GRSMU.Bot.Common.Broker.Contracts;
+using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
 
 namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers.Settings
 {

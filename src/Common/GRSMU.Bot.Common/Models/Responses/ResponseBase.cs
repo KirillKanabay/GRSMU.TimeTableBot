@@ -1,4 +1,6 @@
-﻿namespace GRSMU.Bot.Common.Models.Responses
+﻿using GRSMU.Bot.Common.Enums;
+
+namespace GRSMU.Bot.Common.Models.Responses
 {
     public abstract class ResponseBase
     {
@@ -7,7 +9,7 @@
             Errors = new List<string>();
         }
 
-        public TelegramResponseStatus Status { get; set; } = TelegramResponseStatus.Successful;
+        public ResponseStatus Status { get; set; } = ResponseStatus.Successful;
 
         public List<string> Errors { get; set; }
 

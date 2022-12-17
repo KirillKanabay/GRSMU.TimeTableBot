@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Common.Broker.RequestCache
+﻿namespace GRSMU.Bot.Common.Telegram.Brokers.RequestCache
 {
     public interface IRequestCache
     {

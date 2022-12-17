@@ -1,26 +1,26 @@
-﻿using GRSMU.Bot.Common.Broker.RequestCache;
-using GRSMU.Bot.Common.Services;
+﻿using GRSMU.Bot.Common.Services;
+using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Extensions;
+using GRSMU.Bot.Common.Telegram.Models.Messages;
 using Telegram.Bot.Types;
-using TelegramRequestMessageBase = GRSMU.Bot.Common.Telegram.Models.Messages.TelegramRequestMessageBase;
 
 namespace GRSMU.Bot.Common.Telegram.RequestFactories
 {
     public abstract class MappedRequestFactoryBase : IRequestFactory
     {
         private readonly IRequestCache _requestCache;
-        private readonly Dictionary<string, Func<Update, bool, Task<TelegramRequestMessageBase>>> _requestMap;
+        private readonly Dictionary<string, Func<Update, bool, Task<TelegramCommandMessageBase>>> _requestMap;
 
         protected readonly IUserService UserService;
 
         protected MappedRequestFactoryBase(IRequestCache requestCache, IUserService userService)
         {
             _requestCache = requestCache ?? throw new ArgumentNullException(nameof(requestCache));
-            _requestMap = new Dictionary<string, Func<Update, bool, Task<TelegramRequestMessageBase>>>();
+            _requestMap = new Dictionary<string, Func<Update, bool, Task<TelegramCommandMessageBase>>>();
             UserService = userService;
         }
         
-        public async Task<TelegramRequestMessageBase> CreateRequestMessage(Update update)
+        public async Task<TelegramCommandMessageBase> CreateRequestMessage(Update update)
         {
             var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
             
@@ -45,7 +45,7 @@ namespace GRSMU.Bot.Common.Telegram.RequestFactories
 #pragma warning restore CS8603
         }
 
-        public MappedRequestFactoryBase AddRequest(string command, Func<Update, bool, Task<TelegramRequestMessageBase>> requestFactory)
+        public MappedRequestFactoryBase AddRequest(string command, Func<Update, bool, Task<TelegramCommandMessageBase>> requestFactory)
         {
             if (_requestMap.ContainsKey(command))
             {
@@ -58,7 +58,7 @@ namespace GRSMU.Bot.Common.Telegram.RequestFactories
         }
 
         public MappedRequestFactoryBase AddRequest<TRequest>(string command)
-            where TRequest : TelegramRequestMessageBase
+            where TRequest : TelegramCommandMessageBase
         {
             if (_requestMap.ContainsKey(command))
             {
@@ -70,11 +70,11 @@ namespace GRSMU.Bot.Common.Telegram.RequestFactories
             return this;
         }
 
-        protected async Task<TelegramRequestMessageBase> CreateCommandRequestMessage<TRequest>(Update update, bool isCached)
-            where TRequest : TelegramRequestMessageBase
+        protected async Task<TelegramCommandMessageBase> CreateCommandRequestMessage<TRequest>(Update update, bool isCached)
+            where TRequest : TelegramCommandMessageBase
         {
             var userContext = await UserService.CreateContextFromTelegramUpdateAsync(update);
-            var requestMessage = Activator.CreateInstance(typeof(TRequest), userContext);
+            var requestMessage = Activator.CreateInstance(typeof(TRequest));
 
             return (requestMessage as TRequest)!;
         }

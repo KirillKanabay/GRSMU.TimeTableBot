@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Common.Models.Responses;
+﻿namespace GRSMU.Bot.Common.Telegram.Enums;
 
 public enum TelegramResponseStatus
 {

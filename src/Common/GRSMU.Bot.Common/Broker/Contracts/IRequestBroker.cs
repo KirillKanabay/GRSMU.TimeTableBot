@@ -1,6 +1,5 @@
 ﻿using GRSMU.Bot.Common.Models.Messages;
 using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Models.Responses;
 
 namespace GRSMU.Bot.Common.Broker.Contracts
 {
@@ -8,5 +7,7 @@ namespace GRSMU.Bot.Common.Broker.Contracts
     {
         public Task<TResponse> Publish<TResponse>(IRequestMessage<TResponse> request)
             where TResponse : ResponseBase;
+
+        Task PublishEvent(EventMessageBase @event);
     }
 }

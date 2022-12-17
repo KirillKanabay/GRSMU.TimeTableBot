@@ -1,5 +1,5 @@
-﻿using GRSMU.Bot.Common.Broker.RequestCache;
-using GRSMU.Bot.Common.Services;
+﻿using GRSMU.Bot.Common.Services;
+using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Data;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Common.Telegram.RequestFactories;

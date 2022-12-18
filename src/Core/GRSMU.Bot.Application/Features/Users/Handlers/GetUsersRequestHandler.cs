@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
+using GRSMU.Bot.Application.Features.Timetables.DataLoaders;
+using GRSMU.Bot.Common.Broker.Contexts;
 using GRSMU.Bot.Common.Broker.RequestHandlers;
 using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Core.DataLoaders;
 using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Data.Users.Contracts.Filters;
 using GRSMU.Bot.Data.Users.Documents;
 using GRSMU.Bot.Domain.Users.Dtos;
 using GRSMU.Bot.Domain.Users.Requests;
 
-namespace GRSMU.Bot.Application.Users.Handlers
+namespace GRSMU.Bot.Application.Features.Users.Handlers
 {
     public class GetUsersRequestHandler : CommandHandlerBase<GetUsersRequestMessage, ItemPagedResponse<UserDto>>
     {
@@ -23,7 +24,7 @@ namespace GRSMU.Bot.Application.Users.Handlers
             _formDataLoader = formDataLoader ?? throw new ArgumentNullException(nameof(formDataLoader));
         }
 
-        protected override async Task<ItemPagedResponse<UserDto>> ExecuteAsync(GetUsersRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<ItemPagedResponse<UserDto>> ExecuteAsync(GetUsersRequestMessage request, NullableContext context)
         {
             var response = new ItemPagedResponse<UserDto>
             {

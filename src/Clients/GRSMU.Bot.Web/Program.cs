@@ -63,7 +63,7 @@ namespace GRSMU.Bot.Web
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
-
+            
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -78,7 +78,7 @@ namespace GRSMU.Bot.Web
                 .UseHangfireServer();
 
             HangfireJobScheduler.ScheduleRecurringJobs();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 var token = botConfig.Token;

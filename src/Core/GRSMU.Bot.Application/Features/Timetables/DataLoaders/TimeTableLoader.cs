@@ -1,9 +1,9 @@
-﻿using GRSMU.Bot.Common.Models;
+﻿using GRSMU.Bot.Application.Features.Timetables.DataLoaders.Common;
+using GRSMU.Bot.Application.Features.Timetables.DataLoaders.Handlers;
+using GRSMU.Bot.Common.Models;
 using GRSMU.Bot.Common.Models.Options;
-using GRSMU.Bot.Core.DataLoaders.Common;
-using GRSMU.Bot.Core.DataLoaders.Handlers;
 
-namespace GRSMU.Bot.Core.DataLoaders
+namespace GRSMU.Bot.Application.Features.Timetables.DataLoaders
 {
     public class TimeTableLoader : ITimeTableLoader
     {

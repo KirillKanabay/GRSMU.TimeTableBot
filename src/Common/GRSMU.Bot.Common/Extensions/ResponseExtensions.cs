@@ -1,4 +1,5 @@
-﻿using GRSMU.Bot.Common.Models.Responses;
+﻿using GRSMU.Bot.Common.Enums;
+using GRSMU.Bot.Common.Models.Responses;
 
 namespace GRSMU.Bot.Common.Extensions;
 

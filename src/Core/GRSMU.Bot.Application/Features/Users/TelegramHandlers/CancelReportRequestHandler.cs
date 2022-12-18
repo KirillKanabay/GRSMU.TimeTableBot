@@ -1,13 +1,11 @@
-﻿using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Extensions;
-using GRSMU.Bot.Common.Models.Responses;
+﻿using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Data.Common.Contracts;
-using GRSMU.Bot.Domain.Reports.Requests;
 using Telegram.Bot;
 using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
 using GRSMU.Bot.Common.Telegram.Services;
+using GRSMU.Bot.Domain.Reports.TelegramRequests;
 
 namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers;
 
@@ -16,7 +14,11 @@ public class CancelReportRequestHandler : SimpleTelegramRequestHandlerBase<Cance
     private readonly ITelegramUserService _userService;
     private readonly IRequestCacheRepository _requestCacheRepository;
 
-    public CancelReportRequestHandler(ITelegramBotClient client, ITelegramUserService userService, IRequestCacheRepository requestCacheRepository) : base(client)
+    public CancelReportRequestHandler(
+        ITelegramBotClient client, 
+        ITelegramUserService userService, 
+        IRequestCacheRepository requestCacheRepository,
+        ITelegramRequestContext context) : base(client, context)
     {
         _userService = userService ?? throw new ArgumentNullException(nameof(userService));
         _requestCacheRepository = requestCacheRepository ?? throw new ArgumentNullException(nameof(requestCacheRepository));

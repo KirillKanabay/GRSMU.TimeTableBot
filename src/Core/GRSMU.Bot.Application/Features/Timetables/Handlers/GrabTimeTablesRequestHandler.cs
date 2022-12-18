@@ -1,22 +1,21 @@
 ﻿using System.Globalization;
 using AutoMapper;
+using GRSMU.Bot.Application.Features.Timetables.DataLoaders;
+using GRSMU.Bot.Common.Broker.Contexts;
 using GRSMU.Bot.Common.Broker.RequestHandlers;
-using GRSMU.Bot.Common.Models.Responses;
 using GRSMU.Bot.Common.Extensions;
 using GRSMU.Bot.Common.Models;
 using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Core.DataLoaders;
 using GRSMU.Bot.Data.TimeTables.Contracts;
 using GRSMU.Bot.Data.TimeTables.Contracts.Filters;
 using GRSMU.Bot.Data.TimeTables.Documents;
 using GRSMU.Bot.Domain.Timetables.Enums;
 using GRSMU.Bot.Domain.Timetables.Requests;
 using Microsoft.Extensions.Logging;
-using Telegram.Bot;
 
-namespace GRSMU.Bot.Application.Timetables.Handlers
+namespace GRSMU.Bot.Application.Features.Timetables.Handlers
 {
-    public class GrabTimeTablesRequestHandler : CommandHandlerBase<GrabTimeTablesRequestMessage, EmptyResponse>
+    public class GrabTimeTablesRequestHandler : CommandHandlerBase<GrabTimeTablesRequestMessage>
     {
         private readonly ITimeTableLoader _timeTableLoader;
         private readonly FormDataLoader _formDataLoader;
@@ -38,7 +37,7 @@ namespace GRSMU.Bot.Application.Timetables.Handlers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        protected override async Task<EmptyResponse> ExecuteAsync(GrabTimeTablesRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<EmptyResponse> ExecuteAsync(GrabTimeTablesRequestMessage request, NullableContext context)
         {
             var weeks = await _formDataLoader.GetWeeksAsync();
 

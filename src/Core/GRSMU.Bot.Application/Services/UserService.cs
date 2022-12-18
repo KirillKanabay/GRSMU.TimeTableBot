@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using GRSMU.Bot.Common.Contexts;
 using GRSMU.Bot.Common.Telegram.Extensions;
+using GRSMU.Bot.Common.Telegram.Models;
 using GRSMU.Bot.Common.Telegram.Services;
 using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Data.Users.Documents;
 using Telegram.Bot.Types;
 
-namespace GRSMU.Bot.Core.Services
+namespace GRSMU.Bot.Application.Services
 {
     public class UserService : ITelegramUserService
     {
@@ -19,7 +19,7 @@ namespace GRSMU.Bot.Core.Services
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
         }
 
-        public async Task<UserContext> CreateContextFromTelegramUpdateAsync(Update update)
+        public async Task<TelegramUser> CreateUserFromTelegramUpdateAsync(Update update)
         {
             var user = update.GetUser();
 
@@ -36,30 +36,30 @@ namespace GRSMU.Bot.Core.Services
                 await _userRepository.InsertAsync(userDocument);
             }
 
-            var context = _mapper.Map<UserContext>(userDocument);
+            var context = _mapper.Map<TelegramUser>(userDocument);
 
             return context;
         }
 
-        public Task UpdateContext(UserContext context)
+        public Task UpdateUserAsync(TelegramUser context)
         {
             var document = _mapper.Map<UserDocument>(context);
 
             return _userRepository.UpdateOneAsync(document);
         }
 
-        public Task UpdateLastMessageBotId(UserContext context, int messageId)
+        public Task UpdateLastMessageBotIdAsync(TelegramUser context, int messageId)
         {
             context.LastBotMessageId = messageId;
             
-            return UpdateContext(context);
+            return UpdateUserAsync(context);
         }
 
-        public Task DeleteLastMessageBotId(UserContext context)
+        public Task DeleteLastMessageBotIdAsync(TelegramUser context)
         {
             context.LastBotMessageId = null;
 
-            return UpdateContext(context);
+            return UpdateUserAsync(context);
         }
     }
 }

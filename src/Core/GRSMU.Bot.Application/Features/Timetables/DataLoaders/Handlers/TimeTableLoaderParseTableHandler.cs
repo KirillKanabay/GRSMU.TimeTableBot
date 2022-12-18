@@ -2,10 +2,10 @@
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
+using GRSMU.Bot.Application.Features.Timetables.DataLoaders.Common;
 using GRSMU.Bot.Common.Models;
-using GRSMU.Bot.Core.DataLoaders.Common;
 
-namespace GRSMU.Bot.Core.DataLoaders.Handlers
+namespace GRSMU.Bot.Application.Features.Timetables.DataLoaders.Handlers
 {
     public class TimeTableLoaderParseTableHandler : TimeTableLoaderHandlerBase
     {

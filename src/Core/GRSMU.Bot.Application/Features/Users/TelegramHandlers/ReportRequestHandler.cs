@@ -1,18 +1,17 @@
-﻿using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Extensions;
-using GRSMU.Bot.Common.Models.Responses;
+﻿using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Data;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Data.Reports.Contracts;
 using GRSMU.Bot.Data.Reports.Documents;
-using GRSMU.Bot.Domain.Reports.Requests;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
-using static System.String;
 using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
 using GRSMU.Bot.Common.Telegram.Enums;
+using GRSMU.Bot.Common.Telegram.Models.Responses;
 using GRSMU.Bot.Common.Telegram.Services;
+using GRSMU.Bot.Domain.Reports.TelegramRequests;
+using static System.String;
 
 namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers;
 
@@ -20,8 +19,8 @@ public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMess
 {
     private readonly ITelegramUserService _userService;
     private readonly IReportRepository _reportRepository;
-
-    public ReportRequestHandler(ITelegramBotClient client, ITelegramUserService userService, IReportRepository reportRepository) : base(client)
+    
+    public ReportRequestHandler(ITelegramBotClient client, ITelegramUserService userService, IReportRepository reportRepository, ITelegramRequestContext context) : base(client, context)
     {
         _userService = userService ?? throw new ArgumentNullException(nameof(userService));
         _reportRepository = reportRepository ?? throw new ArgumentNullException(nameof(reportRepository));
@@ -29,7 +28,7 @@ public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMess
 
     protected override async Task<TelegramResponse> ExecuteAsync(ReportRequestMessage request, CancellationToken cancellationToken)
     {
-        var user = request.UserContext;
+        var user = Context.User;
 
         if (IsNullOrEmpty(request.Message))
         {
@@ -54,7 +53,7 @@ public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMess
 
             await _userService.UpdateUserAsync(user);
 
-            return new TelegramResponse(user, TelegramResponseStatus.WaitingNextResponse);
+            return new TelegramResponse(TelegramResponseStatus.WaitingNextResponse);
         }
 
         await Client.EditMessageReplyMarkupAsync
@@ -82,6 +81,6 @@ public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMess
             Markups.DefaultMarkup
         );
 
-        return new TelegramResponse(user, TelegramResponseStatus.Finished);
+        return new TelegramResponse(TelegramResponseStatus.Finished);
     }
 }

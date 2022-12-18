@@ -1,10 +1,12 @@
 ﻿using System.Net;
-using GRSMU.Bot.Core.DataLoaders.Common;
+using GRSMU.Bot.Application.Features.Timetables.DataLoaders.Common;
 
-namespace GRSMU.Bot.Core.DataLoaders.Handlers
+namespace GRSMU.Bot.Application.Features.Timetables.DataLoaders.Handlers
 {
     public class TimeTableLoaderGrabFormHandler : TimeTableLoaderHandlerBase
     {
+        private const string CookieUrl = "https://rsp-med.grsu.by";
+
         public override async Task Handle(ParserTimeTableContext query)
         {
             var cookieContainer = new CookieContainer();
@@ -14,7 +16,7 @@ namespace GRSMU.Bot.Core.DataLoaders.Handlers
                 using (var client = new HttpClient(handler))
                 {
                     var content = new FormUrlEncodedContent(query.FormParams);
-                    cookieContainer.Add(new Uri("https://rsp-med.grsu.by"), query.Cookie);
+                    cookieContainer.Add(new Uri(CookieUrl), query.Cookie);
                     var result = await client.PostAsync(query.Url, content);
 
                     query.HtmlContent = await result.Content.ReadAsStringAsync();

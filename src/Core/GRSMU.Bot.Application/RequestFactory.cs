@@ -1,20 +1,22 @@
-﻿using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
+﻿using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
+using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Data;
 using GRSMU.Bot.Common.Telegram.Extensions;
+using GRSMU.Bot.Common.Telegram.Models.Messages;
 using GRSMU.Bot.Common.Telegram.RequestFactories;
 using GRSMU.Bot.Common.Telegram.Services;
 using GRSMU.Bot.Core.Immutable;
-using GRSMU.Bot.Domain.Common.Requests;
-using GRSMU.Bot.Domain.Reports.Requests;
-using GRSMU.Bot.Domain.Timetables.Requests;
+using GRSMU.Bot.Domain.Common.TelegramRequests;
+using GRSMU.Bot.Domain.Reports.TelegramRequests;
+using GRSMU.Bot.Domain.Timetables.TelegramRequests;
 using GRSMU.Bot.Domain.Users.TelegramRequests.Settings;
 using Telegram.Bot.Types;
 
-namespace GRSMU.Bot.Core;
+namespace GRSMU.Bot.Application;
 
 public class RequestFactory : MappedRequestFactoryBase
 {
-    public RequestFactory(IRequestCache requestCache, ITelegramUserService userService) : base(requestCache, userService)
+    public RequestFactory(IRequestCache requestCache, ITelegramUserService userService, ITelegramRequestContext context) : base(requestCache, userService, context)
     {
         AddRequest<StartRequestMessage>(CommandKeys.Start);
         AddRequest<SetDefaultMenuRequestMessage>(CommandKeys.SetDefaultMenu);
@@ -48,14 +50,12 @@ public class RequestFactory : MappedRequestFactoryBase
     
     #region Registrators
 
-    private async Task<TelegramRequestMessageBase> CreateSettingsCommand<TRequest>(Update update, bool isCached)
+    private async Task<TelegramCommandMessageBase> CreateSettingsCommand<TRequest>(Update update, bool isCached)
         where TRequest : SettingsRequestMessageBase
     {
-        var userContext = await UserService.CreateUserFromTelegramUpdateAsync(update);
-
         var value = CallbackDataProcessor.ReadCallbackData(update?.CallbackQuery?.Data).Data;
 
-        var requestMessage = Activator.CreateInstance(typeof(TRequest), userContext) as TRequest;
+        var requestMessage = Activator.CreateInstance(typeof(TRequest)) as TRequest;
 
         requestMessage.BackExecuted = value == CommandKeys.Registrators.Back;
         requestMessage.Value = value == CommandKeys.Registrators.Back ? string.Empty : value;
@@ -65,10 +65,9 @@ public class RequestFactory : MappedRequestFactoryBase
 
     #endregion
 
-    private async Task<TelegramRequestMessageBase> CreateReportCommand(Update update, bool isCached)
+    private async Task<TelegramCommandMessageBase> CreateReportCommand(Update update, bool isCached)
     {
-        var userContext = await UserService.CreateUserFromTelegramUpdateAsync(update);
-        var requestMessage = new ReportRequestMessage(userContext);
+        var requestMessage = new ReportRequestMessage();
 
         if (isCached)
         {

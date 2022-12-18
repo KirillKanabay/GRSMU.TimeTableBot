@@ -1,11 +1,11 @@
-﻿using AngleSharp.Dom;
+﻿using AngleSharp;
+using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
-using AngleSharp;
 using GRSMU.Bot.Common.Extensions;
 using GRSMU.Bot.Common.Models.Options;
 using GRSMU.Bot.Core.Immutable;
 
-namespace GRSMU.Bot.Core.DataLoaders
+namespace GRSMU.Bot.Application.Features.Timetables.DataLoaders
 {
     public class FormDataLoader
     {

@@ -1,6 +1,6 @@
 ﻿using GRSMU.Bot.Common.Models;
 
-namespace GRSMU.Bot.Core.DataLoaders
+namespace GRSMU.Bot.Application.Features.Timetables.DataLoaders
 {
     public interface ITimeTableLoader
     {

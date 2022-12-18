@@ -2,9 +2,9 @@
 
 namespace GRSMU.Bot.Common.Telegram.Extensions;
 
-public abstract class TelegramUserExtensions
+public static class TelegramUserExtensions
 {
-    public static bool IsRegistered(TelegramUser user)
+    public static bool IsRegistered(this TelegramUser user)
     {
         if (user == null)
         {

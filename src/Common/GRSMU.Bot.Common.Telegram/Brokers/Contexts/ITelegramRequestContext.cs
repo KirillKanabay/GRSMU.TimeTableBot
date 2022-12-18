@@ -5,7 +5,7 @@ namespace GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 
 public interface ITelegramRequestContext
 {
-    TelegramUser User { get; }
+    TelegramUser User { get; set; }
 
-    Update Update { get; }
+    Update Update { get; set; }
 }

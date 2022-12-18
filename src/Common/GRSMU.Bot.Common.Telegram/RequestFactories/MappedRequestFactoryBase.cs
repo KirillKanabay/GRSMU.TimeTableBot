@@ -1,4 +1,5 @@
-﻿using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
+﻿using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
+using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Common.Telegram.Models.Messages;
 using GRSMU.Bot.Common.Telegram.Services;
@@ -12,19 +13,21 @@ namespace GRSMU.Bot.Common.Telegram.RequestFactories
         private readonly Dictionary<string, Func<Update, bool, Task<TelegramCommandMessageBase>>> _requestMap;
 
         protected readonly ITelegramUserService UserService;
+        protected readonly ITelegramRequestContext Context;
 
-        protected MappedRequestFactoryBase(IRequestCache requestCache, ITelegramUserService userService)
+        protected MappedRequestFactoryBase(IRequestCache requestCache, ITelegramUserService userService, ITelegramRequestContext context)
         {
             _requestCache = requestCache ?? throw new ArgumentNullException(nameof(requestCache));
             _requestMap = new Dictionary<string, Func<Update, bool, Task<TelegramCommandMessageBase>>>();
             UserService = userService;
+            Context = context;
         }
         
         public async Task<TelegramCommandMessageBase> CreateRequestMessage(Update update)
         {
-            var userContext = await UserService.CreateUserFromTelegramUpdateAsync(update);
+            var user = Context.User;
             
-            var cachedCommand = await _requestCache.Pop(userContext.TelegramId);
+            var cachedCommand = await _requestCache.Pop(user.TelegramId);
 
             var command = update.IsTextMessage() 
                 ? cachedCommand ?? update.ExtractCommand()
@@ -73,7 +76,7 @@ namespace GRSMU.Bot.Common.Telegram.RequestFactories
         protected async Task<TelegramCommandMessageBase> CreateCommandRequestMessage<TRequest>(Update update, bool isCached)
             where TRequest : TelegramCommandMessageBase
         {
-            var userContext = await UserService.CreateUserFromTelegramUpdateAsync(update);
+            var TelegramUser = await UserService.CreateUserFromTelegramUpdateAsync(update);
             var requestMessage = Activator.CreateInstance(typeof(TRequest));
 
             return (requestMessage as TRequest)!;

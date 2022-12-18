@@ -1,27 +1,25 @@
-﻿using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Models.Responses;
+﻿using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
+using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
 using GRSMU.Bot.Common.Telegram.Extensions;
 using GRSMU.Bot.Core.Immutable;
-using GRSMU.Bot.Domain.Timetables.Requests;
-using Telegram.Bot;
-using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
-using GRSMU.Bot.Common.Telegram.Enums;
 using GRSMU.Bot.Domain.Timetables.TelegramRequests;
+using Telegram.Bot;
 
-namespace GRSMU.Bot.Application.Timetables.TelegramHandlers;
+namespace GRSMU.Bot.Application.Features.Timetables.TelegramHandlers;
 
-public class SetTimeTableKeyboardRequestHandler : TelegramRequestHandlerBase<SetTimeTableKeyboardRequestMessage>
+public class SetTimeTableKeyboardRequestHandler : SimpleTelegramRequestHandlerBase<SetTimeTableKeyboardRequestMessage>
 {
-    public SetTimeTableKeyboardRequestHandler(ITelegramBotClient client) : base(client)
+    public SetTimeTableKeyboardRequestHandler(ITelegramBotClient client, ITelegramRequestContext context) : base(client, context)
     {
     }
 
-    protected override async Task<TelegramResponse> ExecuteAsync(SetTimeTableKeyboardRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task ExecuteAsync(SetTimeTableKeyboardRequestMessage request, CancellationToken cancellationToken)
     {
-        var response = new TelegramResponse(request.UserContext, TelegramResponseStatus.Finished);
-
-        await Client.SendTextMessageWithMarkup(request.UserContext, "Укажите период за который нужно показать расписание.", Markups.TimeTableMarkup);
-
-        return response;
+        await Client.SendTextMessageWithMarkup
+        (
+            Context.User,
+            "Укажите период за который нужно показать расписание.",
+            Markups.TimeTableMarkup
+        );
     }
 }

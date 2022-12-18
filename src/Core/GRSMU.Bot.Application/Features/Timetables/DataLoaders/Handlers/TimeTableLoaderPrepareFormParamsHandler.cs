@@ -1,11 +1,11 @@
 ﻿using AngleSharp;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
+using GRSMU.Bot.Application.Features.Timetables.DataLoaders.Common;
 using GRSMU.Bot.Common.Extensions;
-using GRSMU.Bot.Core.DataLoaders.Common;
 using GRSMU.Bot.Core.Immutable;
 
-namespace GRSMU.Bot.Core.DataLoaders.Handlers
+namespace GRSMU.Bot.Application.Features.Timetables.DataLoaders.Handlers
 {
     public class TimeTableLoaderPrepareFormParamsHandler : TimeTableLoaderHandlerBase
     {

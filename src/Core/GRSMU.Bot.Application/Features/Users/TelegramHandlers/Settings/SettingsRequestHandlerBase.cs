@@ -1,20 +1,22 @@
 ﻿using AutoMapper;
+using GRSMU.Bot.Application.Features.Timetables.DataLoaders;
 using GRSMU.Bot.Common.Telegram.Data;
 using GRSMU.Bot.Common.Telegram.Extensions;
-using GRSMU.Bot.Core.DataLoaders;
 using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Data.Users.Documents;
 using GRSMU.Bot.Domain.Users.TelegramRequests.Settings;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
-using GRSMU.Bot.Common.Broker.Contracts;
+using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
+using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
 using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
+using GRSMU.Bot.Common.Telegram.Models;
 using GRSMU.Bot.Common.Telegram.Services;
 
 namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers.Settings
 {
-    public abstract class SettingsRequestHandlerBase<TRequest> : TelegramRequestHandlerBase<TRequest>
+    public abstract class SettingsRequestHandlerBase<TRequest> : SimpleTelegramRequestHandlerBase<TRequest>
         where TRequest : SettingsRequestMessageBase
     {
         protected abstract string SettingsTitle { get; }
@@ -24,14 +26,21 @@ namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers.Settings
         protected abstract bool IsFirstHandler { get; }
         protected abstract bool IsLastHandler { get; }
 
-        protected readonly IRequestBroker RequestBroker;
+        protected readonly ITelegramRequestBroker RequestBroker;
         protected readonly FormDataLoader FormDataLoader;
         protected readonly ITelegramUserService UserService;
 
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        protected SettingsRequestHandlerBase(ITelegramBotClient client, IRequestBroker requestBroker, ITelegramUserService userService, IMapper mapper, IUserRepository userRepository, FormDataLoader formDataLoader) : base(client)
+        protected SettingsRequestHandlerBase(
+            ITelegramBotClient client,
+            ITelegramRequestBroker requestBroker, 
+            ITelegramUserService userService, 
+            IMapper mapper, 
+            IUserRepository userRepository, 
+            FormDataLoader formDataLoader,
+            ITelegramRequestContext context) : base(client, context)
         {
             RequestBroker = requestBroker ?? throw new ArgumentNullException(nameof(requestBroker));
             UserService = userService ?? throw new ArgumentNullException(nameof(userService));
@@ -40,16 +49,14 @@ namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers.Settings
             FormDataLoader = formDataLoader ?? throw new ArgumentNullException(nameof(formDataLoader));
         }
 
-        protected override async Task<TelegramResponse> ExecuteAsync(TRequest request, CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(TRequest request, CancellationToken cancellationToken)
         {
-            var response = new TelegramResponse(request.UserContext);
-
-            var user = request.UserContext;
+            var user = Context.User;
 
             if (request.BackExecuted && !IsFirstHandler)
             {
                 await ExecuteBackHandler(user);
-                return response;
+                return;
             }
 
             var settingsItems = await GetSettingItems(user);
@@ -76,7 +83,7 @@ namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers.Settings
                     await UserService.UpdateLastMessageBotIdAsync(user, message.MessageId);
                 }
 
-                return response;
+                return;
             }
 
             if (settingsItems.Values.Contains(request.Value))
@@ -93,16 +100,16 @@ namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers.Settings
                 await ExecuteNextHandler(user);
             }
 
-            return response;
+            return;
         }
 
-        protected abstract void UpdateSettingItem(UserContext user, string value);
+        protected abstract void UpdateSettingItem(TelegramUser user, string value);
 
-        protected abstract Task<IReadOnlyDictionary<string, string>> GetSettingItems(UserContext user);
+        protected abstract Task<IReadOnlyDictionary<string, string>> GetSettingItems(TelegramUser user);
 
-        protected abstract Task ExecuteNextHandler(UserContext user);
+        protected abstract Task ExecuteNextHandler(TelegramUser user);
 
-        protected abstract Task ExecuteBackHandler(UserContext user);
+        protected abstract Task ExecuteBackHandler(TelegramUser user);
 
         protected virtual InlineKeyboardMarkup CreateButtons(IReadOnlyDictionary<string, string> items, int itemsInRow = 1)
         {

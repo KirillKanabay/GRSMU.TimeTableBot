@@ -1,9 +1,9 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace GRSMU.Bot.Common.Telegram.Brokers
+namespace GRSMU.Bot.Common.Telegram.Brokers.Contracts
 {
-    public interface ITelegramRequestBroker
+    public interface ITelegramUpdateHandler
     {
         Task HandleUpdateAsync(Update update);
 

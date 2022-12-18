@@ -1,71 +1,23 @@
-﻿using GRSMU.Bot.Common.Broker.Contracts;
-using GRSMU.Bot.Common.Models.Responses;
-using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
-using GRSMU.Bot.Common.Telegram.Enums;
-using GRSMU.Bot.Common.Telegram.Extensions;
-using GRSMU.Bot.Common.Telegram.RequestFactories;
-using GRSMU.Bot.Common.Telegram.Services;
-using Microsoft.Extensions.Logging;
-using Telegram.Bot;
-using Telegram.Bot.Types;
+﻿using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
+using GRSMU.Bot.Common.Telegram.Models.Messages;
+using GRSMU.Bot.Common.Telegram.Models.Responses;
+using MediatR;
 
 namespace GRSMU.Bot.Common.Telegram.Brokers;
 
 public class TelegramRequestBroker : ITelegramRequestBroker
 {
-    private readonly IRequestBroker _requestBroker;
-    private readonly IRequestCache _requestCache;
-    private readonly IRequestFactory _requestFactory;
-    private readonly ITelegramBotClient _botClient;
-    private readonly ITelegramUserService _userService;
-    private readonly ILogger<TelegramRequestBroker> _logger;
+    private readonly IMediator _mediator;
 
-    public TelegramRequestBroker(IRequestBroker requestBroker, IRequestCache requestCache, IRequestFactory requestFactory, ITelegramBotClient botClient, ITelegramUserService userService, ILogger<TelegramRequestBroker> logger)
+    public TelegramRequestBroker(IMediator mediator)
     {
-        _requestBroker = requestBroker ?? throw new ArgumentNullException(nameof(requestBroker));
-        _requestCache = requestCache ?? throw new ArgumentNullException(nameof(requestCache));
-        _requestFactory = requestFactory ?? throw new ArgumentNullException(nameof(requestFactory));
-        _botClient = botClient ?? throw new ArgumentNullException(nameof(botClient));
-        _userService = userService ?? throw new ArgumentNullException(nameof(userService));
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-    }
-    public Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
-        => HandleUpdateAsync(update);
-
-    public async Task HandleUpdateAsync(Update update)
-    {
-        var request = await _requestFactory.CreateRequestMessage(update);
-
-        var userContext = await _userService.CreateUserFromTelegramUpdateAsync(update);
-
-        if (request == null)
-        {
-            await _botClient.SendTextMessage(userContext, "Такой команды не существует!");
-
-            return;
-        }
-
-        try
-        {
-            var response = await _requestBroker.Publish(request);
-
-            if (response.Status is TelegramResponseStatus.WaitingNextResponse)
-            {
-                await _requestCache.Push(request.UserContext.TelegramId, update.ExtractCommand());
-            }
-        }
-        catch (Exception e)
-        {
-            _logger.LogWarning($"Error while processing telegram request: {e}", e);
-
-            await _botClient.SendTextMessage(userContext, "Упс! Во время обработки вашего запроса, бот неожиданно сломался(");
-        }
+        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
-    public Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
+    public async Task<TelegramResponse> Publish(TelegramCommandMessageBase request)
     {
-        _logger.LogWarning($"Error while processing telegram request:{exception}", exception);
+        var response = await _mediator.Send(request);
 
-        return Task.CompletedTask;
+        return response;
     }
 }

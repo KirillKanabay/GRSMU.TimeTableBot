@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using GRSMU.Bot.Common.Broker.Contracts;
-using GRSMU.Bot.Common.Contexts;
+using GRSMU.Bot.Application.Features.Timetables.DataLoaders;
+using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
+using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
 using GRSMU.Bot.Common.Telegram.Extensions;
+using GRSMU.Bot.Common.Telegram.Models;
 using GRSMU.Bot.Common.Telegram.Services;
-using GRSMU.Bot.Core.DataLoaders;
 using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Domain.Users.TelegramRequests.Settings;
@@ -13,7 +14,14 @@ namespace GRSMU.Bot.Application.Features.Users.TelegramHandlers.Settings;
 
 public class GroupSettingsRequestHandler : SettingsRequestHandlerBase<GroupSettingsRequestMessage>
 {
-    public GroupSettingsRequestHandler(ITelegramBotClient client, IRequestBroker requestBroker, ITelegramUserService userService, IMapper mapper, IUserRepository userRepository, FormDataLoader formDataLoader) : base(client, requestBroker, userService, mapper, userRepository, formDataLoader)
+    public GroupSettingsRequestHandler(
+        ITelegramBotClient client, 
+        ITelegramRequestBroker requestBroker, 
+        ITelegramUserService userService, 
+        IMapper mapper, 
+        IUserRepository userRepository, 
+        FormDataLoader formDataLoader,
+        ITelegramRequestContext context) : base(client, requestBroker, userService, mapper, userRepository, formDataLoader, context)
     {
     }
 
@@ -23,14 +31,14 @@ public class GroupSettingsRequestHandler : SettingsRequestHandlerBase<GroupSetti
     protected override bool IsFirstHandler => false;
     protected override bool IsLastHandler => true;
 
-    protected override void UpdateSettingItem(UserContext user, string value) => user.GroupId = value;
-    protected override Task<IReadOnlyDictionary<string, string>> GetSettingItems(UserContext user) => FormDataLoader.GetGroupsAsync(user.FacultyId, user.CourseId);
-    protected override Task ExecuteNextHandler(UserContext user) => Task.CompletedTask;
-    protected override Task ExecuteBackHandler(UserContext user) => RequestBroker.Publish(new FacultySettingsRequestMessage(user));
+    protected override void UpdateSettingItem(TelegramUser user, string value) => user.GroupId = value;
+    protected override Task<IReadOnlyDictionary<string, string>> GetSettingItems(TelegramUser user) => FormDataLoader.GetGroupsAsync(user.FacultyId, user.CourseId);
+    protected override Task ExecuteNextHandler(TelegramUser user) => Task.CompletedTask;
+    protected override Task ExecuteBackHandler(TelegramUser user) => RequestBroker.Publish(new FacultySettingsRequestMessage());
 
     protected override async Task PostExecuteAsync(GroupSettingsRequestMessage request, CancellationToken cancellationToken)
     {
-        var user = request.UserContext;
+        var user = Context.User;
 
         if (!string.IsNullOrWhiteSpace(request.Value)
             && !string.IsNullOrWhiteSpace(user.GroupId)
@@ -40,7 +48,7 @@ public class GroupSettingsRequestHandler : SettingsRequestHandlerBase<GroupSetti
             {
                 await Client.DeleteMessageAsync(user.ChatId, user.LastBotMessageId.Value, cancellationToken);
                 await Client.SendTextMessageWithMarkup(user, "Настройка профиля завершена", Markups.DefaultMarkup);
-                await UserService.DeleteLastMessageBotIdAsync(request.UserContext);
+                await UserService.DeleteLastMessageBotIdAsync(user);
             }
         }
     }

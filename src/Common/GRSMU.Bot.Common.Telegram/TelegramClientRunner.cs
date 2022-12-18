@@ -1,4 +1,4 @@
-﻿using GRSMU.Bot.Common.Telegram.Brokers;
+﻿using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types.Enums;
@@ -8,9 +8,9 @@ namespace GRSMU.Bot.Common.Telegram
     public class TelegramClientRunner
     {
         private readonly ITelegramBotClient _client;
-        private readonly ITelegramRequestBroker _requestsHandler;
+        private readonly ITelegramUpdateHandler _requestsHandler;
 
-        public TelegramClientRunner(ITelegramRequestBroker requestsHandler, ITelegramBotClient client)
+        public TelegramClientRunner(ITelegramUpdateHandler requestsHandler, ITelegramBotClient client)
         {
             _requestsHandler = requestsHandler ?? throw new ArgumentNullException(nameof(requestsHandler));
             _client = client ?? throw new ArgumentNullException(nameof(client));

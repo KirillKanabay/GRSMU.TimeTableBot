@@ -1,14 +1,13 @@
 ﻿using AutoMapper;
 using GRSMU.Bot.Application.Features.Timetables.DataLoaders;
-using GRSMU.Bot.Common.Contexts;
 using GRSMU.Bot.Common.Extensions;
 using GRSMU.Bot.Common.Models;
-using GRSMU.Bot.Core.DataLoaders;
+using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
+using GRSMU.Bot.Common.Telegram.Models;
 using GRSMU.Bot.Core.Presenters;
 using GRSMU.Bot.Data.TimeTables.Contracts;
 using GRSMU.Bot.Data.TimeTables.Contracts.Filters;
 using GRSMU.Bot.Domain.Timetables.Dtos;
-using GRSMU.Bot.Domain.Timetables.Requests;
 using GRSMU.Bot.Domain.Timetables.TelegramRequests;
 using Telegram.Bot;
 
@@ -16,11 +15,17 @@ namespace GRSMU.Bot.Application.Features.Timetables.TelegramHandlers;
 
 public class GetTomorrowTimeTableRequestHandler : GetTimeTableRequestHandlerBase<GetTomorrowTimeTableRequestMessage>
 {
-    public GetTomorrowTimeTableRequestHandler(ITelegramBotClient client, ITimeTableRepository timeTableRepository, TimeTablePresenter timeTablePresenter, IMapper mapper, ITimeTableLoader timeTableLoader) : base(client, timeTableRepository, timeTablePresenter, mapper, timeTableLoader)
+    public GetTomorrowTimeTableRequestHandler(
+        ITelegramBotClient client, 
+        ITimeTableRepository timeTableRepository, 
+        TimeTablePresenter timeTablePresenter, 
+        IMapper mapper, 
+        ITimeTableLoader timeTableLoader,
+        ITelegramRequestContext context) : base(client, timeTableRepository, timeTablePresenter, mapper, timeTableLoader, context)
     {
     }
 
-    protected override TimeTableFilter CreateFilter(UserContext context)
+    protected override TimeTableFilter CreateFilter(TelegramUser context)
     {
         var day = DateTime.Today.AddDays(1);
 
@@ -42,7 +47,7 @@ public class GetTomorrowTimeTableRequestHandler : GetTimeTableRequestHandlerBase
         return filter;
     }
 
-    protected override async Task<List<TimeTableDto>> GetFromLoader(UserContext user, TimeTableFilter filter)
+    protected override async Task<List<TimeTableDto>> GetFromLoader(TelegramUser user, TimeTableFilter filter)
     {
         var grabbedTimeTables = await TimeTableLoader.GrabTimeTableModels(new TimetableQuery
         {

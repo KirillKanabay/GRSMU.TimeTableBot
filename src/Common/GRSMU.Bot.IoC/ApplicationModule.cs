@@ -1,20 +1,18 @@
 ﻿using Autofac;
 using AutoMapper.Contrib.Autofac.DependencyInjection;
 using GRSMU.Bot.Application;
+using GRSMU.Bot.Application.Features.Timetables.DataLoaders;
+using GRSMU.Bot.Application.Features.Timetables.TelegramHandlers;
+using GRSMU.Bot.Application.Services;
 using GRSMU.Bot.Common.Data.Contexts;
 using GRSMU.Bot.Common.Data.Migrator;
 using GRSMU.Bot.Common.Data.Models.Options;
-using GRSMU.Bot.Common.Telegram.Brokers;
 using GRSMU.Bot.Common.Telegram.Models.Options;
 using GRSMU.Bot.Common.Telegram.RequestFactories;
 using GRSMU.Bot.Application.Timetables.Mappings;
-using GRSMU.Bot.Application.Timetables.TelegramHandlers;
 using GRSMU.Bot.Common.Models.Options;
 using GRSMU.Bot.Common.Telegram;
-using GRSMU.Bot.Core;
-using GRSMU.Bot.Core.DataLoaders;
 using GRSMU.Bot.Core.Presenters;
-using GRSMU.Bot.Core.Services;
 using GRSMU.Bot.Data.Common.Contracts;
 using GRSMU.Bot.Data.Common.Repositories;
 using GRSMU.Bot.Data.Migrations.Users;
@@ -26,14 +24,16 @@ using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Data.Users.Repositories;
 using GRSMU.Bot.IoC.Extensions;
 using GRSMU.Bot.Web.Core.Controllers;
-using MediatR;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using GRSMU.Bot.Common.Broker.Contracts;
 using GRSMU.Bot.Common.Broker;
+using GRSMU.Bot.Common.Telegram.Brokers;
 using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Services;
+using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
+using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
 
 namespace GRSMU.Bot.IoC
 {
@@ -92,22 +92,26 @@ namespace GRSMU.Bot.IoC
 
             builder.RegisterType<RequestFactory>()
                 .As<IRequestFactory>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<MediatorRequestBroker>()
                 .As<IRequestBroker>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<RequestCache>()
                 .As<IRequestCache>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
-            builder.RegisterType<TelegramRequestBroker>()
-                .As<ITelegramRequestBroker>()
+            builder.RegisterType<TelegramUpdateHandler>()
+                .As<ITelegramUpdateHandler>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<TelegramRequestContext>()
                 .As<ITelegramRequestContext>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<TelegramRequestBroker>()
+                .As<ITelegramRequestBroker>()
                 .InstancePerLifetimeScope();
         }
     }

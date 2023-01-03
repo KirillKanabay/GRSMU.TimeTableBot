@@ -1,7 +1,8 @@
-﻿namespace GRSMU.Bot.Core.Immutable;
+﻿namespace GRSMU.Bot.Common.Telegram.Immutable;
 
 public static class CommandKeys
 {
+    public const string EmptyData = "_";
     public const string SetDefaultMenu = "В главное меню";
     public const string Start = "/start";
     public const string ShowTimeTableCommand = "Показать расписание";
@@ -28,5 +29,18 @@ public static class CommandKeys
         public const string Tomorrow = "На завтра";
         public const string Week = "На всю неделю";
         public const string NextWeek = "На следующую неделю";
+    }
+
+    public static class Gradebook
+    {
+        public const string Run = "Журнал отметок";
+        public const string Total = "Общая успеваемость";
+        public const string Specific = "По конкретному предмету";
+        
+        public static readonly string Back = $"{nameof(Gradebook)}_{nameof(Back)}";
+        public static readonly string Cancel = $"{nameof(Gradebook)}_{nameof(Cancel)}";
+
+        public static readonly string SetLogin = $"{nameof(Gradebook)}_{nameof(SetLogin)}";
+        public static readonly string SetPassword = $"{nameof(Gradebook)}_{nameof(SetPassword)}";
     }
 }

@@ -3,7 +3,7 @@ using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using GRSMU.Bot.Application.Features.Timetables.DataLoaders.Common;
 using GRSMU.Bot.Common.Extensions;
-using GRSMU.Bot.Core.Immutable;
+using GRSMU.Bot.Common.Telegram.Immutable;
 
 namespace GRSMU.Bot.Application.Features.Timetables.DataLoaders.Handlers
 {

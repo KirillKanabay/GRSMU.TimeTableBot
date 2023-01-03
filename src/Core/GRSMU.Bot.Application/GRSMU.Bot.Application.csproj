@@ -17,4 +17,10 @@
 	  <ProjectReference Include="..\GRSMU.Bot.Domain\GRSMU.Bot.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Features\Gradebooks\Models\" />
+	  <Folder Include="Features\Gradebooks\Mappings\" />
+	  <Folder Include="Features\Gradebooks\Presenters\" />
+	</ItemGroup>
+
 </Project>

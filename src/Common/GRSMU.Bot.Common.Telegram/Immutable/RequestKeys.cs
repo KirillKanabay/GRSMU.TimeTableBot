@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Core.Immutable
+﻿namespace GRSMU.Bot.Common.Telegram.Immutable
 {
     public class RequestKeys
     {
@@ -15,5 +15,14 @@
         public static readonly KeyValuePair<string, string> DefaultButton = new("btnShowTT", "Показать");
         public static readonly KeyValuePair<string, string> DefaultFrame = new("iframeheight", "400");
         public static readonly KeyValuePair<string, string> DefaultDepartment = new(Department, "2");
+
+        #region Gradebook
+
+        public const string Login = "login";
+        public const string Password = "password";
+
+        public const string GradebookInvalidLoginOrPassword = "\n\t\talert(\"Неправильный логин или номер студенческого\");\n\t";
+
+        #endregion
     }
 }

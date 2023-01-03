@@ -32,8 +32,8 @@ using GRSMU.Bot.Common.Telegram.Brokers;
 using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Services;
-using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
 using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
+using GRSMU.Bot.Application.Features.Gradebooks.Helpers;
 
 namespace GRSMU.Bot.IoC
 {
@@ -54,6 +54,7 @@ namespace GRSMU.Bot.IoC
             builder.RegisterType<TelegramClientRunner>().SingleInstance();
             builder.RegisterType<FormDataLoader>().SingleInstance();
             builder.RegisterType<TimeTableLoader>().As<ITimeTableLoader>().SingleInstance();
+            builder.RegisterType<GradebookProcessor>().SingleInstance();
 
             builder.RegisterType<RequestFactory>().SingleInstance();
             builder.RegisterType<TimeTablePresenter>().SingleInstance();

@@ -2,7 +2,6 @@
 using GRSMU.Bot.Application.Features.Timetables.DataLoaders;
 using GRSMU.Bot.Common.Telegram.Data;
 using GRSMU.Bot.Common.Telegram.Extensions;
-using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Data.Users.Documents;
 using GRSMU.Bot.Domain.Users.TelegramRequests.Settings;
@@ -11,6 +10,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
 using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
+using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Common.Telegram.Models;
 using GRSMU.Bot.Common.Telegram.Services;
 

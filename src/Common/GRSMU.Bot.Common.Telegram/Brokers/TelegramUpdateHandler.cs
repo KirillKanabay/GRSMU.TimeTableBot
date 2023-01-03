@@ -3,6 +3,7 @@ using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
 using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Enums;
 using GRSMU.Bot.Common.Telegram.Extensions;
+using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Common.Telegram.RequestFactories;
 using GRSMU.Bot.Common.Telegram.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace GRSMU.Bot.Common.Telegram.Brokers.Handlers;
+namespace GRSMU.Bot.Common.Telegram.Brokers;
 
 public class TelegramUpdateHandler : ITelegramUpdateHandler
 {
@@ -26,7 +27,7 @@ public class TelegramUpdateHandler : ITelegramUpdateHandler
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
     }
-    
+
     public Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         => HandleUpdateAsync(update);
 
@@ -51,7 +52,14 @@ public class TelegramUpdateHandler : ITelegramUpdateHandler
 
             if (request == null)
             {
-                await _botClient.SendTextMessage(telegramUser, "Такой команды не существует!");
+                if (telegramUser.IsRegistered())
+                {
+                    await _botClient.SendTextMessageWithMarkup(telegramUser, "Такой команды не существует!", Markups.DefaultMarkup);
+                }
+                else
+                {
+                    await _botClient.SendTextMessage(telegramUser, "Такой команды не существует!");
+                }
 
                 return;
             }
@@ -59,14 +67,8 @@ public class TelegramUpdateHandler : ITelegramUpdateHandler
             try
             {
                 var requestBroker = scope.ServiceProvider.GetService<ITelegramRequestBroker>();
-                var requestCache = scope.ServiceProvider.GetService<IRequestCache>();
 
-                var response = await requestBroker.Publish(request);
-
-                if (response.Status is TelegramResponseStatus.WaitingNextResponse)
-                {
-                    await requestCache.Push(telegramUser.TelegramId, update.ExtractCommand());
-                }
+                await requestBroker.Publish(request);
             }
             catch (Exception e)
             {

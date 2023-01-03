@@ -2,9 +2,9 @@
 using GRSMU.Bot.Application.Features.Timetables.DataLoaders;
 using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
+using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Common.Telegram.Models;
 using GRSMU.Bot.Common.Telegram.Services;
-using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Domain.Users.TelegramRequests.Settings;
 using Telegram.Bot;

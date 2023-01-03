@@ -47,4 +47,9 @@ public class SetGradebookPasswordRequestHandler : GradebookSettingsRequestHandle
             ? Client.SendTextMessageWithMarkup(user, "Регистрация студ билета успешно завершена!", Markups.GradebookMarkup) 
             : Task.CompletedTask;
     }
+
+    protected override Task ExecuteBackHandler()
+    {
+        return RequestBroker.Publish(new SetGradebookLoginTelegramRequestMessage());
+    }
 }

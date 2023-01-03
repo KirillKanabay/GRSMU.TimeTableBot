@@ -51,7 +51,10 @@ public abstract class GradebookSettingsRequestHandlerBase<TRequest> : TelegramRe
 
         var user = Context.User;
 
-        await Client.RemoveReplyKeyboard(user);
+        if (IsFirstHandler)
+        {
+            await Client.RemoveReplyKeyboard(user);
+        }
 
         if (user.LastBotMessageId.HasValue)
         {
@@ -128,7 +131,7 @@ public abstract class GradebookSettingsRequestHandlerBase<TRequest> : TelegramRe
                     text: "Назад",
                     callbackData: CallbackDataProcessor.CreateCallbackData(new CallbackData
                     {
-                        Data = CommandKeys.Registrators.Back,
+                        Data = CommandKeys.Gradebook.Back,
                         Handler = CallbackHandlerName,
                     })
                 )

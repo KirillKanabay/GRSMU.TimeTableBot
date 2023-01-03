@@ -1,4 +1,5 @@
-﻿using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
+﻿using GRSMU.Bot.Application.Features.Gradebooks.TelegramHandlers.GradebookSettings;
+using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Data;
 using GRSMU.Bot.Common.Telegram.Extensions;
@@ -53,6 +54,7 @@ public class RequestFactory : MappedRequestFactoryBase
         AddRequest<SetGradebookKeyboardTelegramRequestMessage>(CommandKeys.Gradebook.Run);
         AddRequest(CommandKeys.Gradebook.SetLogin, CreateGradeBookSettingsCommand<SetGradebookLoginTelegramRequestMessage>);
         AddRequest(CommandKeys.Gradebook.SetPassword, CreateGradeBookSettingsCommand<SetGradebookPasswordTelegramRequestMessage>);
+        AddRequest<CancelGradebookRegistrationTelegramRequestMessage>(CommandKeys.Gradebook.Cancel);
     }
     
     #region Registrators

@@ -36,7 +36,7 @@ public class SetGradebookPasswordRequestHandler : GradebookSettingsRequestHandle
     protected override Task<bool> ValidateUser()
     {
         var user = Context.User;
-        return GradebookProcessor.TrySignInAsync(user.Login, user.StudentCardId);
+        return GradebookProcessor.TrySignInAsync(user);
     }
 
     protected override Task PostExecuteAsync(SetGradebookPasswordTelegramRequestMessage request, CancellationToken cancellationToken)

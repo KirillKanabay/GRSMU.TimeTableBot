@@ -8,4 +8,5 @@ public enum MarkType
     UnknownAbsence = 3,
     SeriousAbsence = 4,
     NotSeriousAbsence = 5,
+    Nothing = 6,
 }

@@ -9,4 +9,6 @@ public class DisciplineDocument
     public string CurrentAverageMark { get; set; }
 
     public string TotalAverageMark { get; set; }
+
+    public string ExamMark { get; set; }
 }

@@ -27,5 +27,7 @@
         public string Login { get; set; }
 
         public string StudentCardId { get; set; }
+
+        public string StudentFullName { get; set; }
     }
 }

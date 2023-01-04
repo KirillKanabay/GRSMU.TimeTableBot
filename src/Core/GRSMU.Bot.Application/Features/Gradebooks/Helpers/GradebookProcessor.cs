@@ -1,25 +1,38 @@
-﻿using AngleSharp;
-using AngleSharp.Dom;
-using AngleSharp.Html.Dom;
-using AngleSharp.Html.Parser;
+﻿using AutoMapper;
+using GRSMU.Bot.Application.Features.Gradebooks.Models;
 using GRSMU.Bot.Common.Extensions;
 using GRSMU.Bot.Common.Models.Options;
 using GRSMU.Bot.Common.Telegram.Immutable;
+using GRSMU.Bot.Common.Telegram.Models;
+using GRSMU.Bot.Common.Telegram.Services;
+using GRSMU.Bot.Data.Gradebooks.Contracts;
+using GRSMU.Bot.Data.Gradebooks.Documents;
+using GRSMU.Bot.Domain.Gradebooks.Dtos;
 
 namespace GRSMU.Bot.Application.Features.Gradebooks.Helpers
 {
     public class GradebookProcessor
     {
         private readonly SourceOptions _options;
-        private readonly 
+        private readonly GradebookParser _parser;
+        private readonly IGradebookRepository _gradebookRepository;
+        private readonly ITelegramUserService _userService;
+        private readonly IMapper _mapper;
 
-        public GradebookProcessor(SourceOptions options)
+        public GradebookProcessor(SourceOptions options, GradebookParser parser, IGradebookRepository gradebookRepository, ITelegramUserService userService, IMapper mapper)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
+            _parser = parser ?? throw new ArgumentNullException(nameof(parser));
+            _gradebookRepository = gradebookRepository ?? throw new ArgumentNullException(nameof(gradebookRepository));
+            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<bool> TrySignInAsync(string login, string password)
+        public async Task<bool> TrySignInAsync(TelegramUser user)
         {
+            var login = user.Login;
+            var password = user.StudentCardId;
+
             if (string.IsNullOrWhiteSpace(login))
             {
                 throw new ArgumentNullException(nameof(login));
@@ -37,16 +50,56 @@ namespace GRSMU.Bot.Application.Features.Gradebooks.Helpers
                 return false;
             }
 
-            var parser = new HtmlParser(new HtmlParserOptions
+            var result = await _parser.ParseAsync(rawPage);
+
+            if (!result.SignInSuccessful)
             {
-                IsNotConsumingCharacterReferences = true
-            });
+                return false;
+            }
 
-            var document = await parser.ParseDocumentAsync(rawPage, CancellationToken.None);
+            await UpdateGradebook(user, result);
 
-            var scripts = document.QuerySelectorAll<IHtmlScriptElement>("script");
+            return true;
+        }
+        
+        private async Task UpdateGradebook(TelegramUser user, GradebookParserResult result)
+        {
+            if (string.IsNullOrWhiteSpace(user.StudentFullName))
+            {
+                user.StudentFullName = result.StudentFullName;
+                await _userService.UpdateUserAsync(user);
+            }
 
-            return !scripts.Any(x => x.Text.Equals(RequestKeys.GradebookInvalidLoginOrPassword));
+            var dto = result.Result;
+            dto.UserId = user.MongoId;
+
+            var document = _mapper.Map<GradebookDocument>(dto);
+
+            await _gradebookRepository.DeleteGradebookByUserAsync(dto.UserId);
+            await _gradebookRepository.InsertAsync(document);
+        }
+
+        public async Task<GradebookDto> GetGradebookDto(TelegramUser user)
+        {
+            var document = await _gradebookRepository.GetByUserAsync(user.MongoId);
+
+            if (document == null || (document.CreatedDate.HasValue && (document.CreatedDate.Value - DateTime.UtcNow).TotalHours > 1))
+            {
+                if (await TrySignInAsync(user))
+                {
+                    document = await _gradebookRepository.GetByUserAsync(user.MongoId);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+
+            return _mapper.Map<GradebookDto>(document);
         }
 
         private async Task<string> GetRawPageAsync(string login, string password)

@@ -15,4 +15,15 @@ public static class TelegramUserExtensions
                !string.IsNullOrWhiteSpace(user.CourseId) &&
                !string.IsNullOrWhiteSpace(user.FacultyId);
     }
+
+    public static bool IsStudentCardRegistered(this TelegramUser user)
+    {
+        if (user == null)
+        {
+            throw new ArgumentNullException(nameof(user));
+        }
+
+        return !string.IsNullOrWhiteSpace(user.Login) &&
+               !string.IsNullOrWhiteSpace(user.StudentCardId);
+    }
 }

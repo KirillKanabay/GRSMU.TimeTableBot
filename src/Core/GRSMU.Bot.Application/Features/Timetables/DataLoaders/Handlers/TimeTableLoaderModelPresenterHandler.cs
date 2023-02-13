@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using GRSMU.Bot.Application.Features.Timetables.DataLoaders.Common;
-using GRSMU.Bot.Core.Immutable;
+using GRSMU.Bot.Common.Telegram.Immutable;
 
 namespace GRSMU.Bot.Application.Features.Timetables.DataLoaders.Handlers
 {

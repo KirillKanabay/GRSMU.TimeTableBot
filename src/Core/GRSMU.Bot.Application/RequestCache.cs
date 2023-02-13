@@ -1,5 +1,5 @@
 ﻿using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
-using GRSMU.Bot.Core.Immutable;
+using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Data.Common.Contracts;
 
 namespace GRSMU.Bot.Application
@@ -10,7 +10,9 @@ namespace GRSMU.Bot.Application
         
         private readonly IReadOnlyList<string> _allowedToCached = new List<string>
         {
-            CommandKeys.Reports.Report
+            CommandKeys.Reports.Report,
+            CommandKeys.Gradebook.SetLogin,
+            CommandKeys.Gradebook.SetPassword
         };
 
         public RequestCache(IRequestCacheRepository repository)

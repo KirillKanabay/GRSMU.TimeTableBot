@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Core.Immutable
+﻿namespace GRSMU.Bot.Common.Telegram.Immutable
 {
     public static class MessageTexts
     {

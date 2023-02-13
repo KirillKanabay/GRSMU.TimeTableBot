@@ -7,5 +7,7 @@
         public const string Migration = nameof(Migration);
         public const string Report = nameof(Report);
         public const string RequestCache = nameof(RequestCache);
+        public const string Gradebook = nameof(Gradebook);
+        public const string GradebookMap = nameof(GradebookMap);
     }
 }

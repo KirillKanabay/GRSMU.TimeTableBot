@@ -1,13 +1,13 @@
 ﻿using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Data;
 using GRSMU.Bot.Common.Telegram.Extensions;
-using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Data.Reports.Contracts;
 using GRSMU.Bot.Data.Reports.Documents;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
 using GRSMU.Bot.Common.Telegram.Enums;
+using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Common.Telegram.Models.Responses;
 using GRSMU.Bot.Common.Telegram.Services;
 using GRSMU.Bot.Domain.Reports.TelegramRequests;
@@ -53,7 +53,7 @@ public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMess
 
             await _userService.UpdateUserAsync(user);
 
-            return new TelegramResponse(TelegramResponseStatus.WaitingNextResponse);
+            return new TelegramResponse(TelegramResponseStatus.WaitingNextResponse, CommandKeys.Reports.Report);
         }
 
         await Client.EditMessageReplyMarkupAsync
@@ -81,6 +81,6 @@ public class ReportRequestHandler : TelegramRequestHandlerBase<ReportRequestMess
             Markups.DefaultMarkup
         );
 
-        return new TelegramResponse(TelegramResponseStatus.Finished);
+        return new TelegramResponse();
     }
 }

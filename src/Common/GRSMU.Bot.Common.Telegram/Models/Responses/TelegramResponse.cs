@@ -4,10 +4,17 @@ namespace GRSMU.Bot.Common.Telegram.Models.Responses;
 
 public sealed class TelegramResponse
 {
-    public TelegramResponseStatus Status { get; private set; }
+    public TelegramResponseStatus Status { get; private set; } = TelegramResponseStatus.Finished;
+    
+    public string Command { get; set; }
 
-    public TelegramResponse(TelegramResponseStatus status)
+    public TelegramResponse()
+    {
+    }
+
+    public TelegramResponse(TelegramResponseStatus status, string command)
     {
         Status = status;
+        Command = command;
     }
 }

@@ -32,8 +32,10 @@ using GRSMU.Bot.Common.Telegram.Brokers;
 using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Services;
-using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
 using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
+using GRSMU.Bot.Application.Features.Gradebooks.Helpers;
+using GRSMU.Bot.Data.Gradebooks.Contracts;
+using GRSMU.Bot.Data.Gradebooks.Repositories;
 
 namespace GRSMU.Bot.IoC
 {
@@ -54,6 +56,10 @@ namespace GRSMU.Bot.IoC
             builder.RegisterType<TelegramClientRunner>().SingleInstance();
             builder.RegisterType<FormDataLoader>().SingleInstance();
             builder.RegisterType<TimeTableLoader>().As<ITimeTableLoader>().SingleInstance();
+            builder.RegisterType<GradebookProcessor>().SingleInstance();
+            builder.RegisterType<GradebookParser>().SingleInstance();
+            builder.RegisterType<GradebookPresenter>().SingleInstance();
+            builder.RegisterType<GradebookIdGenerator>().SingleInstance();
 
             builder.RegisterType<RequestFactory>().SingleInstance();
             builder.RegisterType<TimeTablePresenter>().SingleInstance();
@@ -76,6 +82,8 @@ namespace GRSMU.Bot.IoC
             builder.RegisterType<TimeTableRepository>().As<ITimeTableRepository>().SingleInstance();
             builder.RegisterType<ReportRepository>().As<IReportRepository>().SingleInstance();
             builder.RegisterType<RequestCacheRepository>().As<IRequestCacheRepository>().SingleInstance();
+            builder.RegisterType<GradebookRepository>().As<IGradebookRepository>().SingleInstance();
+            builder.RegisterType<GradebookMapRepository>().As<IGradebookMapRepository>().SingleInstance();
 
             builder.RegisterType<MigrationRunner>().As<IMigrationRunner>().SingleInstance();
             builder.RegisterMigrations(typeof(V1_0_0_UserIsAdminField).Assembly);

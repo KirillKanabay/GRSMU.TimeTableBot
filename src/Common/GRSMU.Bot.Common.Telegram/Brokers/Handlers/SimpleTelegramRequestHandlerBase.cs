@@ -27,7 +27,7 @@ public abstract class SimpleTelegramRequestHandlerBase<TRequest> : IRequestHandl
 
         await PostExecuteAsync(request, cancellationToken);
 
-        return new TelegramResponse(TelegramResponseStatus.Finished);
+        return new TelegramResponse();
     }
 
     protected abstract Task ExecuteAsync(TRequest request, CancellationToken cancellationToken);

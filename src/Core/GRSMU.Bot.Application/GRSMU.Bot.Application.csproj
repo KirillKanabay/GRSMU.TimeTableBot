@@ -7,6 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="AngleSharp.Css" Version="0.16.4" />
 	  <PackageReference Include="AutoMapper" Version="12.0.0" />
 	</ItemGroup>
 
@@ -15,6 +16,11 @@
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common\GRSMU.Bot.Common.csproj" />
 	  <ProjectReference Include="..\GRSMU.Bot.Data\GRSMU.Bot.Data.csproj" />
 	  <ProjectReference Include="..\GRSMU.Bot.Domain\GRSMU.Bot.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Features\Gradebooks\Models\" />
+	  <Folder Include="Features\Gradebooks\Presenters\" />
 	</ItemGroup>
 
 </Project>

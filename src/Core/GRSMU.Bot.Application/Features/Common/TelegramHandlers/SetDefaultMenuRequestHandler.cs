@@ -1,7 +1,7 @@
 ﻿using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Brokers.Handlers;
 using GRSMU.Bot.Common.Telegram.Extensions;
-using GRSMU.Bot.Core.Immutable;
+using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Domain.Common.TelegramRequests;
 using Telegram.Bot;
 

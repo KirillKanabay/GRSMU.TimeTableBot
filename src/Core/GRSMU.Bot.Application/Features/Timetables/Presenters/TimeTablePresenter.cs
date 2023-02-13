@@ -1,5 +1,5 @@
-﻿using GRSMU.Bot.Core.Immutable;
-using System.Text;
+﻿using System.Text;
+using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Domain.Timetables.Dtos;
 
 namespace GRSMU.Bot.Core.Presenters

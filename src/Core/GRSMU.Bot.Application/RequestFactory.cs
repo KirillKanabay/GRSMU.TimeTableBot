@@ -1,16 +1,22 @@
-﻿using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
+﻿using GRSMU.Bot.Application.Features.Gradebooks.TelegramHandlers;
+using GRSMU.Bot.Application.Features.Gradebooks.TelegramHandlers.GradebookSettings;
+using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Data;
 using GRSMU.Bot.Common.Telegram.Extensions;
+using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Common.Telegram.Models.Messages;
 using GRSMU.Bot.Common.Telegram.RequestFactories;
 using GRSMU.Bot.Common.Telegram.Services;
-using GRSMU.Bot.Core.Immutable;
 using GRSMU.Bot.Domain.Common.TelegramRequests;
+using GRSMU.Bot.Domain.Gradebooks.TelegramRequests;
+using GRSMU.Bot.Domain.Gradebooks.TelegramRequests.Settings;
 using GRSMU.Bot.Domain.Reports.TelegramRequests;
 using GRSMU.Bot.Domain.Timetables.TelegramRequests;
 using GRSMU.Bot.Domain.Users.TelegramRequests.Settings;
+using Microsoft.VisualBasic;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace GRSMU.Bot.Application;
 
@@ -46,6 +52,27 @@ public class RequestFactory : MappedRequestFactoryBase
         AddRequest(CommandKeys.Registrators.Group, CreateSettingsCommand<GroupSettingsRequestMessage>);
 
         #endregion
+
+        AddRequest<SetGradebookKeyboardTelegramRequestMessage>(CommandKeys.Gradebook.Run);
+        AddRequest(CommandKeys.Gradebook.SetLogin, CreateGradeBookSettingsCommand<SetGradebookLoginTelegramRequestMessage>);
+        AddRequest(CommandKeys.Gradebook.SetPassword, CreateGradeBookSettingsCommand<SetGradebookPasswordTelegramRequestMessage>);
+        AddRequest<CancelGradebookRegistrationTelegramRequestMessage>(CommandKeys.Gradebook.Cancel);
+        AddRequest<SetSpecificGradebookKeyboardRequestMessage>(CommandKeys.Gradebook.Specific);
+
+        AddRequest(CommandKeys.Gradebook.SpecificGradebookKeyboard, (update, _)
+            => Task.FromResult(new SetSpecificGradebookKeyboardRequestMessage
+            {
+                CallbackExecuted = true,
+                LastMessageId = CallbackDataProcessor.ReadCallbackData(update.CallbackQuery?.Data).Data
+            } as TelegramCommandMessageBase));
+
+        AddRequest(CommandKeys.Gradebook.SpecificGradebook, (update, b) 
+            => Task.FromResult(new GetSpecificGradebookRequestMessage
+            {
+                Data = CallbackDataProcessor.ReadCallbackData(update.CallbackQuery?.Data).Data
+            } as TelegramCommandMessageBase));
+
+        AddRequest<GetTotalGradebookRequestMessage>(CommandKeys.Gradebook.Total);
     }
     
     #region Registrators
@@ -72,6 +99,25 @@ public class RequestFactory : MappedRequestFactoryBase
         if (isCached)
         {
             requestMessage.Message = update.GetMessageText();
+        }
+
+        return requestMessage;
+    }
+
+    private async Task<TelegramCommandMessageBase> CreateGradeBookSettingsCommand<TCommand>(Update update, bool isCached)
+        where TCommand : GradebookSettingsTelegramRequestMessageBase, new()
+    {
+        var requestMessage = new TCommand();
+
+        if (update.Type == UpdateType.CallbackQuery)
+        {
+            var value = CallbackDataProcessor.ReadCallbackData(update?.CallbackQuery?.Data).Data;
+            requestMessage.BackExecuted = value == CommandKeys.Gradebook.Back;
+        }
+
+        if (isCached)
+        {
+            requestMessage.Value = update.GetMessageText();
         }
 
         return requestMessage;

@@ -1,4 +1,6 @@
-﻿namespace GRSMU.Bot.Web.Core.ViewModels.Notifications;
+﻿using GRSMU.Bot.Domain.Notifications.Enums;
+
+namespace GRSMU.Bot.Web.Core.ViewModels.Notifications;
 
 public class NotificationFilterViewModel
 {
@@ -8,5 +10,5 @@ public class NotificationFilterViewModel
 
     public List<string> FacultyIds { get; set; }
 
-    public bool IsBroadcast { get; set; }
+    public NotificationType Type { get; set; } = NotificationType.OnlyRegistered;
 }

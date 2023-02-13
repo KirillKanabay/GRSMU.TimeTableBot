@@ -13,6 +13,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Gradebooks\Enums\" />
+	  <Folder Include="Gradebooks\Dtos\" />
+	  <Folder Include="Notifications\Enums\" />
 	  <Folder Include="Timetables\Enums\" />
 	</ItemGroup>
 

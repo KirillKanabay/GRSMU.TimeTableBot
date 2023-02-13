@@ -18,14 +18,16 @@ namespace GRSMU.Bot.Application.Features.Gradebooks.Helpers
         private readonly IGradebookRepository _gradebookRepository;
         private readonly ITelegramUserService _userService;
         private readonly IMapper _mapper;
+        private readonly GradebookIdGenerator _gradebookIdGenerator;
 
-        public GradebookProcessor(SourceOptions options, GradebookParser parser, IGradebookRepository gradebookRepository, ITelegramUserService userService, IMapper mapper)
+        public GradebookProcessor(SourceOptions options, GradebookParser parser, IGradebookRepository gradebookRepository, ITelegramUserService userService, IMapper mapper, GradebookIdGenerator gradebookIdGenerator)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
             _parser = parser ?? throw new ArgumentNullException(nameof(parser));
             _gradebookRepository = gradebookRepository ?? throw new ArgumentNullException(nameof(gradebookRepository));
             _userService = userService ?? throw new ArgumentNullException(nameof(userService));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _gradebookIdGenerator = gradebookIdGenerator ?? throw new ArgumentNullException(nameof(gradebookIdGenerator));
         }
 
         public async Task<bool> TrySignInAsync(TelegramUser user)
@@ -73,6 +75,11 @@ namespace GRSMU.Bot.Application.Features.Gradebooks.Helpers
             var dto = result.Result;
             dto.UserId = user.MongoId;
 
+            foreach (var discipline in dto.Disciplines)
+            {
+                discipline.Id = await _gradebookIdGenerator.GenerateIdAsync(discipline.Name);
+            }
+
             var document = _mapper.Map<GradebookDocument>(dto);
 
             await _gradebookRepository.DeleteGradebookByUserAsync(dto.UserId);
@@ -94,11 +101,7 @@ namespace GRSMU.Bot.Application.Features.Gradebooks.Helpers
                     return null;
                 }
             }
-            else
-            {
-                return null;
-            }
-
+            
             return _mapper.Map<GradebookDto>(document);
         }
 

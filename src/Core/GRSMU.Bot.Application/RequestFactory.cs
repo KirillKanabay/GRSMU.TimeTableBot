@@ -1,4 +1,5 @@
-﻿using GRSMU.Bot.Application.Features.Gradebooks.TelegramHandlers.GradebookSettings;
+﻿using GRSMU.Bot.Application.Features.Gradebooks.TelegramHandlers;
+using GRSMU.Bot.Application.Features.Gradebooks.TelegramHandlers.GradebookSettings;
 using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
 using GRSMU.Bot.Common.Telegram.Data;
@@ -13,6 +14,7 @@ using GRSMU.Bot.Domain.Gradebooks.TelegramRequests.Settings;
 using GRSMU.Bot.Domain.Reports.TelegramRequests;
 using GRSMU.Bot.Domain.Timetables.TelegramRequests;
 using GRSMU.Bot.Domain.Users.TelegramRequests.Settings;
+using Microsoft.VisualBasic;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
@@ -55,6 +57,22 @@ public class RequestFactory : MappedRequestFactoryBase
         AddRequest(CommandKeys.Gradebook.SetLogin, CreateGradeBookSettingsCommand<SetGradebookLoginTelegramRequestMessage>);
         AddRequest(CommandKeys.Gradebook.SetPassword, CreateGradeBookSettingsCommand<SetGradebookPasswordTelegramRequestMessage>);
         AddRequest<CancelGradebookRegistrationTelegramRequestMessage>(CommandKeys.Gradebook.Cancel);
+        AddRequest<SetSpecificGradebookKeyboardRequestMessage>(CommandKeys.Gradebook.Specific);
+
+        AddRequest(CommandKeys.Gradebook.SpecificGradebookKeyboard, (update, _)
+            => Task.FromResult(new SetSpecificGradebookKeyboardRequestMessage
+            {
+                CallbackExecuted = true,
+                LastMessageId = CallbackDataProcessor.ReadCallbackData(update.CallbackQuery?.Data).Data
+            } as TelegramCommandMessageBase));
+
+        AddRequest(CommandKeys.Gradebook.SpecificGradebook, (update, b) 
+            => Task.FromResult(new GetSpecificGradebookRequestMessage
+            {
+                Data = CallbackDataProcessor.ReadCallbackData(update.CallbackQuery?.Data).Data
+            } as TelegramCommandMessageBase));
+
+        AddRequest<GetTotalGradebookRequestMessage>(CommandKeys.Gradebook.Total);
     }
     
     #region Registrators

@@ -54,8 +54,8 @@ namespace GRSMU.Bot.Web
 
             builder.Services.AddHostedService<ConfigureApplication>();
 
-            builder.Services.AddControllers().AddNewtonsoftJson();
             builder.Services.AddControllersWithViews()
+                .AddNewtonsoftJson()
                 .AddApplicationPart(typeof(HomeController).Assembly)
                 .AddRazorRuntimeCompilation();
 

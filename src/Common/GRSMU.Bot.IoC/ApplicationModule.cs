@@ -58,6 +58,8 @@ namespace GRSMU.Bot.IoC
             builder.RegisterType<TimeTableLoader>().As<ITimeTableLoader>().SingleInstance();
             builder.RegisterType<GradebookProcessor>().SingleInstance();
             builder.RegisterType<GradebookParser>().SingleInstance();
+            builder.RegisterType<GradebookPresenter>().SingleInstance();
+            builder.RegisterType<GradebookIdGenerator>().SingleInstance();
 
             builder.RegisterType<RequestFactory>().SingleInstance();
             builder.RegisterType<TimeTablePresenter>().SingleInstance();
@@ -81,6 +83,7 @@ namespace GRSMU.Bot.IoC
             builder.RegisterType<ReportRepository>().As<IReportRepository>().SingleInstance();
             builder.RegisterType<RequestCacheRepository>().As<IRequestCacheRepository>().SingleInstance();
             builder.RegisterType<GradebookRepository>().As<IGradebookRepository>().SingleInstance();
+            builder.RegisterType<GradebookMapRepository>().As<IGradebookMapRepository>().SingleInstance();
 
             builder.RegisterType<MigrationRunner>().As<IMigrationRunner>().SingleInstance();
             builder.RegisterMigrations(typeof(V1_0_0_UserIsAdminField).Assembly);

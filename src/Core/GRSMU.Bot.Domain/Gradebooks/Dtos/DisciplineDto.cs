@@ -2,6 +2,8 @@
 
 public class DisciplineDto
 {
+    public string Id { get; set; }
+
     public string Name { get; set; }
 
     public List<MarkDto> Marks { get; set; }

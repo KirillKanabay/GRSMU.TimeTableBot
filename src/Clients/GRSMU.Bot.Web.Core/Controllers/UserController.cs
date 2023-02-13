@@ -1,6 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using GRSMU.Bot.Common.Broker.Contracts;
+using GRSMU.Bot.Common.Models;
+using GRSMU.Bot.Common.Web.ViewModels;
+using GRSMU.Bot.Domain.Users.Dtos.Filters;
+using GRSMU.Bot.Domain.Users.Requests;
+using GRSMU.Bot.Web.Core.ViewModels.Users;
 
 namespace GRSMU.Bot.Web.Core.Controllers;
 
@@ -17,22 +22,22 @@ public class UserController : Controller
 
     public async Task<IActionResult> Index([FromQuery] int? page)
     {
-        //var response = await _requestBroker.Publish(new GetUsersRequestMessage
-        //{
-        //    Filter = new UserFilterDto(),
-        //    Paging = new PagingModel
-        //    {
-        //        Page = page ?? 1,
-        //        PageSize = 15
-        //    }
-        //});
+        var response = await _requestBroker.Publish(new GetUsersRequestMessage
+        {
+            Filter = new UserFilterDto(),
+            Paging = new PagingModel
+            {
+                Page = page ?? 1,
+                PageSize = 15
+            }
+        });
 
-        //var viewModel = new UserListViewModel
-        //{
-        //    Users = response.Items.Select(_mapper.Map<UserViewModel>).ToList(),
-        //    Paging = _mapper.Map<PagingViewModel>(response.PagingModel)
-        //};
+        var viewModel = new UserListViewModel
+        {
+            Users = response.Items.Select(_mapper.Map<UserViewModel>).ToList(),
+            Paging = _mapper.Map<PagingViewModel>(response.PagingModel)
+        };
 
-        return Ok();
+        return View(viewModel);
     }
 }

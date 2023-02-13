@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using AngleSharp.Css.Dom;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
@@ -109,6 +108,7 @@ public class GradebookParser
     private DisciplineDto GetDiscipline(IHtmlTableRowElement row)
     {
         var dto = new DisciplineDto();
+
         var cells = row.Cells;
 
         dto.Name = cells[DisciplineNameOffset].Text();

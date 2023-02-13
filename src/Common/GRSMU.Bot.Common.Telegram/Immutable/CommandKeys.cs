@@ -36,7 +36,10 @@ public static class CommandKeys
         public const string Run = "Журнал отметок";
         public const string Total = "Общая успеваемость";
         public const string Specific = "По конкретному предмету";
-        
+
+        public static readonly string SpecificGradebook = "SG";
+        public static readonly string SpecificGradebookKeyboard = "SGK";
+
         public static readonly string Back = $"{nameof(Gradebook)}_{nameof(Back)}";
         public static readonly string Cancel = $"{nameof(Gradebook)}_{nameof(Cancel)}";
 

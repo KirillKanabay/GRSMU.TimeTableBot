@@ -7,6 +7,7 @@ using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Common.Telegram.Models.Messages;
 using GRSMU.Bot.Common.Telegram.Services;
 using GRSMU.Bot.Domain.Gradebooks.Dtos;
+using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Types.ReplyMarkups;
 
@@ -16,11 +17,13 @@ public class SetSpecificGradebookKeyboardRequestHandler : SimpleTelegramRequestH
 {
     private readonly GradebookProcessor _processor;
     private readonly ITelegramUserService _userService;
+    private readonly ILogger<SetSpecificGradebookKeyboardRequestHandler> _logger;
 
-    public SetSpecificGradebookKeyboardRequestHandler(ITelegramBotClient client, ITelegramRequestContext context, GradebookProcessor processor, ITelegramUserService userService) : base(client, context)
+    public SetSpecificGradebookKeyboardRequestHandler(ITelegramBotClient client, ITelegramRequestContext context, GradebookProcessor processor, ITelegramUserService userService, ILogger<SetSpecificGradebookKeyboardRequestHandler> logger) : base(client, context)
     {
         _processor = processor ?? throw new ArgumentNullException(nameof(processor));
         _userService = userService ?? throw new ArgumentNullException(nameof(userService));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     protected override async Task ExecuteAsync(SetSpecificGradebookKeyboardRequestMessage request, CancellationToken cancellationToken)
@@ -50,7 +53,14 @@ public class SetSpecificGradebookKeyboardRequestHandler : SimpleTelegramRequestH
         {
             if (lastMessageId.HasValue)
             {
-                await Client.DeleteMessageAsync(user.ChatId, lastMessageId.Value, cancellationToken: cancellationToken);
+                try
+                {
+                    await Client.DeleteMessageAsync(user.ChatId, lastMessageId.Value, cancellationToken: cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogWarning(e, "Error while deleting message for specific gradebook keyboard");
+                }
             }
 
             var sentMessage = await Client.SendTextMessageWithMarkup(user, message, markup);

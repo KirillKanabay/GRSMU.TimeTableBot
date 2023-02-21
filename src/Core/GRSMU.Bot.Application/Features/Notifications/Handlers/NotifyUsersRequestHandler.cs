@@ -11,6 +11,7 @@ using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Data.Users.Contracts.Filters;
 using GRSMU.Bot.Domain.Notifications.Dto;
 using GRSMU.Bot.Domain.Notifications.Enums;
+using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 
 namespace GRSMU.Bot.Application.Features.Notifications.Handlers
@@ -20,11 +21,14 @@ namespace GRSMU.Bot.Application.Features.Notifications.Handlers
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
         private readonly ITelegramBotClient _botClient;
-        public NotifyUsersRequestHandler(IUserRepository userRepository, IMapper mapper, ITelegramBotClient botClient)
+        private readonly ILogger<NotifyUsersRequestHandler> _logger;
+
+        public NotifyUsersRequestHandler(IUserRepository userRepository, IMapper mapper, ITelegramBotClient botClient, ILogger<NotifyUsersRequestHandler> logger)
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _botClient = botClient ?? throw new ArgumentNullException(nameof(botClient));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         protected override async Task<EmptyResponse> ExecuteAsync(NotifyUsersRequestMessage request, NullableContext context)
@@ -41,13 +45,21 @@ namespace GRSMU.Bot.Application.Features.Notifications.Handlers
 
             foreach (var telegramUser in users)
             {
-                if (filter.Type is NotificationType.Broadcast)
+                try
                 {
-                    await _botClient.SendTextMessage(telegramUser, request.Text);
+                    switch (filter.Type)
+                    {
+                        case NotificationType.Broadcast:
+                            await _botClient.SendTextMessage(telegramUser, request.Text);
+                            break;
+                        case NotificationType.OnlyRegistered:
+                            await _botClient.SendTextMessageWithMarkup(telegramUser, request.Text, Markups.DefaultMarkup);
+                            break;
+                    }
                 }
-                else if (filter.Type is NotificationType.OnlyRegistered)
+                catch (Exception e)
                 {
-                    await _botClient.SendTextMessageWithMarkup(telegramUser, request.Text, Markups.DefaultMarkup);
+                    _logger.LogWarning(e, "Error while notifying user {telegramUser}", telegramUser);
                 }
             }
 

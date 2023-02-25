@@ -90,7 +90,7 @@ namespace GRSMU.Bot.Application.Features.Gradebooks.Helpers
         {
             var document = await _gradebookRepository.GetByUserAsync(user.MongoId);
 
-            if (document == null || (document.CreatedDate.HasValue && (document.CreatedDate.Value - DateTime.UtcNow).TotalHours > 1))
+            if (document == null || (document.CreatedDate.HasValue && (DateTime.UtcNow - document.CreatedDate.Value).TotalHours > 1))
             {
                 if (await TrySignInAsync(user))
                 {

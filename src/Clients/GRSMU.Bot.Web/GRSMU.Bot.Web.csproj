@@ -43,6 +43,5 @@
 	
 	<ItemGroup>
 	  <Folder Include="wwwroot\dist\" />
-	  <Folder Include="wwwroot\scss\NewFolder\" />
 	</ItemGroup>
 </Project>

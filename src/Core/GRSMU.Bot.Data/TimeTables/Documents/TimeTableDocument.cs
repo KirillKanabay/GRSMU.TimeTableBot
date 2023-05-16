@@ -1,4 +1,4 @@
-﻿using GRSMU.Bot.Common.Data.Documents;
+﻿using GRSMU.Bot.Common.Data.Mongo.Documents;
 using GRSMU.Bot.Domain.Timetables.Enums;
 using MongoDB.Bson.Serialization.Attributes;
 

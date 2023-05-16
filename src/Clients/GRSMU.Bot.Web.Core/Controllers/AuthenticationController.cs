@@ -12,9 +12,9 @@ namespace GRSMU.Bot.Web.Core.Controllers
         }
 
         [HttpPost("login")]
-        public Task<IActionResult> Login()
+        public async Task<IActionResult> Login()
         {
-
+            return Ok();
         }
     }
 }

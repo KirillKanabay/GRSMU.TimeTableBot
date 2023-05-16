@@ -1,6 +1,8 @@
-﻿namespace GRSMU.Bot.Domain.Identity.Models;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class ApplicationUser
+namespace GRSMU.Bot.Domain.Identity.Models;
+
+public class ApplicationUser : IdentityUser
 {
     
 }

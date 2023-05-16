@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace GRSMU.Bot.Common.Data.Contexts;
+namespace GRSMU.Bot.Common.Data.Mongo.Contexts;
 
 public interface IDbContext
 {

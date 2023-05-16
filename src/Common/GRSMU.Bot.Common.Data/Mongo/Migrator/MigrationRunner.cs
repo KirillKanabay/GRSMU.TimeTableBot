@@ -1,10 +1,10 @@
-﻿using GRSMU.Bot.Common.Data.Contexts;
-using GRSMU.Bot.Common.Data.Documents;
-using GRSMU.Bot.Common.Data.Immutable;
+﻿using GRSMU.Bot.Common.Data.Mongo.Contexts;
+using GRSMU.Bot.Common.Data.Mongo.Documents;
+using GRSMU.Bot.Common.Data.Mongo.Immutable;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 
-namespace GRSMU.Bot.Common.Data.Migrator;
+namespace GRSMU.Bot.Common.Data.Mongo.Migrator;
 
 public class MigrationRunner : IMigrationRunner
 {

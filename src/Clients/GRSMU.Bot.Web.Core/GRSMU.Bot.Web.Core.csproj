@@ -24,6 +24,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Mappings\Notifications\" />
+	  <Folder Include="ViewModels\Authetication\" />
 	</ItemGroup>
 
 </Project>

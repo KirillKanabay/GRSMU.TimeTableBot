@@ -1,6 +1,6 @@
-﻿using GRSMU.Bot.Common.Data.Contexts;
-using GRSMU.Bot.Common.Data.Immutable;
-using GRSMU.Bot.Common.Data.Migrator;
+﻿using GRSMU.Bot.Common.Data.Mongo.Contexts;
+using GRSMU.Bot.Common.Data.Mongo.Immutable;
+using GRSMU.Bot.Common.Data.Mongo.Migrator;
 using GRSMU.Bot.Data.TimeTables.Documents;
 using GRSMU.Bot.Domain.Timetables.Enums;
 using MongoDB.Driver;

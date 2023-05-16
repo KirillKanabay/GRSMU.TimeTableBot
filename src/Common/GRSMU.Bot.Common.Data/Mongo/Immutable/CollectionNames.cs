@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Common.Data.Immutable
+﻿namespace GRSMU.Bot.Common.Data.Mongo.Immutable
 {
     public static class CollectionNames
     {

@@ -1,4 +1,4 @@
-﻿using GRSMU.Bot.Common.Data.Documents;
+﻿using GRSMU.Bot.Common.Data.Mongo.Documents;
 using MongoDB.Bson;
 
 namespace GRSMU.Bot.Data.Gradebooks.Documents

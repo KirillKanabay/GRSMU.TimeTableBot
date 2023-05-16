@@ -1,4 +1,4 @@
-﻿using GRSMU.Bot.Common.Data.Migrator;
+﻿using GRSMU.Bot.Common.Data.Mongo.Migrator;
 using GRSMU.Bot.Common.Telegram.Models.Options;
 using Telegram.Bot;
 using UpdateType = Telegram.Bot.Types.Enums.UpdateType;

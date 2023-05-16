@@ -2,7 +2,7 @@
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
-namespace GRSMU.Bot.Common.Data.Extensions
+namespace GRSMU.Bot.Common.Data.Mongo.Extensions
 {
     public static class MongoQueryableExtensions
     {

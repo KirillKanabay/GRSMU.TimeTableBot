@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using Autofac;
-using GRSMU.Bot.Common.Data.Migrator;
 using GRSMU.Bot.Common.Telegram.Models.Options;
 using GRSMU.Bot.Common.Models.Options;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Telegram.Bot;
+using GRSMU.Bot.Common.Data.Mongo.Migrator;
 
 namespace GRSMU.Bot.IoC.Extensions
 {

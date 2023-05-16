@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
-using DbOptions = GRSMU.Bot.Common.Data.Models.Options.DbOptions;
+using DbOptions = GRSMU.Bot.Common.Data.Mongo.Models.Options.DbOptions;
 
-namespace GRSMU.Bot.Common.Data.Contexts;
+namespace GRSMU.Bot.Common.Data.Mongo.Contexts;
 
 public class MongoDbContext : IDbContext
 {

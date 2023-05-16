@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Common.Data.Models.Options;
+﻿namespace GRSMU.Bot.Common.Data.Mongo.Models.Options;
 
 public class DbOptions
 {

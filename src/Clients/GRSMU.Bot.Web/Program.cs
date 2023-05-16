@@ -1,6 +1,8 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using GRSMU.Bot.Common.Telegram.Models.Options;
+using GRSMU.Bot.Data;
+using GRSMU.Bot.Domain.Identity.Models;
 using GRSMU.Bot.Web.Core.Controllers;
 using GRSMU.Bot.Web.Filters;
 using GRSMU.Bot.Web.RecurringJobs;
@@ -8,6 +10,8 @@ using GRSMU.Bot.Web.RecurringJobs.Jobs;
 using GRSMU.Bot.IoC;
 using Hangfire;
 using Hangfire.Mongo;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 
@@ -61,14 +65,22 @@ namespace GRSMU.Bot.Web
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            //builder.Services.AddIdentity<>();
 
+            builder.Services.AddDbContext<ApplicationDbContext>(opt =>
+                opt.UseSqlServer(config["ConnectionStrings:DefaultConnection"]));
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            
             var app = builder.Build();
             
             app.UseStaticFiles();
 
             app.UseRouting();
             app.UseCors();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             var dashboardOptions = new DashboardOptions
             {
@@ -79,7 +91,8 @@ namespace GRSMU.Bot.Web
                 .UseHangfireServer();
 
             HangfireJobScheduler.ScheduleRecurringJobs();
-            
+
+
             app.UseEndpoints(endpoints =>
             {
                 var token = botConfig.Token;

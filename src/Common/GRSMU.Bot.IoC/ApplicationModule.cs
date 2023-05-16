@@ -4,9 +4,6 @@ using GRSMU.Bot.Application;
 using GRSMU.Bot.Application.Features.Timetables.DataLoaders;
 using GRSMU.Bot.Application.Features.Timetables.TelegramHandlers;
 using GRSMU.Bot.Application.Services;
-using GRSMU.Bot.Common.Data.Contexts;
-using GRSMU.Bot.Common.Data.Migrator;
-using GRSMU.Bot.Common.Data.Models.Options;
 using GRSMU.Bot.Common.Telegram.Models.Options;
 using GRSMU.Bot.Common.Telegram.RequestFactories;
 using GRSMU.Bot.Application.Timetables.Mappings;
@@ -36,6 +33,9 @@ using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
 using GRSMU.Bot.Application.Features.Gradebooks.Helpers;
 using GRSMU.Bot.Data.Gradebooks.Contracts;
 using GRSMU.Bot.Data.Gradebooks.Repositories;
+using GRSMU.Bot.Common.Data.Mongo.Models.Options;
+using GRSMU.Bot.Common.Data.Mongo.Migrator;
+using GRSMU.Bot.Common.Data.Mongo.Contexts;
 
 namespace GRSMU.Bot.IoC
 {

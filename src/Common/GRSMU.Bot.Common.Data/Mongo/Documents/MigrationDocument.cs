@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Common.Data.Documents
+﻿namespace GRSMU.Bot.Common.Data.Mongo.Documents
 {
     public class MigrationDocument : DocumentBase
     {

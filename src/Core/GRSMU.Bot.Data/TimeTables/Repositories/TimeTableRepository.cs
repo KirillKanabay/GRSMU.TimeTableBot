@@ -1,6 +1,6 @@
-﻿using GRSMU.Bot.Common.Data.Contexts;
-using GRSMU.Bot.Common.Data.Immutable;
-using GRSMU.Bot.Common.Data.Repositories;
+﻿using GRSMU.Bot.Common.Data.Mongo.Contexts;
+using GRSMU.Bot.Common.Data.Mongo.Immutable;
+using GRSMU.Bot.Common.Data.Mongo.Repositories;
 using GRSMU.Bot.Data.TimeTables.Contracts;
 using GRSMU.Bot.Data.TimeTables.Contracts.Filters;
 using GRSMU.Bot.Data.TimeTables.Documents;

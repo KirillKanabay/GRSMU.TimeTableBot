@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace GRSMU.Bot.Common.Data.Documents
+namespace GRSMU.Bot.Common.Data.Mongo.Documents
 {
     [BsonIgnoreExtraElements]
     public abstract class DocumentBase

@@ -1,4 +1,4 @@
-﻿using GRSMU.Bot.Common.Data.Documents;
+﻿using GRSMU.Bot.Common.Data.Mongo.Documents;
 
 namespace GRSMU.Bot.Data.Common.Documents;
 

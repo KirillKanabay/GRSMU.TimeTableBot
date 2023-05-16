@@ -1,6 +1,6 @@
-﻿using GRSMU.Bot.Common.Data.Contexts;
+﻿using GRSMU.Bot.Common.Data.Mongo.Contexts;
 
-namespace GRSMU.Bot.Common.Data.Migrator;
+namespace GRSMU.Bot.Common.Data.Mongo.Migrator;
 
 public interface IMigration
 {

@@ -1,9 +1,9 @@
-﻿using GRSMU.Bot.Common.Data.Contexts;
-using GRSMU.Bot.Common.Data.Documents;
+﻿using GRSMU.Bot.Common.Data.Mongo.Contexts;
+using GRSMU.Bot.Common.Data.Mongo.Documents;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
-namespace GRSMU.Bot.Common.Data.Repositories
+namespace GRSMU.Bot.Common.Data.Mongo.Repositories
 {
     public abstract class MongoRepositoryBase
     {

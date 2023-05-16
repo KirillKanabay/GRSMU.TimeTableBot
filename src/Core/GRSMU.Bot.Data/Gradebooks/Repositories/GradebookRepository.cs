@@ -9,7 +9,7 @@ using MongoDB.Driver.Linq;
 
 namespace GRSMU.Bot.Data.Gradebooks.Repositories
 {
-    public class GradebookRepository : RepositoryBase<GradebookDocument>, IGradebookRepository
+    public class GradebookRepository : MongoRepositoryBase<GradebookDocument>, IGradebookRepository
     {
         protected override string CollectionName => CollectionNames.Gradebook;
 

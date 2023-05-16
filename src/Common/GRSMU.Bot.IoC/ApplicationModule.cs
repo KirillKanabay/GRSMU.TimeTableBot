@@ -91,7 +91,7 @@ namespace GRSMU.Bot.IoC
 
         private void RegisterServices(ContainerBuilder builder)
         {
-            builder.RegisterType<UserService>().As<ITelegramUserService>().SingleInstance();
+            builder.RegisterType<TelegramUserService>().As<ITelegramUserService>().SingleInstance();
         }
 
         private void RegisterRequestBroker(ContainerBuilder builder)

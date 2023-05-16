@@ -9,7 +9,7 @@ using MongoDB.Driver.Linq;
 
 namespace GRSMU.Bot.Data.Gradebooks.Repositories;
 
-public class GradebookMapRepository : RepositoryBase<GradebookMapDocument>, IGradebookMapRepository
+public class GradebookMapRepository : MongoRepositoryBase<GradebookMapDocument>, IGradebookMapRepository
 {
     public GradebookMapRepository(IDbContext dbContext) : base(dbContext)
     {

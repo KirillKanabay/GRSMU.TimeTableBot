@@ -5,21 +5,21 @@ using MongoDB.Driver.Linq;
 
 namespace GRSMU.Bot.Common.Data.Repositories
 {
-    public abstract class RepositoryBase
+    public abstract class MongoRepositoryBase
     {
         protected abstract string CollectionName { get; }
         protected readonly IDbContext DbContext;
 
-        protected RepositoryBase(IDbContext dbContext)
+        protected MongoRepositoryBase(IDbContext dbContext)
         {
             DbContext = dbContext;
         }
     }
 
-    public abstract class RepositoryBase<TDocument> : RepositoryBase
+    public abstract class MongoRepositoryBase<TDocument> : MongoRepositoryBase
         where TDocument : DocumentBase
     {
-        protected RepositoryBase(IDbContext dbContext) : base(dbContext)
+        protected MongoRepositoryBase(IDbContext dbContext) : base(dbContext)
         {
         }
 

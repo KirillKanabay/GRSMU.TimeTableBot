@@ -17,7 +17,7 @@ namespace GRSMU.Bot.Web
     {
         public static void Main(string[] args)
         {
-            var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+            LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
             var builder = WebApplication.CreateBuilder(args);
 
@@ -61,6 +61,7 @@ namespace GRSMU.Bot.Web
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            //builder.Services.AddIdentity<>();
 
             var app = builder.Build();
             

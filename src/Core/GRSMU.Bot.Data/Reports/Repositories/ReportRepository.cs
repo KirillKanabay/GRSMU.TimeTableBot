@@ -6,7 +6,7 @@ using GRSMU.Bot.Data.Reports.Documents;
 
 namespace GRSMU.Bot.Data.Reports.Repositories;
 
-public class ReportRepository : RepositoryBase<ReportDocument>, IReportRepository
+public class ReportRepository : MongoRepositoryBase<ReportDocument>, IReportRepository
 {
     protected override string CollectionName => CollectionNames.Report;
 

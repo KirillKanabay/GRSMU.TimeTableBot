@@ -1,0 +1,16 @@
+@import '../variables.scss';
+
+.auth {
+    &-main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    &-container {
+        .form-group {
+            margin-bottom: 10px;
+        }
+    }
+}

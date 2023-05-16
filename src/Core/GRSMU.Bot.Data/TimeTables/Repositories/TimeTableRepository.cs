@@ -9,7 +9,7 @@ using MongoDB.Driver.Linq;
 
 namespace GRSMU.Bot.Data.TimeTables.Repositories;
 
-public class TimeTableRepository : RepositoryBase<TimeTableDocument>, ITimeTableRepository
+public class TimeTableRepository : MongoRepositoryBase<TimeTableDocument>, ITimeTableRepository
 {
     protected override string CollectionName => CollectionNames.TimeTable;
 

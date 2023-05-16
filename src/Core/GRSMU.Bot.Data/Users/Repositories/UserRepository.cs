@@ -11,7 +11,7 @@ using MongoDB.Driver.Linq;
 
 namespace GRSMU.Bot.Data.Users.Repositories
 {
-    public class UserRepository : RepositoryBase<UserDocument>, IUserRepository
+    public class UserRepository : MongoRepositoryBase<UserDocument>, IUserRepository
     {
         protected override string CollectionName => CollectionNames.User;
 

@@ -8,12 +8,12 @@ using Telegram.Bot.Types;
 
 namespace GRSMU.Bot.Application.Services
 {
-    public class UserService : ITelegramUserService
+    public class TelegramUserService : ITelegramUserService
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
 
-        public UserService(IMapper mapper, IUserRepository userRepository)
+        public TelegramUserService(IMapper mapper, IUserRepository userRepository)
         {
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));

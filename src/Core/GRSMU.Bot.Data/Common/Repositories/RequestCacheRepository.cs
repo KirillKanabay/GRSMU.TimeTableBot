@@ -7,7 +7,7 @@ using MongoDB.Driver;
 
 namespace GRSMU.Bot.Data.Common.Repositories;
 
-public class RequestCacheRepository : RepositoryBase<RequestCacheDocument>, IRequestCacheRepository
+public class RequestCacheRepository : MongoRepositoryBase<RequestCacheDocument>, IRequestCacheRepository
 {
     protected override string CollectionName => CollectionNames.RequestCache;
 

@@ -6,9 +6,11 @@ using GRSMU.Bot.Common.Web.ViewModels;
 using GRSMU.Bot.Domain.Users.Dtos.Filters;
 using GRSMU.Bot.Domain.Users.Requests;
 using GRSMU.Bot.Web.Core.ViewModels.Users;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GRSMU.Bot.Web.Core.Controllers;
 
+[Authorize]
 public class UserController : Controller
 {
     private readonly IRequestBroker _requestBroker;

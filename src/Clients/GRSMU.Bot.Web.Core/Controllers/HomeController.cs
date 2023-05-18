@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
 using GRSMU.Bot.Web.Core.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace GRSMU.Bot.Web.Core.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

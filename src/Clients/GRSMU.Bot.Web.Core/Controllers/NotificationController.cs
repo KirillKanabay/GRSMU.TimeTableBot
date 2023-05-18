@@ -2,10 +2,12 @@
 using GRSMU.Bot.Application.Features.Notifications.Handlers;
 using GRSMU.Bot.Common.Broker.Contracts;
 using GRSMU.Bot.Web.Core.ViewModels.Notifications;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GRSMU.Bot.Web.Core.Controllers;
 
+[Authorize]
 public class NotificationController : Controller
 {
     private readonly IMapper _mapper;

@@ -1,4 +1,5 @@
-﻿@{
+﻿@using GRSMU.Bot.Web.Core.Immutable
+@{
     Layout = null;
 }
 
@@ -17,7 +18,7 @@
             <div class="col-md-6 col-lg-4">
                 <div class="login-wrap p-0">
                     <h3 class="mb-4 text-center">Добро пожаловать!</h3>
-                    <form asp-controller="Authentication" asp-action="Login" method="post">
+                    <form asp-controller="Authentication" asp-action="Login" asp-route-returnurl="@ViewBag[ViewBagKeys.ReturnUrl]" method="post">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Имя пользователя" required/>
                         </div>

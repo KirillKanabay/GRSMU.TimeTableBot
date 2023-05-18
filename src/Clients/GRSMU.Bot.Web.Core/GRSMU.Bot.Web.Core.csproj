@@ -8,8 +8,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="12.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="6.0.16" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -24,7 +26,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Mappings\Notifications\" />
-	  <Folder Include="ViewModels\Authetication\" />
+	  <Folder Include="ViewModels\Authentication\" />
 	</ItemGroup>
 
 </Project>

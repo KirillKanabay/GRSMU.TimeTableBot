@@ -19,6 +19,18 @@ namespace GRSMU.Bot.Web.Core.Controllers
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
+        [HttpGet("register")]
+        public IActionResult Register(string? returnUrl = null)
+        {
+            ViewBag[ViewBagKeys.ReturnUrl] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register()
+        {
+
+        }
 
         [HttpGet("login")]
         public IActionResult Login(string? returnUrl = null)
@@ -28,6 +40,7 @@ namespace GRSMU.Bot.Web.Core.Controllers
         }
 
         [HttpPost("login")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel, string? returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");

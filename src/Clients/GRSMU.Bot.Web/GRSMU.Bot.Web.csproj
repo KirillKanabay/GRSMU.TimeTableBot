@@ -21,7 +21,7 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Hangfire" Version="1.7.9" />
 		<PackageReference Include="HangFire.Mongo" Version="0.6.6" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.13" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.15" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -40,5 +40,8 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
-
+	
+	<ItemGroup>
+	  <Folder Include="wwwroot\dist\" />
+	</ItemGroup>
 </Project>

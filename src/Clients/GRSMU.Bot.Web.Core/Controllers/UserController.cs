@@ -28,7 +28,7 @@ public class UserController : Controller
             Paging = new PagingModel
             {
                 Page = page ?? 1,
-                PageSize = 15
+                PageSize = 10
             }
         });
 

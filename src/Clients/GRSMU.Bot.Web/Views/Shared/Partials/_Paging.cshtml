@@ -3,17 +3,124 @@
 @{
     var pagesCount = Model.PagesCount;
     var page = Model.Page;
+    var pageCutLow = page - 1;
+    var pageCutHigh = page + 1;
+}
+@{
+    string GetUrl(int pageIdx)
+    {
+        return $"?page={pageIdx}";
+    }
+
+    string GetActiveClass(int pageIdx)
+    {
+        return pageIdx == page ? "active" : "";
+    }
 }
 
 <nav>
     <ul class="pagination justify-content-center">
-        @for (int pageIdx = 1; pageIdx < pagesCount; pageIdx++)
+        @if (page > 1)
         {
-            var url = $"?page={pageIdx}";
-            var activeClass = pageIdx.Equals(page) ? "active" : "";
+            <li class="page-item">
+                <a class="page-link" href="@GetUrl(page - 1)">
+                    <span>&laquo;</span>
+                </a>
+            </li>
+        }
+        
+        @if (pagesCount < 6)
+        {
+            for (var pageIdx = 1; pageIdx <= pagesCount; pageIdx++)
+            {
+                <li class="page-item @GetActiveClass(pageIdx)">
+                    <a class="page-link" href="@GetUrl(pageIdx)">
+                        @pageIdx
+                    </a>
+                </li>    
+            }
+        }
+        else
+        {
+            @if (page > 2)
+            {
+                <li class="page-item @GetActiveClass(1)">
+                    <a class="page-link" href="@GetUrl(1)">
+                        1
+                    </a>
+                </li>
 
-            <li class="page-item @(activeClass)">
-                <a class="page-link" href="@url">@pageIdx</a>
+                @if (page > 3)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link">
+                            ...
+                        </a>
+                    </li>
+                }
+            }
+
+            @if (page == 1)
+            {
+                pageCutHigh += 2;
+            }
+            else if(page == 2)
+            {
+                pageCutHigh += 1;
+            }
+
+            @if (page == pagesCount)
+            {
+                pageCutLow -= 2;
+            }
+            else if (page == pagesCount -1)
+            {
+                pageCutLow -= 1;
+            }
+
+            @for (var pageIdx = pageCutLow; pageIdx <= pageCutHigh; pageIdx++)
+            {
+                @if (pageIdx == 0)
+                {
+                    pageIdx++;
+                }
+
+                @if (pageIdx > pagesCount)
+                {
+                    continue;
+                }
+
+                <li class="page-item @GetActiveClass(pageIdx)">
+                    <a class="page-link" href="@GetUrl(pageIdx)">
+                        @pageIdx
+                    </a>
+                </li> 
+            }
+
+            @if (page < pagesCount - 1)
+            {
+                if (page < pagesCount - 2)
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link">
+                            ...
+                        </a>
+                    </li>
+                }
+                <li class="page-item @GetActiveClass(pagesCount)">
+                    <a class="page-link" href="@GetUrl(pagesCount)">
+                        @pagesCount
+                    </a>
+                </li>
+            }
+        }
+
+        @if (page < pagesCount)
+        {
+            <li class="page-item">
+                <a class="page-link" href="@GetUrl(page + 1)">
+                    <span>&raquo;</span>
+                </a>
             </li>
         }
     </ul>

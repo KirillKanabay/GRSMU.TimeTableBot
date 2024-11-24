@@ -364,3 +364,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/src/Clients/GRSMU.Bot.Web.Api/appsettings.json
+/src/Clients/GRSMU.Bot.Web.Api/appsettings.Development.json

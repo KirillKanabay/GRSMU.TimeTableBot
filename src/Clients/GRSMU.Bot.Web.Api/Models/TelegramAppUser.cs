@@ -5,16 +5,16 @@ namespace GRSMU.Bot.Web.Api.Models
     public record TelegramAppUser
     {
         [JsonPropertyName("id")]
-        public int Id { get; init; }
+        public string Id { get; init; }
 
         [JsonPropertyName("first_name")]
-        public string FirstName { get; init; }
+        public string? FirstName { get; init; }
 
         [JsonPropertyName("last_name")]
-        public string LastName { get; init; }
+        public string? LastName { get; init; }
 
         [JsonPropertyName("username")]
-        public string UserName { get; init; }
+        public string? UserName { get; init; }
 
         [JsonPropertyName("language_code")]
         public string LanguageCode { get; init; }

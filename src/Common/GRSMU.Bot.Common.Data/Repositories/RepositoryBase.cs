@@ -25,11 +25,11 @@ namespace GRSMU.Bot.Common.Data.Repositories
 
         protected IMongoCollection<TDocument> Collection => DbContext.GetCollection<TDocument>(CollectionName);
 
-        public virtual Task<TDocument> GetByIdAsync(string id)
+        public virtual async Task<TDocument?> GetByIdAsync(string id)
         {
             var query = GetQuery();
 
-            return query.FirstOrDefaultAsync(document => document.Id.Equals(id));
+            return await query.FirstOrDefaultAsync(document => document.Id.Equals(id));
         }
 
         public virtual async Task InsertAsync(TDocument document)

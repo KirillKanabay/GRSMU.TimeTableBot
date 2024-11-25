@@ -27,7 +27,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Data\GRSMU.Bot.Common.Data.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
-	  <ProjectReference Include="..\..\Common\GRSMU.Bot.IoC\GRSMU.Bot.IoC[old].csproj" />
+	  <ProjectReference Include="..\..\Common\GRSMU.Bot.IoC\GRSMU.Bot.IoC.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Data\GRSMU.Bot.Common.Data.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.IoC\GRSMU.Bot.IoC.csproj" />

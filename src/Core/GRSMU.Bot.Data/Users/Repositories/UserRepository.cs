@@ -7,6 +7,7 @@ using GRSMU.Bot.Common.Models;
 using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Data.Users.Contracts.Filters;
 using GRSMU.Bot.Data.Users.Documents;
+using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
 namespace GRSMU.Bot.Data.Users.Repositories
@@ -19,14 +20,23 @@ namespace GRSMU.Bot.Data.Users.Repositories
         {
         }
 
-        public Task<UserDocument> GetByTelegramIdAsync(string telegramId)
+        public async Task<UserDocument?> GetByTelegramIdAsync(string telegramId)
         {
-            return GetQuery().Where(x => x.TelegramId.Equals(telegramId)).FirstOrDefaultAsync();
+            return await GetQuery().Where(x => x.TelegramId.Equals(telegramId)).FirstOrDefaultAsync();
         }
 
         public Task<List<UserDocument>> GetUserListAsync(UserFilter filter, PagingModel paging)
         {
             return GetQuery(filter).ToPagedListAsync(paging);
+        }
+
+        public Task UpdateRefreshToken(string id, string token, DateTime expireTime)
+        {
+            return Collection.UpdateOneAsync(
+                Builders<UserDocument>.Filter.Eq(x => x.Id, id),
+                Builders<UserDocument>.Update.Combine(
+                    Builders<UserDocument>.Update.Set(x => x.RefreshToken, token),
+                    Builders<UserDocument>.Update.Set(x => x.RefreshTokenExpireTime, expireTime)));
         }
 
         protected IMongoQueryable<UserDocument> GetQuery(UserFilter filter)

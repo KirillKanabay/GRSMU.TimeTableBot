@@ -1,8 +1,8 @@
 ﻿using GRSMU.Bot.Common.Models;
 using GRSMU.Bot.Logic.Features.Users.Dtos;
-using GRSMU.Bot.Web.Api.Authorization.Models;
+using GRSMU.Bot.Web.Core.Authorization.Models;
 
-namespace GRSMU.Bot.Web.Api.Authorization.Services.Interfaces;
+namespace GRSMU.Bot.Web.Core.Authorization.Services.Interfaces;
 
 public interface IAccountService
 {

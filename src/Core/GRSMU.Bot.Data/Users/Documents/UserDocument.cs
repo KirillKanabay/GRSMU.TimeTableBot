@@ -1,7 +1,9 @@
 ﻿using GRSMU.Bot.Common.Data.Documents;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace GRSMU.Bot.Data.Users.Documents
 {
+    [BsonIgnoreExtraElements(true)]
     public class UserDocument : DocumentBase
     {
         public string TelegramId { get; set; }

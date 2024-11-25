@@ -1,7 +1,7 @@
 ﻿using GRSMU.Bot.Common.Models;
-using GRSMU.Bot.Web.Api.Models;
+using GRSMU.Bot.Web.Core.Models;
 
-namespace GRSMU.Bot.Web.Api.Services.Interfaces
+namespace GRSMU.Bot.Web.Core.Services.Interfaces
 {
     public interface ITelegramTokenValidator
     {

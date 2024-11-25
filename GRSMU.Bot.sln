@@ -21,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.Bot.Common.Data", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.Bot.Web.Core", "src\Clients\GRSMU.Bot.Web.Core\GRSMU.Bot.Web.Core.csproj", "{5B5A775A-EE76-4C09-A47E-C12C84F768E4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.Bot.Common.Telegram", "src\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj", "{0623C6F2-8124-4312-9734-04E2EE0B36C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.Bot.Common.Telegram[old]", "src\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram[old].csproj", "{0623C6F2-8124-4312-9734-04E2EE0B36C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.Bot.Common.Web", "src\Common\GRSMU.Bot.Common.Web\GRSMU.Bot.Common.Web.csproj", "{0C679048-B8E2-44E7-ABF0-B3DF9744D519}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GRSMU.Bot.Common.Web[old]", "src\Common\GRSMU.Bot.Common.Web\GRSMU.Bot.Common.Web[old].csproj", "{0C679048-B8E2-44E7-ABF0-B3DF9744D519}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{AC276CC2-885C-4338-B1C4-1A604A243A9A}"
 EndProject

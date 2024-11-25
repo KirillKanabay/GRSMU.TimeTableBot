@@ -4,14 +4,14 @@ using System.Security.Cryptography;
 using System.Text;
 using GRSMU.Bot.Common.Models;
 using GRSMU.Bot.Logic.Features.Users.Dtos;
-using GRSMU.Bot.Web.Api.Authorization.Models;
-using GRSMU.Bot.Web.Api.Authorization.Services.Interfaces;
-using GRSMU.Bot.Web.Api.Configurations;
+using GRSMU.Bot.Web.Core.Authorization.Models;
+using GRSMU.Bot.Web.Core.Authorization.Services.Interfaces;
+using GRSMU.Bot.Web.Core.Configurations;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
 
-namespace GRSMU.Bot.Web.Api.Authorization.Services;
+namespace GRSMU.Bot.Web.Core.Authorization.Services;
 
 public class JwtService : IJwtService
 {

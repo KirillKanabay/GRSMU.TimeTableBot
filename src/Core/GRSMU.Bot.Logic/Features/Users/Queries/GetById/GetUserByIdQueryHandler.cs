@@ -2,7 +2,7 @@
 using GRSMU.Bot.Common.Messaging;
 using GRSMU.Bot.Common.Models;
 using GRSMU.Bot.Data.Users.Contracts;
-using GRSMU.Bot.Domain.Users.Dtos;
+using GRSMU.Bot.Logic.Features.Users.Dtos;
 
 namespace GRSMU.Bot.Logic.Features.Users.Queries.GetById;
 

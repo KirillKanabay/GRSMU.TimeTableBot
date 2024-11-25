@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Web.Api.Authorization;
+﻿namespace GRSMU.Bot.Web.Core.Authorization;
 
 public static class CustomClaimTypes
 {

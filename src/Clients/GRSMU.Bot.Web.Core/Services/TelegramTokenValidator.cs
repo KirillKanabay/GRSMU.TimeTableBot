@@ -2,16 +2,15 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Web;
 using GRSMU.Bot.Common.Enums;
 using GRSMU.Bot.Common.Models;
-using GRSMU.Bot.Web.Api.Configurations;
-using GRSMU.Bot.Web.Api.Models;
-using GRSMU.Bot.Web.Api.Services.Interfaces;
+using GRSMU.Bot.Web.Core.Configurations;
+using GRSMU.Bot.Web.Core.Models;
+using GRSMU.Bot.Web.Core.Services.Interfaces;
 using Microsoft.Extensions.Options;
 
-namespace GRSMU.Bot.Web.Api.Services
+namespace GRSMU.Bot.Web.Core.Services
 {
     internal class TelegramTokenValidator : ITelegramTokenValidator
     {

@@ -11,9 +11,9 @@ namespace GRSMU.Bot.Web.Api
             _migrationRunner = migrationRunner;
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        public Task StartAsync(CancellationToken cancellationToken)
         {
-            await _migrationRunner.RunMigrations();
+            return _migrationRunner.RunMigrations();
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

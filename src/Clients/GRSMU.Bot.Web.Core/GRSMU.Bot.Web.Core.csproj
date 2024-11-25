@@ -8,19 +8,22 @@
 
 	<ItemGroup>
 		<PackageReference Include="Autofac" Version="8.1.1" />
-		<PackageReference Include="AutoMapper" Version="12.0.0" />
+		<PackageReference Include="AutoMapper" Version="13.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="9.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
-	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Web\GRSMU.Bot.Common.Web.csproj" />
+	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram[old].csproj" />
+	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Web\GRSMU.Bot.Common.Web[old].csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common\GRSMU.Bot.Common.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common\GRSMU.Bot.Common.csproj" />
 	  <ProjectReference Include="..\..\Core\GRSMU.Bot.Application\GRSMU.Bot.Application[old].csproj" />
 	  <ProjectReference Include="..\..\Core\GRSMU.Bot.Domain\GRSMU.Bot.Domain[old].csproj" />
+	  <ProjectReference Include="..\..\Core\GRSMU.Bot.Logic\GRSMU.Bot.Logic.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

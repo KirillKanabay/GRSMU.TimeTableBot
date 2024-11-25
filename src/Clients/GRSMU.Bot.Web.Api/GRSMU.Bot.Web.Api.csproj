@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />      
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
@@ -17,6 +15,7 @@
     <ProjectReference Include="..\..\Common\GRSMU.Bot.Common\GRSMU.Bot.Common.csproj" />
     <ProjectReference Include="..\..\Common\GRSMU.Bot.IoC\GRSMU.Bot.IoC.csproj" />
     <ProjectReference Include="..\..\Core\GRSMU.Bot.Logic\GRSMU.Bot.Logic.csproj" />
+    <ProjectReference Include="..\GRSMU.Bot.Web.Core\GRSMU.Bot.Web.Core.csproj" />
   </ItemGroup>
 
 </Project>

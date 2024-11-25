@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Web.Api.Configurations
+﻿namespace GRSMU.Bot.Web.Core.Configurations
 {
     public record TelegramConfiguration
     {

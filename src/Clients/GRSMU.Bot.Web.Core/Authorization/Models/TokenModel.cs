@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Web.Api.Authorization.Models;
+﻿namespace GRSMU.Bot.Web.Core.Authorization.Models;
 
 public class TokenModel
 {

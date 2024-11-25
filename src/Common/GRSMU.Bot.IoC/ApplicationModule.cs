@@ -66,7 +66,8 @@ namespace GRSMU.Bot.IoC
             builder.RegisterTelegramClient(_configuration);
 
             builder.RegisterAutoMapper(typeof(TimeTableProfile).Assembly);
-            
+            builder.RegisterAutoMapper(Logic.AssemblyReference.Assembly);
+
             RegisterServices(builder);
             RegisterRequestBroker(builder);
             RegisterDatabase(builder);

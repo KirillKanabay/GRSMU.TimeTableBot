@@ -2,11 +2,12 @@
 using GRSMU.Bot.Logic.Features.Users.Commands.UpdateRefreshToken;
 using GRSMU.Bot.Logic.Features.Users.Dtos;
 using GRSMU.Bot.Logic.Features.Users.Queries.GetById;
-using GRSMU.Bot.Web.Api.Authorization.Models;
-using GRSMU.Bot.Web.Api.Authorization.Services.Interfaces;
+using GRSMU.Bot.Web.Core.Authorization.Models;
+using GRSMU.Bot.Web.Core.Authorization.Services.Interfaces;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
-namespace GRSMU.Bot.Web.Api.Authorization.Services;
+namespace GRSMU.Bot.Web.Core.Authorization.Services;
 
 public class AccountService : IAccountService
 {

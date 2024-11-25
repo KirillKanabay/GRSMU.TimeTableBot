@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace GRSMU.Bot.Web.Api.Models
+namespace GRSMU.Bot.Web.Core.Models
 {
     public record TelegramAppUser
     {
         [JsonPropertyName("id")]
-        public string Id { get; init; }
+        public long Id { get; init; }
 
         [JsonPropertyName("first_name")]
         public string? FirstName { get; init; }

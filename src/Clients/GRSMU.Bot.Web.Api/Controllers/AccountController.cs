@@ -1,9 +1,9 @@
 ﻿using GRSMU.Bot.Logic.Features.Users.Commands.GetOrCreateUser;
-using GRSMU.Bot.Web.Api.Authorization.Models;
-using GRSMU.Bot.Web.Api.Authorization.Services.Interfaces;
 using GRSMU.Bot.Web.Api.Extensions;
 using GRSMU.Bot.Web.Api.Models.Account.Requests;
-using GRSMU.Bot.Web.Api.Services.Interfaces;
+using GRSMU.Bot.Web.Core.Authorization.Models;
+using GRSMU.Bot.Web.Core.Authorization.Services.Interfaces;
+using GRSMU.Bot.Web.Core.Services.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +27,7 @@ namespace GRSMU.Bot.Web.Api.Controllers
         }
 
         [HttpPost]
+        [Route("authorization")]
         public async Task<ActionResult<TokenModel>> Authorization(AuthorizationRequest request)
         {
             var validationResult = _telegramTokenValidator.Validate(request.Token);
@@ -41,7 +42,7 @@ namespace GRSMU.Bot.Web.Api.Controllers
             var getOrCreateResult = await _sender.Send(new GetOrCreateUserCommand
             {
                 ChatId = request.ChatId,
-                TelegramId = telegramUser.Id,
+                TelegramId = telegramUser.Id.ToString(),
                 TelegramFirstName = telegramUser.FirstName,
                 TelegramLastName = telegramUser.LastName,
                 TelegramUsername = telegramUser.UserName
@@ -58,6 +59,7 @@ namespace GRSMU.Bot.Web.Api.Controllers
         }
 
         [HttpPost]
+        [Route("refresh-token")]
         public async Task<ActionResult<TokenModel>> RefreshToken(UpdateRefreshTokenRequest request)
         {
             var updateTokenResult = await _accountService.RefreshAsync(request.AccessToken, request.RefreshToken);

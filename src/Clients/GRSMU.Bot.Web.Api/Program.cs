@@ -1,7 +1,9 @@
-
+using GRSMU.Bot.IoC;
 using GRSMU.Bot.Web.Api.Configurations;
 using GRSMU.Bot.Web.Api.Services;
 using GRSMU.Bot.Web.Api.Services.Interfaces;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 
 namespace GRSMU.Bot.Web.Api
 {
@@ -16,6 +18,14 @@ namespace GRSMU.Bot.Web.Api
 
             builder.Services.Configure<TelegramConfiguration>(
                 builder.Configuration.GetSection(TelegramConfiguration.SectionName));
+
+            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
+            builder.Host.ConfigureContainer<ContainerBuilder>(cb =>
+            {
+                cb.RegisterModule(new ApplicationModule(builder.Configuration));
+            });
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

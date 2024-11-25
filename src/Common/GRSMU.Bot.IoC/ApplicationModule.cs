@@ -7,10 +7,8 @@ using GRSMU.Bot.Application.Services;
 using GRSMU.Bot.Common.Data.Contexts;
 using GRSMU.Bot.Common.Data.Migrator;
 using GRSMU.Bot.Common.Data.Models.Options;
-using GRSMU.Bot.Common.Telegram.Models.Options;
 using GRSMU.Bot.Common.Telegram.RequestFactories;
 using GRSMU.Bot.Application.Timetables.Mappings;
-using GRSMU.Bot.Common.Models.Options;
 using GRSMU.Bot.Common.Telegram;
 using GRSMU.Bot.Core.Presenters;
 using GRSMU.Bot.Data.Common.Contracts;
@@ -22,12 +20,6 @@ using GRSMU.Bot.Data.TimeTables.Contracts;
 using GRSMU.Bot.Data.TimeTables.Repositories;
 using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Data.Users.Repositories;
-using GRSMU.Bot.IoC.Extensions;
-using GRSMU.Bot.Web.Core.Controllers;
-using MediatR.Extensions.Autofac.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using GRSMU.Bot.Common.Broker.Contracts;
-using GRSMU.Bot.Common.Broker;
 using GRSMU.Bot.Common.Telegram.Brokers;
 using GRSMU.Bot.Common.Telegram.Brokers.Contexts;
 using GRSMU.Bot.Common.Telegram.Brokers.RequestCache;
@@ -36,6 +28,13 @@ using GRSMU.Bot.Common.Telegram.Brokers.Contracts;
 using GRSMU.Bot.Application.Features.Gradebooks.Helpers;
 using GRSMU.Bot.Data.Gradebooks.Contracts;
 using GRSMU.Bot.Data.Gradebooks.Repositories;
+using GRSMU.Bot.Common.Broker;
+using GRSMU.Bot.Common.Broker.Contracts;
+using GRSMU.Bot.IoC.Extensions;
+using MediatR.Extensions.Autofac.DependencyInjection;
+using MediatR.Extensions.Autofac.DependencyInjection.Builder;
+using GRSMU.Bot.Common.Behaviors;
+using Microsoft.Extensions.Configuration;
 
 namespace GRSMU.Bot.IoC
 {
@@ -50,8 +49,8 @@ namespace GRSMU.Bot.IoC
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterOptions<SourceOptions>(_configuration, "Source");
-            builder.RegisterOptions<TelegramOptions>(_configuration, "Telegram");
+            //builder.RegisterOptions<SourceOptions>(_configuration, "Source");
+            //builder.RegisterOptions<TelegramOptions>(_configuration, "Telegram");
 
             builder.RegisterType<TelegramClientRunner>().SingleInstance();
             builder.RegisterType<FormDataLoader>().SingleInstance();
@@ -67,7 +66,6 @@ namespace GRSMU.Bot.IoC
             builder.RegisterTelegramClient(_configuration);
 
             builder.RegisterAutoMapper(typeof(TimeTableProfile).Assembly);
-            builder.RegisterAutoMapper(typeof(UserController).Assembly);
             
             RegisterServices(builder);
             RegisterRequestBroker(builder);
@@ -96,7 +94,13 @@ namespace GRSMU.Bot.IoC
 
         private void RegisterRequestBroker(ContainerBuilder builder)
         {
-            builder.RegisterMediatR(typeof(GetNextWeekTimeTableRequestHandler).Assembly);
+            var cfg = MediatRConfigurationBuilder
+                .Create(Logic.AssemblyReference.Assembly)
+                .WithAllOpenGenericHandlerTypesRegistered()
+                .WithCustomPipelineBehavior(typeof(ValidationPipelineBehavior<,>))
+                .Build();
+
+            builder.RegisterMediatR(cfg);
 
             builder.RegisterType<RequestFactory>()
                 .As<IRequestFactory>()

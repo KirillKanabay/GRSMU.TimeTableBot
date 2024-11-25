@@ -18,8 +18,8 @@
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common\GRSMU.Bot.Common.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common\GRSMU.Bot.Common.csproj" />
-	  <ProjectReference Include="..\..\Core\GRSMU.Bot.Application\GRSMU.Bot.Application.csproj" />
-	  <ProjectReference Include="..\..\Core\GRSMU.Bot.Domain\GRSMU.Bot.Domain.csproj" />
+	  <ProjectReference Include="..\..\Core\GRSMU.Bot.Application\GRSMU.Bot.Application[old].csproj" />
+	  <ProjectReference Include="..\..\Core\GRSMU.Bot.Domain\GRSMU.Bot.Domain[old].csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

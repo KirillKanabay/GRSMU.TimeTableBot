@@ -52,21 +52,21 @@ namespace GRSMU.Bot.Data.Users.Repositories
             {
                 var regex = new Regex(Regex.Escape(filter.FirstName), RegexOptions.IgnoreCase);
 
-                query = query.Where(x => regex.IsMatch(x.FirstName));
+                query = query.Where(x => regex.IsMatch(x.TelegramFirstName));
             }
 
             if (!string.IsNullOrWhiteSpace(filter.LastName))
             {
                 var regex = new Regex(Regex.Escape(filter.LastName), RegexOptions.IgnoreCase);
 
-                query = query.Where(x => regex.IsMatch(x.LastName));
+                query = query.Where(x => regex.IsMatch(x.TelegramLastName));
             }
 
             if (!string.IsNullOrWhiteSpace(filter.Username))
             {
                 var regex = new Regex(Regex.Escape(filter.Username), RegexOptions.IgnoreCase);
 
-                query = query.Where(x => regex.IsMatch(x.Username));
+                query = query.Where(x => regex.IsMatch(x.TelegramUsername));
             }
 
             return query;

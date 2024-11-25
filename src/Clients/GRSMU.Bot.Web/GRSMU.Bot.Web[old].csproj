@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>400e82c8-80e1-4f6c-bcb5-76acc8963b2e</UserSecretsId>
@@ -11,7 +11,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
 		<PackageReference Include="Hangfire.Core" Version="1.7.31" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.10" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
@@ -27,7 +27,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Data\GRSMU.Bot.Common.Data.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
-	  <ProjectReference Include="..\..\Common\GRSMU.Bot.IoC\GRSMU.Bot.IoC.csproj" />
+	  <ProjectReference Include="..\..\Common\GRSMU.Bot.IoC\GRSMU.Bot.IoC[old].csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Data\GRSMU.Bot.Common.Data.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.IoC\GRSMU.Bot.IoC.csproj" />

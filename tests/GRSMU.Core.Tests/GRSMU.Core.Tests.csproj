@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Core\GRSMU.Bot.Application\GRSMU.Bot.Application.csproj" />
+    <ProjectReference Include="..\..\src\Core\GRSMU.Bot.Application\GRSMU.Bot.Application[old].csproj" />
   </ItemGroup>
 
   <ItemGroup>

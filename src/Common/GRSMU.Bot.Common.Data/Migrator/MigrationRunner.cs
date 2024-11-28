@@ -56,6 +56,8 @@ public class MigrationRunner : IMigrationRunner
 
     private Task ProcessMigrationResult(IMigration migration)
     {
+        _logger.LogInformation($"Migration {migration.Name} v{migration.Version.ToString()} applied successfully");
+
         return _collection.InsertOneAsync(new MigrationDocument
         {
             Name = migration.Name,

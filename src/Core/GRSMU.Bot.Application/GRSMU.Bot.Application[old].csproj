@@ -8,19 +8,20 @@
 
 	<ItemGroup>
 	  <PackageReference Include="AngleSharp.Css" Version="0.16.4" />
-	  <PackageReference Include="AutoMapper" Version="12.0.0" />
+	  <PackageReference Include="AutoMapper" Version="13.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram.csproj" />
+	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Telegram\GRSMU.Bot.Common.Telegram[old].csproj" />
 	  <ProjectReference Include="..\..\Common\GRSMU.Bot.Common\GRSMU.Bot.Common.csproj" />
 	  <ProjectReference Include="..\GRSMU.Bot.Data\GRSMU.Bot.Data.csproj" />
-	  <ProjectReference Include="..\GRSMU.Bot.Domain\GRSMU.Bot.Domain.csproj" />
+	  <ProjectReference Include="..\GRSMU.Bot.Domain\GRSMU.Bot.Domain[old].csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Features\Gradebooks\Models\" />
 	  <Folder Include="Features\Gradebooks\Presenters\" />
+	  <Folder Include="Features\Users\Handlers\Queries\" />
 	</ItemGroup>
 
 </Project>

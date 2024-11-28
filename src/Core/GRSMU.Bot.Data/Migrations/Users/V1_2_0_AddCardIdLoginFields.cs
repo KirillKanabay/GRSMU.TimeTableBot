@@ -22,8 +22,8 @@ public class V1_2_0_AddCardIdLoginFields : IMigration
             Builders<UserDocument>.Filter.Empty,
             Builders<UserDocument>.Update.Combine
             (
-                Builders<UserDocument>.Update.Set(x => x.Login, null),
-                Builders<UserDocument>.Update.Set(x => x.StudentCardId, null))
+                Builders<UserDocument>.Update.Set(x => x.StudentCardPassword, null),
+                Builders<UserDocument>.Update.Set(x => x.StudentCardLogin, null))
             );
     }
 }

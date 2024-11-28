@@ -3,6 +3,6 @@
 public static class CustomClaimTypes
 {
     public const string Id = "id";
-    public const string TelegramId = "telegram-id";
-    public const string StudentCardRegistered = "student-card-registered";
+    public const string TelegramId = "telegramId";
+    public const string StudentCardRegistered = "isStudentCardRegistered";
 }

@@ -27,7 +27,7 @@ namespace GRSMU.Bot.Web.Api.Controllers
         }
 
         [HttpPost]
-        [Route("authorization")]
+        [Route("tg-auth")]
         public async Task<ActionResult<TokenModel>> Authorization(AuthorizationRequest request)
         {
             var validationResult = _telegramTokenValidator.Validate(request.Token);

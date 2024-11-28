@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GRSMU.Bot.Domain.Users.Dtos;
+using GRSMU.Bot.Logic.Features.Users.Dtos;
 using GRSMU.Bot.Web.Api.Models.User.Responses;
 
 namespace GRSMU.Bot.Web.Api.Mappings;

@@ -32,7 +32,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ITelegramTokenValidator, TelegramTokenValidator>();
         services.AddSingleton<IAccountService, AccountService>();
         services.AddSingleton<IJwtService, JwtService>();
-
+        
         return services;
     }
 
@@ -95,13 +95,13 @@ public static class ServiceCollectionExtensions
             options.DefaultPolicy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-                .RequireClaim(CustomClaimTypes.TelegramId)
+                .RequireClaim(CustomClaimTypes.Id)
                 .Build();
 
             options.AddPolicy(PolicyConstants.StudentCardRegisteredOnly, new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser()
                 .AddAuthenticationSchemes(JwtBearerCustomDefaults.StudentCardRegisteredOnlyScheme)
-                .RequireClaim(CustomClaimTypes.TelegramId)
+                .RequireClaim(CustomClaimTypes.Id)
                 .RequireClaim(CustomClaimTypes.StudentCardRegistered, bool.TrueString)
                 .Build());
         });

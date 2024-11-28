@@ -2,6 +2,8 @@ using GRSMU.Bot.IoC;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using GRSMU.Bot.Web.Core.Extensions;
+using GRSMU.Bot.Application.Timetables.Mappings;
+using GRSMU.Bot.Web.Api.Mappings;
 
 namespace GRSMU.Bot.Web.Api
 {
@@ -12,7 +14,12 @@ namespace GRSMU.Bot.Web.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
+            // TODO: Refactor it!
+            builder.Services.AddAutoMapper(
+                typeof(TimeTableProfile).Assembly, 
+                Logic.AssemblyReference.Assembly, 
+                typeof(UserProfile).Assembly);
+          
             builder.Services.AddWebApiServices(builder.Configuration);
             builder.Services.AddHostedService<HostedService>();
 

@@ -1,5 +1,7 @@
 ﻿using System.Text;
 using GRSMU.Bot.Common.Data.Configurations;
+using GRSMU.Bot.Common.Resources;
+using GRSMU.Bot.Web.Api.Resources;
 using GRSMU.Bot.Web.Api.Swagger;
 using GRSMU.Bot.Web.Core.Authorization;
 using GRSMU.Bot.Web.Core.Authorization.Services;
@@ -27,6 +29,8 @@ public static class ServiceCollectionExtensions
             .ConfigureAuthorization();
         
         services.AddSwaggerGen(SwaggerConfigurator.Configure);
+
+        services.AddSingleton<IResourceProvider, ResourceProvider>();
 
         return services;
     }

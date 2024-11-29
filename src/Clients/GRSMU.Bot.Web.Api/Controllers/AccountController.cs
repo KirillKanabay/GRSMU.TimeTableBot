@@ -16,6 +16,7 @@ namespace GRSMU.Bot.Web.Api.Controllers
         private readonly IAccountService _accountService;
         private readonly ITelegramTokenValidator _telegramTokenValidator;
         private readonly ISender _sender;
+
         public AccountController(
             ITelegramTokenValidator telegramTokenValidator,
             ISender sender, 

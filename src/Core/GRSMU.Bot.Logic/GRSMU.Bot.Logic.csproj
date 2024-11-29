@@ -17,4 +17,9 @@
     <ProjectReference Include="..\GRSMU.Bot.Data\GRSMU.Bot.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Users\Commands\UpdateStudentCardId\" />
+    <Folder Include="Immutable\" />
+  </ItemGroup>
+
 </Project>

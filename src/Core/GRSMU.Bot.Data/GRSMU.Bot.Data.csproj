@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Faculties\Contracts\" />
+    <Folder Include="Faculties\Documents\" />
+    <Folder Include="Faculties\Repositories\" />
     <Folder Include="Migrations\TimeTables\" />
   </ItemGroup>
 

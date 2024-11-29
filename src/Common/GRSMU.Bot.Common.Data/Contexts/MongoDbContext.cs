@@ -1,4 +1,4 @@
-﻿using GRSMU.Bot.Common.Data.Configurations;
+﻿using GRSMU.Bot.Common.Configurations;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 

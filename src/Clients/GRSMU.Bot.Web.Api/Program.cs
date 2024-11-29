@@ -1,6 +1,7 @@
 using GRSMU.Bot.Data.Extensions;
 using GRSMU.Bot.Logic.Extensions;
 using GRSMU.Bot.Web.Api.Extensions;
+using Serilog;
 
 namespace GRSMU.Bot.Web.Api
 {
@@ -9,6 +10,9 @@ namespace GRSMU.Bot.Web.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Host.UseSerilog((ctx, cfg) => 
+                cfg.ReadFrom.Configuration(ctx.Configuration));
 
             builder.Services
                 .AddWebApiServices(builder.Configuration)

@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 using GRSMU.Bot.Common.Behaviors;
+using GRSMU.Bot.Logic.Features.Faculty.Services;
+using GRSMU.Bot.Logic.Features.Faculty.Services.Interfaces;
 using GRSMU.Bot.Logic.Features.Gradebook.Services;
 using GRSMU.Bot.Logic.Features.Gradebook.Services.Interfaces;
 using MediatR;
@@ -30,6 +32,9 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<IGradebookService, GradebookService>();
         services.AddSingleton<IGradebookParser, GradebookParser>();
+
+        services.AddSingleton<IFacultyInfoProvider, GrsmuFacultyInfoProvider>();
+        services.AddSingleton<IFacultiesInfoInitializer, FacultiesInfoInitializer>();
 
         return services;
     }

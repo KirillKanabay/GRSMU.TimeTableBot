@@ -1,19 +1,25 @@
 ﻿using GRSMU.Bot.Common.Data.Migrator;
+using GRSMU.Bot.Logic.Features.Faculty.Services.Interfaces;
 
 namespace GRSMU.Bot.Web.Api
 {
     public class HostedService : IHostedService
     {
         private readonly IMigrationRunner _migrationRunner;
+        private readonly IFacultiesInfoInitializer _facultiesInfoInitializer;
 
-        public HostedService(IMigrationRunner migrationRunner)
+        public HostedService(
+            IMigrationRunner migrationRunner,
+            IFacultiesInfoInitializer facultiesInfoInitializer)
         {
             _migrationRunner = migrationRunner;
+            _facultiesInfoInitializer = facultiesInfoInitializer;
         }
 
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
-            return _migrationRunner.RunMigrations();
+            await _migrationRunner.RunMigrations();
+            await _facultiesInfoInitializer.InitializeAsync();
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

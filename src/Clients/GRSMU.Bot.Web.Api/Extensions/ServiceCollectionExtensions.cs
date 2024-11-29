@@ -1,5 +1,5 @@
 ﻿using System.Text;
-using GRSMU.Bot.Common.Data.Configurations;
+using GRSMU.Bot.Common.Configurations;
 using GRSMU.Bot.Common.Resources;
 using GRSMU.Bot.Web.Api.Resources;
 using GRSMU.Bot.Web.Api.Swagger;
@@ -49,6 +49,7 @@ public static class ServiceCollectionExtensions
         services.Configure<TelegramConfiguration>(configuration.GetSection(TelegramConfiguration.SectionName));
         services.Configure<JwtConfiguration>(configuration.GetSection(JwtConfiguration.SectionName));
         services.Configure<DbConfiguration>(configuration.GetSection(DbConfiguration.SectionName));
+        services.Configure<GrsmuSourceConfiguration>(configuration.GetSection(GrsmuSourceConfiguration.SectionName));
 
         return services;
     }

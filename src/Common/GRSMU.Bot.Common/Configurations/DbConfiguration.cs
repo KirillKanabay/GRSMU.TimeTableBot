@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Common.Data.Configurations;
+﻿namespace GRSMU.Bot.Common.Configurations;
 
 public record DbConfiguration
 {

@@ -13,6 +13,8 @@ using GRSMU.Bot.Data.Users.Contracts;
 using GRSMU.Bot.Data.Users.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using GRSMU.Bot.Data.Faculties.Contracts;
+using GRSMU.Bot.Data.Faculties.Repositories;
 
 namespace GRSMU.Bot.Data.Extensions;
 
@@ -27,6 +29,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IRequestCacheRepository, RequestCacheRepository>();
         services.AddSingleton<IGradebookRepository, GradebookRepository>();
         services.AddSingleton<IGradebookMapRepository, GradebookMapRepository>();
+        services.AddSingleton<IFacultyRepository, FacultyRepository>();
 
         services.AddSingleton<IMigrationRunner, MigrationRunner>();
 

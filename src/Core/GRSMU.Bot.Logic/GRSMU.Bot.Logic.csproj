@@ -20,6 +20,7 @@
   <ItemGroup>
     <Folder Include="Features\Users\Commands\UpdateStudentCardId\" />
     <Folder Include="Immutable\" />
+    <Folder Include="Mappings\" />
   </ItemGroup>
 
 </Project>

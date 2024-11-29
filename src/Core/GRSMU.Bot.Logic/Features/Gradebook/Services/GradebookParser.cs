@@ -8,10 +8,11 @@ using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Domain.Gradebooks.Dtos;
 using GRSMU.Bot.Domain.Gradebooks.Enums;
 using GRSMU.Bot.Logic.Features.Gradebook.Dtos;
+using GRSMU.Bot.Logic.Features.Gradebook.Services.Interfaces;
 
 namespace GRSMU.Bot.Logic.Features.Gradebook.Services;
 
-public class GradebookParser
+public class GradebookParser : IGradebookParser
 {
     private const int DisciplineOffset = 1;
     private const int DisciplineNameOffset = 1;
@@ -48,14 +49,17 @@ public class GradebookParser
     //    return result;
     //}
 
+    // TODO: Will be implemented later
     public async Task<ExecutionResult<GradebookSignInResultDto>> CheckSignInResultAsync(string rawPage)
     {
         var document = await GetHtmlDocumentAsync(rawPage);
         
         if (!CheckSignIn(document))
         {
-            return ExecutionResult.Failure(new ValidationError(Error.Problem("")));
+            return ExecutionResult.Failure<GradebookSignInResultDto>(Error.Problem("d", "d"));
         }
+
+        return ExecutionResult.Success(new GradebookSignInResultDto(null, 1, 1));
     }
 
     private async Task<IHtmlDocument> GetHtmlDocumentAsync(string rawPage)

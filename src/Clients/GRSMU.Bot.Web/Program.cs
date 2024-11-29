@@ -5,7 +5,6 @@ using GRSMU.Bot.Web.Core.Controllers;
 using GRSMU.Bot.Web.Filters;
 using GRSMU.Bot.Web.RecurringJobs;
 using GRSMU.Bot.Web.RecurringJobs.Jobs;
-using GRSMU.Bot.IoC;
 using Hangfire;
 using Hangfire.Mongo;
 using NLog;
@@ -28,12 +27,12 @@ namespace GRSMU.Bot.Web
 
             var botConfig = config.GetSection("Telegram").Get<TelegramOptions>();
 
-            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+            //builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
-            builder.Host.ConfigureContainer<ContainerBuilder>(cb =>
-            {
-                cb.RegisterModule(new ApplicationModule(config));
-            });
+            //builder.Host.ConfigureContainer<ContainerBuilder>(cb =>
+            //{
+            //    cb.RegisterModule(new ApplicationModule(config));
+            //});
 
             builder.Services.AddHangfire(x =>
             {

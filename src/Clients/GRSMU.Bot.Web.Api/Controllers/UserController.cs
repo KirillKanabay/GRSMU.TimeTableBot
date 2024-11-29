@@ -39,8 +39,5 @@ namespace GRSMU.Bot.Web.Api.Controllers
 
             return Ok(responseModel);
         }
-
-        [HttpPut("update-student-id")]
-        public async Task<ActionResult<>>
     }
 }

@@ -1,5 +1,6 @@
-﻿using MongoDB.Driver;
-using DbOptions = GRSMU.Bot.Common.Data.Models.Options.DbOptions;
+﻿using GRSMU.Bot.Common.Data.Configurations;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace GRSMU.Bot.Common.Data.Contexts;
 
@@ -7,10 +8,12 @@ public class MongoDbContext : IDbContext
 {
     private readonly IMongoDatabase _database;
 
-    public MongoDbContext(DbOptions dbOptions)
+    public MongoDbContext(IOptions<DbConfiguration> dbOptions)
     {
-        var client = new MongoClient(dbOptions.ConnectionString);
-        _database = client.GetDatabase(dbOptions.DatabaseName);
+        var cfg = dbOptions.Value;
+
+        var client = new MongoClient(cfg.ConnectionString);
+        _database = client.GetDatabase(cfg.DatabaseName);
     }
 
     public IMongoCollection<TDocument> GetCollection<TDocument>(string collectionName)

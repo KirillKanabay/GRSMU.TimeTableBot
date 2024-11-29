@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace GRSMU.Bot.Web.Core.Services
 {
-    internal class TelegramTokenValidator : ITelegramTokenValidator
+    public class TelegramTokenValidator : ITelegramTokenValidator
     {
         private readonly TelegramConfiguration _configuration;
 

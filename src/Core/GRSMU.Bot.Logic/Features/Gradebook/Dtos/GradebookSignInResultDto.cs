@@ -2,5 +2,5 @@
 
 public record GradebookSignInResultDto(
     string StudentFullName,
-    int StudentCourseNumber,
-    int StudentGroupNumber);
+    string StudentCourseNumber,
+    string GroupNumber);

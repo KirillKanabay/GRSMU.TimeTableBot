@@ -31,7 +31,7 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection RegisterServices(this IServiceCollection services)
     {
         services.AddSingleton<IGradebookService, GradebookService>();
-        services.AddSingleton<IGradebookParser, GradebookParser>();
+        services.AddSingleton<IGradebookProvider, GrsmuGradebookProvider>();
 
         services.AddSingleton<IFacultyInfoProvider, GrsmuFacultyInfoProvider>();
         services.AddSingleton<IFacultiesInfoInitializer, FacultiesInfoInitializer>();

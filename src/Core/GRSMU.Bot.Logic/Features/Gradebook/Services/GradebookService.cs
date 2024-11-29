@@ -7,9 +7,16 @@ namespace GRSMU.Bot.Logic.Features.Gradebook.Services
 {
     public class GradebookService : IGradebookService
     {
+        private readonly IGradebookProvider _gradebookProvider;
+
+        public GradebookService(IGradebookProvider gradebookProvider)
+        {
+            _gradebookProvider = gradebookProvider;
+        }
+
         public Task<ExecutionResult<GradebookSignInResultDto>> SignInAsync(StudentCardIdDto studentCardId)
         {
-            throw new NotImplementedException();
+            return _gradebookProvider.CheckSignInResultAsync(studentCardId.Login, studentCardId.Password);
         }
     }
 }

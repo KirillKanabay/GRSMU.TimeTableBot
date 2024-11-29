@@ -17,6 +17,18 @@ public class FacultyRepository : RepositoryBase<FacultyDocument>, IFacultyReposi
     {
     }
 
+    public Task<List<FacultyDocument>> SearchByFacultyId(string facultyId)
+    {
+        return GetQuery()
+            .Where(x => x.FacultyId.Equals(facultyId))
+            .ToListAsync();
+    }
+
+    public Task<FacultyDocument> GetByFacultyAndCourse(string facultyId, string courseId)
+    {
+        return GetQuery().FirstOrDefaultAsync(x => x.FacultyId.Equals(facultyId) && x.CourseId.Equals(courseId));
+    }
+
     public Task<List<LookupDocument>> LookupAsync()
     {
         var query = GetQuery().GroupBy(x => x.FacultyId, (key, value) => new LookupDocument

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using GRSMU.Bot.Logic.Features.Users.Commands.UpdateStudentCardId;
 using GRSMU.Bot.Logic.Features.Users.Queries.GetById;
 using GRSMU.Bot.Web.Api.Extensions;
+using GRSMU.Bot.Web.Api.Models.User.Requests;
 using GRSMU.Bot.Web.Api.Models.User.Responses;
 using GRSMU.Bot.Web.Core.Authorization;
 using MediatR;
@@ -38,6 +40,25 @@ namespace GRSMU.Bot.Web.Api.Controllers
             var responseModel = _mapper.Map<UserMeResponse>(searchResult.Data);
 
             return Ok(responseModel);
+        }
+
+        [HttpPut("student-card-id")]
+        public async Task<ActionResult<UserPrefilledFacultyModel>> UpdateStudentCardId(UpdateStudentCardIdRequest request)
+        {
+            var id = HttpContext.User.GetId();
+
+            var command = new UpdateStudentCardIdCommand(id, request.Login, request.Password, request.FacultyId);
+
+            var result = await _sender.Send(command);
+
+            if (result.HasErrors)
+            {
+                return result.ToFailureActionResult();
+            }
+
+            var model = _mapper.Map<UserPrefilledFacultyModel>(result.Data);
+
+            return Ok(model);
         }
     }
 }

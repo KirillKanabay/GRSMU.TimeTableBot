@@ -5,11 +5,13 @@ namespace GRSMU.Bot.Data.Faculties.Contracts;
 
 public interface IFacultyRepository
 {
-    Task<List<FacultyDocument>> SearchByFacultyId(string facultyId);
+    Task<List<FacultyDocument>> SearchByFacultyIdAsync(string facultyId);
 
-    Task<FacultyDocument?> GetByFacultyAndCourse(string facultyId, string courseId);
+    Task<FacultyDocument?> GetByFacultyAndCourseAsync(string facultyId, string courseId);
 
     Task<List<LookupDocument>> LookupAsync();
+
+    Task<List<LookupDocument>> LookupCoursesAsync(string facultyId);
 
     Task DropAsync();
 

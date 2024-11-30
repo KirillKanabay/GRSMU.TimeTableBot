@@ -17,14 +17,14 @@ public class FacultyRepository : RepositoryBase<FacultyDocument>, IFacultyReposi
     {
     }
 
-    public Task<List<FacultyDocument>> SearchByFacultyId(string facultyId)
+    public Task<List<FacultyDocument>> SearchByFacultyIdAsync(string facultyId)
     {
         return GetQuery()
             .Where(x => x.FacultyId.Equals(facultyId))
             .ToListAsync();
     }
 
-    public Task<FacultyDocument> GetByFacultyAndCourse(string facultyId, string courseId)
+    public Task<FacultyDocument> GetByFacultyAndCourseAsync(string facultyId, string courseId)
     {
         return GetQuery().FirstOrDefaultAsync(x => x.FacultyId.Equals(facultyId) && x.CourseId.Equals(courseId));
     }
@@ -36,6 +36,19 @@ public class FacultyRepository : RepositoryBase<FacultyDocument>, IFacultyReposi
             Id = key,
             Value = value.First().FacultyName
         });
+
+        return query.OrderBy(x => x.Value).ToListAsync();
+    }
+
+    public Task<List<LookupDocument>> LookupCoursesAsync(string facultyId)
+    {
+        var query = GetQuery()
+            .Where(x => x.FacultyId.Equals(facultyId))
+            .GroupBy(x => x.CourseId, (key, value) => new LookupDocument
+            {
+                Id = key,
+                Value = value.First().CourseName
+            });
 
         return query.OrderBy(x => x.Value).ToListAsync();
     }

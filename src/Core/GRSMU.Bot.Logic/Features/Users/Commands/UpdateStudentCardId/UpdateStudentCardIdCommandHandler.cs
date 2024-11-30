@@ -19,7 +19,7 @@ public class UpdateStudentCardIdCommandHandler : ICommandHandler<UpdateStudentCa
     private readonly IUserRepository _userRepository;
     private readonly IFacultyRepository _facultyRepository;
     private readonly ILogger<UpdateStudentCardIdCommandHandler> _logger;
-
+     
     public UpdateStudentCardIdCommandHandler(
         IGradebookService gradebookService,
         IUserRepository userRepository,
@@ -65,11 +65,11 @@ public class UpdateStudentCardIdCommandHandler : ICommandHandler<UpdateStudentCa
 
     private async Task<ExecutionResult<UserPrefilledFacultyDto>> GetPrefilledData(string facultyId, GradebookSignInResultDto signInResult)
     {
-        var faculty = await _facultyRepository.GetByFacultyAndCourse(facultyId, signInResult.StudentCourseNumber);
+        var faculty = await _facultyRepository.GetByFacultyAndCourseAsync(facultyId, signInResult.StudentCourseNumber);
         
         if (faculty is null)
         {
-            var faculties = await _facultyRepository.SearchByFacultyId(facultyId);
+            var faculties = await _facultyRepository.SearchByFacultyIdAsync(facultyId);
 
             if (!faculties.Any())
             {

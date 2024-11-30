@@ -10,6 +10,7 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.FeatureManagement" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Faculty\Mappings\" />
+    <Folder Include="Features\Faculty\Queries\FullLookup\" />
     <Folder Include="Features\Users\Commands\UpdateStudentCardId\" />
     <Folder Include="Immutable\" />
     <Folder Include="Mappings\" />

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using GRSMU.Bot.Logic.Features.Faculty.Queries.FullLookup;
 using GRSMU.Bot.Logic.Features.Faculty.Queries.Lookup;
 using GRSMU.Bot.Web.Api.Extensions;
 using GRSMU.Bot.Web.Api.Models;
+using GRSMU.Bot.Web.Api.Models.Faculty.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +25,7 @@ public class FacultyController : ControllerBase
     }
 
     [HttpGet("lookup")]
-    public async Task<ActionResult<List<LookupModel>>> GetFacultyLookup()
+    public async Task<ActionResult<List<LookupModel>>> GetFacultyLookupAsync()
     {
         var lookupResult = await _sender.Send(new GetFacultyLookupQuery());
 
@@ -32,8 +34,24 @@ public class FacultyController : ControllerBase
             return lookupResult.ToFailureActionResult();
         }
 
-        var dtoModels = _mapper.Map<List<LookupModel>>(lookupResult.Data);
+        var models = _mapper.Map<List<LookupModel>>(lookupResult.Data);
 
-        return Ok(dtoModels);
+        return Ok(models);
+    }
+
+    [HttpGet("full-lookup")]
+    public async Task<ActionResult<FacultyFullLookupResponse>> GetFacultyFullLookupAsync(string facultyId,
+        string courseId)
+    {
+        var lookupResult = await _sender.Send(new GetFacultyFullLookupQuery(facultyId, courseId));
+        
+        if (lookupResult.HasErrors)
+        {
+            return lookupResult.ToFailureActionResult();
+        }
+
+        var response = _mapper.Map<FacultyFullLookupResponse>(lookupResult.Data);
+
+        return Ok(response);
     }
 }

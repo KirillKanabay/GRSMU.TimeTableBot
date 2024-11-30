@@ -1,6 +1,9 @@
+using AngleSharp;
 using GRSMU.Bot.Data.Extensions;
 using GRSMU.Bot.Logic.Extensions;
 using GRSMU.Bot.Web.Api.Extensions;
+using GRSMU.Bot.Web.Core.Configurations;
+using Microsoft.FeatureManagement;
 using Serilog;
 
 namespace GRSMU.Bot.Web.Api
@@ -13,7 +16,10 @@ namespace GRSMU.Bot.Web.Api
 
             builder.Host.UseSerilog((ctx, cfg) => 
                 cfg.ReadFrom.Configuration(ctx.Configuration));
-
+            
+            builder.Services.AddFeatureManagement(
+                builder.Configuration.GetSection(FeatureFlagsConfiguration.SectionName));
+            
             builder.Services
                 .AddWebApiServices(builder.Configuration)
                 .AddLogicServices()

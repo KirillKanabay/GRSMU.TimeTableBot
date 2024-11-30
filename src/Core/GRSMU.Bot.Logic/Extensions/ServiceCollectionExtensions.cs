@@ -1,9 +1,11 @@
 ﻿using FluentValidation;
 using GRSMU.Bot.Common.Behaviors;
+using GRSMU.Bot.Common.Extensions;
 using GRSMU.Bot.Logic.Features.Faculty.Services;
 using GRSMU.Bot.Logic.Features.Faculty.Services.Interfaces;
 using GRSMU.Bot.Logic.Features.Gradebook.Services;
 using GRSMU.Bot.Logic.Features.Gradebook.Services.Interfaces;
+using GRSMU.Bot.Logic.Features.Immutable;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,6 +33,8 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection RegisterServices(this IServiceCollection services)
     {
         services.AddSingleton<IGradebookService, GradebookService>();
+        services.AddFeatureDecorator<IGradebookService, GradebookServiceDemoDecorator>(FeatureFlags.DemoStudentId);
+
         services.AddSingleton<IGradebookProvider, GrsmuGradebookProvider>();
 
         services.AddSingleton<IFacultyInfoProvider, GrsmuFacultyInfoProvider>();

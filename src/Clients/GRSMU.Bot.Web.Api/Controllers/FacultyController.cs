@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GRSMU.Bot.Common.Resources;
 using GRSMU.Bot.Logic.Features.Faculty.Queries.FullLookup;
 using GRSMU.Bot.Logic.Features.Faculty.Queries.Lookup;
 using GRSMU.Bot.Web.Api.Extensions;
@@ -17,11 +18,16 @@ public class FacultyController : ControllerBase
 {
     private readonly ISender _sender;
     private readonly IMapper _mapper;
+    private readonly IResourceProvider _resourceProvider;
 
-    public FacultyController(ISender sender, IMapper mapper)
+    public FacultyController(
+        ISender sender,
+        IMapper mapper,
+        IResourceProvider resourceProvider)
     {
         _sender = sender;
         _mapper = mapper;
+        _resourceProvider = resourceProvider;
     }
 
     [HttpGet("lookup")]
@@ -31,7 +37,7 @@ public class FacultyController : ControllerBase
 
         if (lookupResult.HasErrors)
         {
-            return lookupResult.ToFailureActionResult();
+            return lookupResult.ToFailureActionResult(_resourceProvider);
         }
 
         var models = _mapper.Map<List<LookupModel>>(lookupResult.Data);
@@ -47,7 +53,7 @@ public class FacultyController : ControllerBase
         
         if (lookupResult.HasErrors)
         {
-            return lookupResult.ToFailureActionResult();
+            return lookupResult.ToFailureActionResult(_resourceProvider);
         }
 
         var response = _mapper.Map<FacultyFullLookupResponse>(lookupResult.Data);

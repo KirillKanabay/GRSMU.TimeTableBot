@@ -14,10 +14,14 @@ public class ResourceProvider : IResourceProvider
 
     public string GetString(string resourceId)
     {
-        var resourceString = _resourceManager.GetString(resourceId);
-        
-        return !string.IsNullOrEmpty(resourceString)
+        return TryGetString(resourceId, out var resourceString)
             ? resourceString
             : resourceId;
+    }
+
+    public bool TryGetString(string resourceId, out string resourceString)
+    {
+        resourceString = _resourceManager.GetString(resourceId) ?? "";
+        return !string.IsNullOrEmpty(resourceString);
     }
 }

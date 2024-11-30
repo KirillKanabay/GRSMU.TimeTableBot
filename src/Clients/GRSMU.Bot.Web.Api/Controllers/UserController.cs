@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GRSMU.Bot.Common.Resources;
 using GRSMU.Bot.Logic.Features.Users.Commands.UpdateStudentCardId;
 using GRSMU.Bot.Logic.Features.Users.Queries.GetById;
 using GRSMU.Bot.Web.Api.Extensions;
@@ -18,11 +19,16 @@ namespace GRSMU.Bot.Web.Api.Controllers
     {
         private readonly ISender _sender;
         private readonly IMapper _mapper;
+        private readonly IResourceProvider _resourceProvider;
 
-        public UserController(ISender sender, IMapper mapper)
+        public UserController(
+            ISender sender, 
+            IMapper mapper, 
+            IResourceProvider resourceProvider)
         {
             _sender = sender;
             _mapper = mapper;
+            _resourceProvider = resourceProvider;
         }
 
         [HttpGet("me")]
@@ -34,7 +40,7 @@ namespace GRSMU.Bot.Web.Api.Controllers
 
             if (searchResult.HasErrors)
             {
-                return searchResult.ToFailureActionResult();
+                return searchResult.ToFailureActionResult(_resourceProvider);
             }
 
             var responseModel = _mapper.Map<UserMeResponse>(searchResult.Data);
@@ -53,7 +59,7 @@ namespace GRSMU.Bot.Web.Api.Controllers
 
             if (result.HasErrors)
             {
-                return result.ToFailureActionResult();
+                return result.ToFailureActionResult(_resourceProvider);
             }
 
             var model = _mapper.Map<UserPrefilledFacultyModel>(result.Data);

@@ -1,4 +1,5 @@
-﻿using GRSMU.Bot.Logic.Features.Users.Commands.GetOrCreateUser;
+﻿using GRSMU.Bot.Common.Resources;
+using GRSMU.Bot.Logic.Features.Users.Commands.GetOrCreateUser;
 using GRSMU.Bot.Web.Api.Extensions;
 using GRSMU.Bot.Web.Api.Models.Account.Requests;
 using GRSMU.Bot.Web.Core.Authorization.Models;
@@ -16,15 +17,18 @@ namespace GRSMU.Bot.Web.Api.Controllers
         private readonly IAccountService _accountService;
         private readonly ITelegramTokenValidator _telegramTokenValidator;
         private readonly ISender _sender;
+        private readonly IResourceProvider _resourceProvider;
 
         public AccountController(
             ITelegramTokenValidator telegramTokenValidator,
             ISender sender, 
-            IAccountService accountService)
+            IAccountService accountService,
+            IResourceProvider resourceProvider)
         {
             _telegramTokenValidator = telegramTokenValidator;
             _sender = sender;
             _accountService = accountService;
+            _resourceProvider = resourceProvider;
         }
 
         [HttpPost]
@@ -35,7 +39,7 @@ namespace GRSMU.Bot.Web.Api.Controllers
 
             if (!validationResult.IsSuccess)
             {
-                return validationResult.ToFailureActionResult();
+                return validationResult.ToFailureActionResult(_resourceProvider);
             }
 
             var telegramUser = validationResult.Data;
@@ -51,7 +55,7 @@ namespace GRSMU.Bot.Web.Api.Controllers
 
             if (getOrCreateResult.HasErrors)
             {
-                return getOrCreateResult.ToFailureActionResult();
+                return getOrCreateResult.ToFailureActionResult(_resourceProvider);
             }
 
             var token = await _accountService.LoginAsync(getOrCreateResult.Data);
@@ -67,7 +71,7 @@ namespace GRSMU.Bot.Web.Api.Controllers
 
             if (updateTokenResult.HasErrors)
             {
-                return updateTokenResult.ToFailureActionResult();
+                return updateTokenResult.ToFailureActionResult(_resourceProvider);
             }
 
             return Ok(updateTokenResult.Data);

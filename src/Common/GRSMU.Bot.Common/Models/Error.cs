@@ -20,7 +20,7 @@ namespace GRSMU.Bot.Common.Models
 
         public string Code { get; }
 
-        public string? Description { get; }
+        public string? Description { get; set; }
 
         public ErrorType Type { get; }
 

@@ -1,28 +1,36 @@
 ﻿using System.Text;
+using GRSMU.Bot.Common.Configurations;
+using GRSMU.Bot.Common.Resources;
+using GRSMU.Bot.Web.Api.Resources;
+using GRSMU.Bot.Web.Api.Swagger;
 using GRSMU.Bot.Web.Core.Authorization;
+using GRSMU.Bot.Web.Core.Authorization.Services;
+using GRSMU.Bot.Web.Core.Authorization.Services.Interfaces;
 using GRSMU.Bot.Web.Core.Configurations;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+using GRSMU.Bot.Web.Core.Services;
+using GRSMU.Bot.Web.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using GRSMU.Bot.Web.Core.Authorization.Services.Interfaces;
-using GRSMU.Bot.Web.Core.Authorization.Services;
-using GRSMU.Bot.Web.Core.Services.Interfaces;
-using GRSMU.Bot.Web.Core.Services;
 
-namespace GRSMU.Bot.Web.Core.Extensions;
+namespace GRSMU.Bot.Web.Api.Extensions;
 
 public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddWebApiServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddAutoMapper(AssemblyReference.Assembly);
+
         services
             .BindConfigurations(configuration)
             .RegisterServices()
             .ConfigureAuthentication()
             .ConfigureAuthorization();
+        
+        services.AddSwaggerGen(SwaggerConfigurator.Configure);
+
+        services.AddSingleton<IResourceProvider, ResourceProvider>();
 
         return services;
     }
@@ -40,6 +48,8 @@ public static class ServiceCollectionExtensions
     {
         services.Configure<TelegramConfiguration>(configuration.GetSection(TelegramConfiguration.SectionName));
         services.Configure<JwtConfiguration>(configuration.GetSection(JwtConfiguration.SectionName));
+        services.Configure<DbConfiguration>(configuration.GetSection(DbConfiguration.SectionName));
+        services.Configure<GrsmuSourceConfiguration>(configuration.GetSection(GrsmuSourceConfiguration.SectionName));
 
         return services;
     }

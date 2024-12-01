@@ -9,5 +9,6 @@
         public const string RequestCache = nameof(RequestCache);
         public const string Gradebook = nameof(Gradebook);
         public const string GradebookMap = nameof(GradebookMap);
+        public const string Faculty = nameof(Faculty);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace GRSMU.Bot.Web.Core.Configurations;
 
-public class JwtConfiguration
+public record JwtConfiguration
 {
     public const string SectionName = "Jwt";
 

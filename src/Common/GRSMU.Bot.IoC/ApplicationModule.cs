@@ -6,7 +6,6 @@ using GRSMU.Bot.Application.Features.Timetables.TelegramHandlers;
 using GRSMU.Bot.Application.Services;
 using GRSMU.Bot.Common.Data.Contexts;
 using GRSMU.Bot.Common.Data.Migrator;
-using GRSMU.Bot.Common.Data.Models.Options;
 using GRSMU.Bot.Common.Telegram.RequestFactories;
 using GRSMU.Bot.Application.Timetables.Mappings;
 using GRSMU.Bot.Common.Telegram;
@@ -34,6 +33,7 @@ using GRSMU.Bot.IoC.Extensions;
 using MediatR.Extensions.Autofac.DependencyInjection;
 using MediatR.Extensions.Autofac.DependencyInjection.Builder;
 using GRSMU.Bot.Common.Behaviors;
+using GRSMU.Bot.Web.Core.Configurations;
 using Microsoft.Extensions.Configuration;
 
 namespace GRSMU.Bot.IoC
@@ -72,7 +72,7 @@ namespace GRSMU.Bot.IoC
         
         private void RegisterDatabase(ContainerBuilder builder)
         {
-            builder.RegisterOptions<DbOptions>(_configuration, "MongoDb");
+            builder.RegisterOptions<DbConfiguration>(_configuration, "MongoDb");
             builder.RegisterType<MongoDbContext>().As<IDbContext>().SingleInstance();
             builder.RegisterType<UserRepository>().As<IUserRepository>().SingleInstance();
             builder.RegisterType<TimeTableRepository>().As<ITimeTableRepository>().SingleInstance();

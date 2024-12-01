@@ -1,9 +1,10 @@
-using GRSMU.Bot.IoC;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-using GRSMU.Bot.Web.Core.Extensions;
-using GRSMU.Bot.Application.Timetables.Mappings;
-using GRSMU.Bot.Web.Api.Mappings;
+using AngleSharp;
+using GRSMU.Bot.Data.Extensions;
+using GRSMU.Bot.Logic.Extensions;
+using GRSMU.Bot.Web.Api.Extensions;
+using GRSMU.Bot.Web.Core.Configurations;
+using Microsoft.FeatureManagement;
+using Serilog;
 
 namespace GRSMU.Bot.Web.Api
 {
@@ -13,31 +14,24 @@ namespace GRSMU.Bot.Web.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            // TODO: Refactor it!
-            builder.Services.AddAutoMapper(
-                typeof(TimeTableProfile).Assembly, 
-                Logic.AssemblyReference.Assembly, 
-                typeof(UserProfile).Assembly);
-          
-            builder.Services.AddWebApiServices(builder.Configuration);
+            builder.Host.UseSerilog((ctx, cfg) => 
+                cfg.ReadFrom.Configuration(ctx.Configuration));
+            
+            builder.Services.AddFeatureManagement(
+                builder.Configuration.GetSection(FeatureFlagsConfiguration.SectionName));
+            
+            builder.Services
+                .AddWebApiServices(builder.Configuration)
+                .AddLogicServices()
+                .AddDataServices();
+
             builder.Services.AddHostedService<HostedService>();
 
-            builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
-            builder.Host.ConfigureContainer<ContainerBuilder>(cb =>
-            {
-                cb.RegisterModule(new ApplicationModule(builder.Configuration));
-            });
-
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

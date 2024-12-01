@@ -4,14 +4,14 @@ namespace GRSMU.Bot.Common.Models
 {
     public record Error
     {
-        public Error(string code, string description, ErrorType type)
+        public Error(string code, string? description, ErrorType type)
         {
             Code = code;
             Description = description;
             Type = type;
         }
 
-        public Error(string code, string description, ErrorType type, string field) : this(code, description, type)
+        public Error(string code, string? description, ErrorType type, string field) : this(code, description, type)
         {
             Field = field;
         }
@@ -20,17 +20,20 @@ namespace GRSMU.Bot.Common.Models
 
         public string Code { get; }
 
-        public string Description { get; }
+        public string? Description { get; set; }
 
         public ErrorType Type { get; }
 
-        public static Error NotFound(string code, string description)
-            => new Error(code, description, ErrorType.NotFound);
+        public static Error ValidationError(string code, string? description = null, string? field = null)
+            => new Error(code, description, ErrorType.Validation);
 
-        public static Error Problem(string code, string description) =>
+        public static Error NotFound(string code, string? description = null)
+            => new (code, description, ErrorType.NotFound);
+
+        public static Error Problem(string code, string? description = null) =>
             new(code, description, ErrorType.Problem);
 
-        public static Error Conflict(string code, string description) =>
+        public static Error Conflict(string code, string? description = null) =>
             new(code, description, ErrorType.Conflict);
     }
 }

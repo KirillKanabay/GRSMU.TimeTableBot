@@ -1,12 +1,13 @@
 ﻿using GRSMU.Bot.Common.Enums;
 using GRSMU.Bot.Common.Models;
+using GRSMU.Bot.Common.Resources;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GRSMU.Bot.Web.Api.Extensions
 {
     public static class ExecutionResultExtensions
     {
-        public static ActionResult ToFailureActionResult(this ExecutionResult result)
+        public static ActionResult ToFailureActionResult(this ExecutionResult result, IResourceProvider resourceProvider)
         {
             if (result.IsSuccess || result.Error is null)
             {
@@ -26,7 +27,7 @@ namespace GRSMU.Bot.Web.Api.Extensions
                 }
             });
 
-            static int GetStatusCode(ErrorType errorType) => errorType switch
+            int GetStatusCode(ErrorType errorType) => errorType switch
             {
                 ErrorType.Validation => StatusCodes.Status400BadRequest,
                 ErrorType.NotFound => StatusCodes.Status404NotFound,
@@ -34,7 +35,7 @@ namespace GRSMU.Bot.Web.Api.Extensions
                 _ => StatusCodes.Status500InternalServerError
             };
 
-            static string GetTitle(ErrorType errorType) => errorType switch
+            string GetTitle(ErrorType errorType) => errorType switch
             {
                 ErrorType.Validation => "Bad Request",
                 ErrorType.NotFound => "Not Found",
@@ -42,7 +43,7 @@ namespace GRSMU.Bot.Web.Api.Extensions
                 _ => "Internal Server Error"
             };
 
-            static string GetType(ErrorType statusCode) => statusCode switch
+            string GetType(ErrorType statusCode) => statusCode switch
             {
                 ErrorType.Validation => "https://tools.ietf.org/html/rfc7231#section-6.5.1",
                 ErrorType.NotFound => "https://tools.ietf.org/html/rfc7231#section-6.5.4",
@@ -50,11 +51,25 @@ namespace GRSMU.Bot.Web.Api.Extensions
                 _ => "https://tools.ietf.org/html/rfc7231#section-6.6.1"
             };
 
-            static Error[] GetErrorExtensionValue(Error error)
+            Error[] GetErrorExtensionValue(Error resultError)
             {
-                return error is ValidationError ve
+                var errors = resultError is ValidationError ve
                     ? ve.Errors
                     : [error];
+
+                foreach (var errorItem in errors.Where(x => x.Type is not ErrorType.Problem))
+                {
+                    errorItem.Description = resourceProvider.TryGetString(errorItem.Code, out var description)
+                        ? description
+                        : resourceProvider.GetString("Error_Unknown");
+                }
+
+                foreach (var errorItem in errors.Where(x => x.Type is ErrorType.Problem))
+                {
+                    errorItem.Description = resourceProvider.GetString("Error_InternalServerError");
+                }
+
+                return errors;
             }
         }
     }

@@ -16,6 +16,7 @@
         public static readonly KeyValuePair<string, string> DefaultFrame = new("iframeheight", "400");
         public static readonly KeyValuePair<string, string> DefaultDepartment = new(Department, "2");
 
+        // TODO: remove it
         #region Gradebook
 
         public const string Login = "login";

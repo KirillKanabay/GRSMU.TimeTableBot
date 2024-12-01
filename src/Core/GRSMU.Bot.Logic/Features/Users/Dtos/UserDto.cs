@@ -33,9 +33,9 @@ public record UserDto
     public DateTime? RefreshTokenExpireTime { get; set; }
 
     public bool IsStudentCardRegistered => 
-        !string.IsNullOrWhiteSpace(StudentCardLogin) || 
-        !string.IsNullOrWhiteSpace(StudentCardPassword) ||
-        !string.IsNullOrWhiteSpace(GroupId) ||
-        !string.IsNullOrWhiteSpace(CourseId) ||
+        !string.IsNullOrWhiteSpace(StudentCardLogin) && 
+        !string.IsNullOrWhiteSpace(StudentCardPassword) &&
+        !string.IsNullOrWhiteSpace(GroupId) &&
+        !string.IsNullOrWhiteSpace(CourseId) &&
         !string.IsNullOrWhiteSpace(FacultyId);
 }

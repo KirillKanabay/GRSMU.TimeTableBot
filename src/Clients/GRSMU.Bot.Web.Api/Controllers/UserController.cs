@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using AngleSharp.Io;
+using AutoMapper;
 using GRSMU.Bot.Common.Resources;
 using GRSMU.Bot.Logic.Features.Users.Commands.UpdateStudentCardId;
+using GRSMU.Bot.Logic.Features.Users.Commands.UpdateUserFaculty;
 using GRSMU.Bot.Logic.Features.Users.Queries.GetById;
 using GRSMU.Bot.Web.Api.Extensions;
 using GRSMU.Bot.Web.Api.Models.User.Requests;
@@ -49,7 +51,7 @@ namespace GRSMU.Bot.Web.Api.Controllers
         }
 
         [HttpPut("student-card-id")]
-        public async Task<ActionResult<UserPrefilledFacultyModel>> UpdateStudentCardId(UpdateStudentCardIdRequest request)
+        public async Task<ActionResult<UserPrefilledFacultyModel>> UpdateStudentCardIdAsync(UpdateStudentCardIdRequest request)
         {
             var id = HttpContext.User.GetId();
 
@@ -65,6 +67,18 @@ namespace GRSMU.Bot.Web.Api.Controllers
             var model = _mapper.Map<UserPrefilledFacultyModel>(result.Data);
 
             return Ok(model);
+        }
+
+        [HttpPut("student-faculty")]
+        public async Task<ActionResult> UpdateStudentFacultyAsync(UpdateStudentFacultyRequest request)
+        {
+            var id = HttpContext.User.GetId();
+
+            var command = new UpdateUserFacultyCommand(id, request.FacultyId, request.CourseId, request.GroupId);
+            
+            var result = await _sender.Send(command);
+            
+            return result.HasErrors ? result.ToFailureActionResult(_resourceProvider) : Ok();
         }
     }
 }

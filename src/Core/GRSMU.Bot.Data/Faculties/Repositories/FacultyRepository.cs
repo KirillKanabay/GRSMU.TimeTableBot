@@ -60,6 +60,6 @@ public class FacultyRepository : RepositoryBase<FacultyDocument>, IFacultyReposi
 
     public Task<bool> AnyAsync()
     {
-        return IAsyncCursorSourceExtensions.AnyAsync(Collection.AsQueryable());
+        return Collection.AsQueryable().AnyAsync();
     }
 }

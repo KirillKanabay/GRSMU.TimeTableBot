@@ -30,7 +30,7 @@ public class GetFacultyFullLookupQueryHandler : IQueryHandler<GetFacultyFullLook
             return ExecutionResult.Failure<FacultyFullLookupDto>(Error.NotFound(ErrorResourceKeys.FacultyNotFound));
         }
 
-        var coursesLookup = await _facultyRepository.LookupCoursesAsync(faculty.Id);
+        var coursesLookup = await _facultyRepository.LookupCoursesAsync(faculty.FacultyId);
         var allFacultiesLookup = await _facultyRepository.LookupAsync();
 
         var fullLookupDto = new FacultyFullLookupDto(

@@ -7,4 +7,6 @@ public record GrsmuSourceConfiguration
     public string TimetableUrl { get; init; }
 
     public string GradebookUrl { get; init; }
+
+    public string CookieUrl { get; init; }
 }

@@ -22,9 +22,6 @@
     <Folder Include="Features\Faculty\Mappings\" />
     <Folder Include="Features\Faculty\Queries\FullLookup\" />
     <Folder Include="Features\Schedule\Dtos\" />
-    <Folder Include="Features\Schedule\Mappings\" />
-    <Folder Include="Features\Schedule\Services\" />
-    <Folder Include="Features\Schedule\Queries\" />
     <Folder Include="Features\Users\Commands\UpdateUserFaculty\" />
     <Folder Include="Features\Users\Commands\UpdateStudentCardId\" />
     <Folder Include="Immutable\" />

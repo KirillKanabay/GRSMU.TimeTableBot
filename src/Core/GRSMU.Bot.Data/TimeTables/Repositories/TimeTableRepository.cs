@@ -1,6 +1,7 @@
 ﻿using GRSMU.Bot.Common.Data.Contexts;
 using GRSMU.Bot.Common.Data.Immutable;
 using GRSMU.Bot.Common.Data.Repositories;
+using GRSMU.Bot.Common.Extensions;
 using GRSMU.Bot.Data.TimeTables.Contracts;
 using GRSMU.Bot.Data.TimeTables.Contracts.Filters;
 using GRSMU.Bot.Data.TimeTables.Documents;
@@ -66,10 +67,10 @@ public class TimeTableRepository : RepositoryBase<TimeTableDocument>, ITimeTable
 
         if (filter.Date.HasValue)
         {
-            //TODO: Move to extension
-            var date = filter.Date.Value.Add(DateTimeOffset.Now.Offset);
+            var dateFrom = DateTime.SpecifyKind(filter.Date.Value.StartOfDay(), DateTimeKind.Utc);
+            var dateTo = DateTime.SpecifyKind(filter.Date.Value.EndOfDay(), DateTimeKind.Utc);
 
-            query &= Builders<TimeTableDocument>.Filter.Where(x => x.Date.Equals(date));
+            query &= Builders<TimeTableDocument>.Filter.Where(x => x.Date >= dateFrom && x.Date <= dateTo);
         }
 
         if (filter.MinDate.HasValue)

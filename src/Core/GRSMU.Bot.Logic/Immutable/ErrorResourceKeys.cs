@@ -7,4 +7,6 @@ public static class ErrorResourceKeys
     public const string FacultyNotFilled = "Error_Faculty_NotFilled";
     public const string FacultyNotFound = "Error_Faculty_NotFound";
     public const string GroupNotFound = "Error_Group_NotFound";
+    public const string ScheduleNotFound = "Error_Schedule_NotFound";
+    public const string StudentCardIsNotRegistered = "Error_StudentCardIsNotRegistered";
 }

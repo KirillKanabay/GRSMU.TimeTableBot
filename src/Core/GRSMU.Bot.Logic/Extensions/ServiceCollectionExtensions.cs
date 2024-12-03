@@ -6,6 +6,8 @@ using GRSMU.Bot.Logic.Features.Faculty.Services.Interfaces;
 using GRSMU.Bot.Logic.Features.Gradebook.Services;
 using GRSMU.Bot.Logic.Features.Gradebook.Services.Interfaces;
 using GRSMU.Bot.Logic.Features.Immutable;
+using GRSMU.Bot.Logic.Features.Schedule.Services;
+using GRSMU.Bot.Logic.Features.Schedule.Services.Interfaces;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -39,6 +41,10 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IFacultyInfoProvider, GrsmuFacultyInfoProvider>();
         services.AddSingleton<IFacultiesInfoInitializer, FacultiesInfoInitializer>();
+
+        services.AddSingleton<IScheduleParser, ScheduleParser>();
+        services.AddSingleton<IScheduleProvider, GrsmuScheduleProvider>();
+        services.AddSingleton<IScheduleService, ScheduleService>();
 
         return services;
     }

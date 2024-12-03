@@ -6,5 +6,6 @@ public enum ErrorType
     Problem = 2,
     NotFound = 3,
     Conflict = 4,
-    ExternalServiceError = 5
+    ExternalServiceError = 5,
+    Forbidden = 6,
 }

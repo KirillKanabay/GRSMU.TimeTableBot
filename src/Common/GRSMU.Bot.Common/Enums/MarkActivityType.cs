@@ -2,6 +2,7 @@
 
 public enum MarkActivityType
 {
+    Unknown = -1,
     /// <summary>
     /// Пр--Практическое занятие
     /// </summary>

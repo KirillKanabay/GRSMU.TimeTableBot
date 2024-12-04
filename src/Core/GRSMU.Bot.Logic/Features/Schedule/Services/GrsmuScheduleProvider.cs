@@ -2,9 +2,9 @@
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp;
+using GRSMU.Bot.Common;
 using GRSMU.Bot.Common.Configurations;
 using GRSMU.Bot.Common.Extensions;
-using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Logic.Features.Schedule.Dtos;
 using GRSMU.Bot.Logic.Features.Schedule.Services.Interfaces;
 using Microsoft.Extensions.Options;

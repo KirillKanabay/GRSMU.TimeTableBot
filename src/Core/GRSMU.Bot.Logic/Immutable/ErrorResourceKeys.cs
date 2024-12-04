@@ -9,4 +9,6 @@ public static class ErrorResourceKeys
     public const string GroupNotFound = "Error_Group_NotFound";
     public const string ScheduleNotFound = "Error_Schedule_NotFound";
     public const string StudentCardIsNotRegistered = "Error_StudentCardIsNotRegistered";
+    public const string GradebookParseError = "Error_Gradebook_ParseFailure";
+    public const string GradebookNotFound = "Error_Gradebook_NotFound";
 }

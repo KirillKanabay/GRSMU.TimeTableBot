@@ -38,6 +38,7 @@ public static class ServiceCollectionExtensions
         services.AddFeatureDecorator<IGradebookService, GradebookServiceDemoDecorator>(FeatureFlags.DemoStudentId);
 
         services.AddSingleton<IGradebookProvider, GrsmuGradebookProvider>();
+        services.AddSingleton<IGradebookParser, GradebookParser>();
 
         services.AddSingleton<IFacultyInfoProvider, GrsmuFacultyInfoProvider>();
         services.AddSingleton<IFacultiesInfoInitializer, FacultiesInfoInitializer>();
@@ -45,7 +46,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IScheduleParser, ScheduleParser>();
         services.AddSingleton<IScheduleProvider, GrsmuScheduleProvider>();
         services.AddSingleton<IScheduleService, ScheduleService>();
-
+        
         return services;
     }
 }

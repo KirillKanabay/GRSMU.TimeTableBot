@@ -7,7 +7,7 @@ namespace GRSMU.Bot.Data.Gradebooks.Documents
     {
         public ObjectId UserId { get; set; }
 
-        public string Name { get; set; }
+        public string Discipline { get; set; }
 
         public List<MarkDocument> Marks { get; set; }
 

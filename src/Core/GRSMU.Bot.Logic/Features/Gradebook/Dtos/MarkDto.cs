@@ -1,8 +1,8 @@
 ﻿using GRSMU.Bot.Common.Enums;
 
-namespace GRSMU.Bot.Data.Gradebooks.Documents;
+namespace GRSMU.Bot.Logic.Features.Gradebook.Dtos;
 
-public class MarkDocument
+public record MarkDto
 {
     public DateTime? ParsedDate { get; set; }
 

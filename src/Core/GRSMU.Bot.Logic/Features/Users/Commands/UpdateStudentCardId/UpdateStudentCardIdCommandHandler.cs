@@ -8,7 +8,9 @@ using GRSMU.Bot.Logic.Dtos;
 using GRSMU.Bot.Logic.Features.Gradebook.Dtos;
 using GRSMU.Bot.Logic.Features.Gradebook.Services.Interfaces;
 using GRSMU.Bot.Logic.Features.Users.Dtos;
+using GRSMU.Bot.Logic.Features.Users.Events;
 using GRSMU.Bot.Logic.Immutable;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace GRSMU.Bot.Logic.Features.Users.Commands.UpdateStudentCardId;
@@ -19,17 +21,20 @@ public class UpdateStudentCardIdCommandHandler : ICommandHandler<UpdateStudentCa
     private readonly IUserRepository _userRepository;
     private readonly IFacultyRepository _facultyRepository;
     private readonly ILogger<UpdateStudentCardIdCommandHandler> _logger;
-     
+    private readonly IMediator _mediator;
+
     public UpdateStudentCardIdCommandHandler(
         IGradebookService gradebookService,
         IUserRepository userRepository,
         IFacultyRepository facultyRepository,
-        ILogger<UpdateStudentCardIdCommandHandler> logger)
+        ILogger<UpdateStudentCardIdCommandHandler> logger,
+        IMediator mediator)
     {
         _gradebookService = gradebookService;
         _userRepository = userRepository;
         _facultyRepository = facultyRepository;
         _logger = logger;
+        _mediator = mediator;
     }
 
     public async Task<ExecutionResult<UserPrefilledFacultyDto>> Handle(UpdateStudentCardIdCommand request, CancellationToken cancellationToken)
@@ -41,7 +46,8 @@ public class UpdateStudentCardIdCommandHandler : ICommandHandler<UpdateStudentCa
             return ExecutionResult<UserPrefilledFacultyDto>.Failure(Error.NotFound(ErrorResourceKeys.UserNotFound));
         }
 
-        var signInResult = await _gradebookService.SignInAsync(new StudentCardIdDto(request.Login, request.Password));
+        var studentCardId = new StudentCardIdDto(request.Login, request.Password);
+        var signInResult = await _gradebookService.SignInAsync(studentCardId);
 
         if (signInResult.HasErrors)
         {
@@ -59,6 +65,8 @@ public class UpdateStudentCardIdCommandHandler : ICommandHandler<UpdateStudentCa
         userDocument.StudentCardPassword = request.Password;
 
         await _userRepository.UpdateOneAsync(userDocument);
+
+        await _mediator.Publish(new StudentCardUpdatedEvent(userDocument.Id, studentCardId), cancellationToken);
 
         return ExecutionResult.Success(prefillResult.Data);
     }

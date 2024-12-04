@@ -28,7 +28,6 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IReportRepository, ReportRepository>();
         services.AddSingleton<IRequestCacheRepository, RequestCacheRepository>();
         services.AddSingleton<IGradebookRepository, GradebookRepository>();
-        services.AddSingleton<IGradebookMapRepository, GradebookMapRepository>();
         services.AddSingleton<IFacultyRepository, FacultyRepository>();
 
         services.AddSingleton<IMigrationRunner, MigrationRunner>();

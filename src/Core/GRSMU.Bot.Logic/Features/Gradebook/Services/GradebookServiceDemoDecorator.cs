@@ -34,4 +34,19 @@ public class GradebookServiceDemoDecorator : IGradebookService
 
         return await _gradebookService.SignInAsync(studentCardId);
     }
+
+    public Task<ExecutionResult<GradebookDto>> GetUserGradebookAsync(StudentCardIdDto studentCardId, string userId, string disciplineId, bool forceRefresh)
+    {
+        return _gradebookService.GetUserGradebookAsync(studentCardId, userId, disciplineId, forceRefresh);
+    }
+
+    public Task<ExecutionResult<List<LookupDto>>> GetDisciplineLookupAsync(string userId, string searchQuery)
+    {
+        return _gradebookService.GetDisciplineLookupAsync(userId, searchQuery);
+    }
+
+    public Task<ExecutionResult> UpdateUserGradebook(StudentCardIdDto studentCardId, string userId)
+    {
+        return _gradebookService.UpdateUserGradebook(studentCardId, userId);
+    }
 }

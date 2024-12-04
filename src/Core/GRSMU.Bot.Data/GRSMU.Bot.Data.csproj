@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\GRSMU.Bot.Common.Data\GRSMU.Bot.Common.Data.csproj" />
-    <ProjectReference Include="..\GRSMU.Bot.Domain\GRSMU.Bot.Domain[old].csproj" />
   </ItemGroup>
 
   <ItemGroup>

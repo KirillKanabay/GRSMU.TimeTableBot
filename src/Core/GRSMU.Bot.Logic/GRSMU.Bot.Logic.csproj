@@ -21,6 +21,8 @@
   <ItemGroup>
     <Folder Include="Features\Faculty\Mappings\" />
     <Folder Include="Features\Faculty\Queries\FullLookup\" />
+    <Folder Include="Features\Gradebook\Mappings\" />
+    <Folder Include="Features\Gradebook\Queries\GetDisciplineLookup\" />
     <Folder Include="Features\Schedule\Dtos\" />
     <Folder Include="Features\Users\Commands\UpdateUserFaculty\" />
     <Folder Include="Features\Users\Commands\UpdateStudentCardId\" />

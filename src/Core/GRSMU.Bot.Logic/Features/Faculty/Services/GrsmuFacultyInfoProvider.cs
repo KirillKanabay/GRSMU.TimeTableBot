@@ -1,9 +1,9 @@
 ﻿using AngleSharp;
 using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
+using GRSMU.Bot.Common;
 using GRSMU.Bot.Common.Configurations;
 using GRSMU.Bot.Common.Extensions;
-using GRSMU.Bot.Common.Telegram.Immutable;
 using GRSMU.Bot.Logic.Dtos;
 using GRSMU.Bot.Logic.Features.Faculty.Services.Interfaces;
 using Microsoft.Extensions.Logging;

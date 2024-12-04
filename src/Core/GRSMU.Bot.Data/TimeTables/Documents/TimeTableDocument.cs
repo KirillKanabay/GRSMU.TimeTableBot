@@ -1,5 +1,5 @@
 ﻿using GRSMU.Bot.Common.Data.Documents;
-using GRSMU.Bot.Domain.Timetables.Enums;
+using GRSMU.Bot.Common.Enums;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace GRSMU.Bot.Data.TimeTables.Documents

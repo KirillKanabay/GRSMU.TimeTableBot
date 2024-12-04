@@ -1,4 +1,4 @@
-﻿using GRSMU.Bot.Domain.Timetables.Enums;
+﻿using GRSMU.Bot.Common.Enums;
 
 namespace GRSMU.Bot.Data.TimeTables.Contracts.Filters
 {

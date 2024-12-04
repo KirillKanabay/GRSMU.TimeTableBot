@@ -1,4 +1,4 @@
-﻿namespace GRSMU.Bot.Domain.Gradebooks.Enums;
+﻿namespace GRSMU.Bot.Common.Enums;
 
 public enum MarkType
 {

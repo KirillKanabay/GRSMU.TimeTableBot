@@ -1,4 +1,5 @@
-﻿using GRSMU.Bot.Common.Data.Contexts;
+﻿using System.Text.RegularExpressions;
+using GRSMU.Bot.Common.Data.Contexts;
 using GRSMU.Bot.Common.Data.Immutable;
 using GRSMU.Bot.Common.Data.Repositories;
 using GRSMU.Bot.Data.Common.Documents;
@@ -35,7 +36,9 @@ namespace GRSMU.Bot.Data.Gradebooks.Repositories
 
             if (!string.IsNullOrWhiteSpace(searchQuery))
             {
-                query = query.Where(x => x.Discipline.Contains(searchQuery));
+                var regexFilter = Builders<GradebookDocument>.Filter.Regex(x => x.Discipline,
+                    new BsonRegularExpression(new Regex(searchQuery, RegexOptions.IgnoreCase)));
+                query = query.Where(x => regexFilter.Inject());
             }
         
             return query.Select(x => new LookupDocument

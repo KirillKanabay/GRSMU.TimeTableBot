@@ -131,7 +131,7 @@ public class GradebookParser : IGradebookParser
 
         }
 
-        var gradebooks = tableRows.Skip(DisciplineOffset).Select(GetGradebook).ToList();
+        var gradebooks = tableRows.Skip(DisciplineOffset).Select(GetGradebook).Where(x => x.Marks?.Any() ?? false).ToList();
 
         return ExecutionResult.Success(gradebooks);
     }

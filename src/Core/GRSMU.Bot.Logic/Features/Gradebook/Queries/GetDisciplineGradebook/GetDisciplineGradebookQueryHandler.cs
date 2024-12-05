@@ -41,13 +41,7 @@ public class GetDisciplineGradebookQueryHandler : IQueryHandler<GetDisciplineGra
         }
 
         var studentCard = new StudentCardIdDto(user.StudentCardLogin, user.StudentCardPassword);
-        var initialFillResult = await _sender.Send(new InitialFillGradebookCommand(user.Id, studentCard), cancellationToken);
-
-        if (initialFillResult.HasErrors)
-        {
-            return ExecutionResult<GradebookDto>.Failure(initialFillResult.Error!);
-        }
-
+      
         var gradebookSearchResult = await _gradebookService.GetUserGradebookAsync(studentCard, user.Id, request.DisciplineId, request.Force);
 
         return gradebookSearchResult;

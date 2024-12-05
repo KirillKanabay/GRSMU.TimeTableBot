@@ -53,6 +53,7 @@ public class InitialFillGradebookCommandHandler : ICommandHandler<InitialFillGra
 
         _logger.LogInformation($"Requested gradebook initial fill for userId: {userId}");
 
+        await _gradebookRepository.DeleteGradebookByUserAsync(userId);
         var result = await _gradebookService.UpdateUserGradebook(studentCard, userId);
 
         if (result.HasErrors)

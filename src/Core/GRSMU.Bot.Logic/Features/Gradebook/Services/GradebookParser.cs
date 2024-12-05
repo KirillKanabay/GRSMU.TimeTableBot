@@ -1,4 +1,5 @@
-﻿using AngleSharp.Dom;
+﻿using System.Globalization;
+using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
 using GRSMU.Bot.Common.Models;
@@ -189,7 +190,7 @@ public class GradebookParser : IGradebookParser
 
         if (dateParts.Length == 2)
         {
-            parsedDate = DateTime.TryParse(dateParts[0], out var pDate) ? pDate : null;
+            parsedDate = DateTime.Parse(dateParts[0], styles: DateTimeStyles.AssumeUniversal);
             activityType = GetActivityType(dateParts[1]);
         }
 
@@ -215,6 +216,7 @@ public class GradebookParser : IGradebookParser
             "нзч" => MarkType.LectureFail,
             _ when markColor.Equals("green") => MarkType.SeriousWorkOutMark,
             _ when markColor.Equals("red") => MarkType.NotSeriousWorkOutMark,
+            "" or null => MarkType.None,
             _ => MarkType.DefaultMark
         };
     }
